@@ -6,7 +6,7 @@ import AIInsightsCard from '../components/results/AIInsightsCard.jsx'
 import RegimeCardPair from '../components/results/RegimeCardPair.jsx'
 import PDFDownloadButton from '../components/results/PDFDownloadButton.jsx'
 import ITR1Table from '../components/results/ITR1Table.jsx'
-import logoImage from '../images/justice_scales_black_gold.png'
+import Navbar from '../components/Navbar'
 
 /**
  * Results page — renders immediately from router state (no API refetch).
@@ -46,15 +46,11 @@ export default function ResultsPage() {
 
   return (
     <div className="min-h-screen bg-white font-sans text-custom-textDark overflow-x-hidden">
-      {/* Minimal Logo Positioned Top-Left & CTA top-right */}
-      <div className="fixed top-0 left-0 w-full z-50 px-6 py-6 pointer-events-none flex justify-between items-center">
-        <button onClick={() => navigate('/')} className="flex items-center gap-2 pointer-events-auto group">
-          <img src={logoImage} alt="TaxMantri Logo" className="h-9 w-auto object-contain group-hover:scale-105 transition-transform" />
-          <span className="font-extrabold text-2xl tracking-tighter text-black group-hover:text-custom-purple transition-colors">TaxMantri</span>
-        </button>
-        <div className="pointer-events-auto">
-          <PDFDownloadButton profileId={profileId} />
-        </div>
+      <Navbar />
+
+      {/* Floating Action Button for PDF - positioned below navbar on mobile, or absolute top-right */}
+      <div className="fixed top-4 right-6 w-auto z-50 pointer-events-auto mt-2">
+        <PDFDownloadButton profileId={profileId} />
       </div>
 
       {/* Main content */}
