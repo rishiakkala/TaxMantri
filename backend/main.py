@@ -312,6 +312,7 @@ async def run_pipeline(
 
     # Build initial state
     initial_state = {
+        "profile_id": None,               # No pre-stored profile for /api/run
         "raw_input": payload,
         "input_method": input_method,
         "file_path": payload.pop("file_path", None),
