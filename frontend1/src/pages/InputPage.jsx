@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import InputTabs from '../components/input/InputTabs.jsx'
 import LoadingOverlay from '../components/common/LoadingOverlay.jsx'
-import logoImage from '../images/justice_scales_black_gold.png'
 
 /**
  * The state bridge between InputTabs and ResultsPage.
@@ -34,33 +33,42 @@ export default function InputPage() {
   }, [navigate, pendingNavigation])
 
   return (
-    <div className="min-h-screen bg-white font-sans text-custom-textDark">
+    <div className="min-h-screen bg-[#f8fafc]">
       <LoadingOverlay visible={isCalculating} onComplete={handleOverlayComplete} />
 
-      {/* Minimal Logo Positioned Top-Left */}
-      <div className="fixed top-0 left-0 w-full z-50 px-6 py-6 pointer-events-none">
-        <button onClick={() => navigate('/')} className="flex items-center gap-2 pointer-events-auto group">
-          <img src={logoImage} alt="TaxMantri Logo" className="h-9 w-auto object-contain group-hover:scale-105 transition-transform" />
-          <span className="font-extrabold text-2xl tracking-tighter text-black group-hover:text-custom-purple transition-colors">TaxMantri</span>
-        </button>
-      </div>
-
-
+      {/* Header */}
+      <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
+        <div className="max-w-2xl mx-auto px-6 py-4 flex items-center gap-4">
+          <button
+            onClick={() => navigate('/')}
+            className="text-gray-500 hover:text-navy transition-colors"
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <div className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-lg bg-navy flex items-center justify-center">
+              <span className="text-amber font-bold text-xs">₹</span>
+            </div>
+            <span className="font-bold text-navy">TaxMantri</span>
+          </div>
+          <span className="ml-auto text-xs text-gray-400 bg-gray-100 px-2.5 py-1 rounded-full">
+            AY 2025-26
+          </span>
+        </div>
+      </header>
 
       {/* Main content */}
-      <main className="max-w-3xl mx-auto px-6 pt-32 pb-12">
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-extrabold text-black mb-3 tracking-tight">
+      <main className="max-w-2xl mx-auto px-6 py-8">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-navy mb-1">
             Enter Your Tax Details
           </h1>
-          <p className="text-gray-500 text-lg">
+          <p className="text-gray-500 text-sm">
             Upload Form 16 for automatic extraction, or enter details manually.
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.06)] p-6 md:p-10 relative overflow-hidden">
-          {/* Subtle gradient blob behind form */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-custom-purple/5 rounded-full blur-3xl -z-10" />
+        <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
           <InputTabs
             onCalculationComplete={handleCalculationComplete}
             onCalculating={setIsCalculating}

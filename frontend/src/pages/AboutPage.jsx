@@ -3,8 +3,6 @@ import { motion } from 'framer-motion'
 import { ArrowLeft, User } from 'lucide-react'
 import logoImage from '../images/justice_scales_black_gold.png'
 
-import Navbar from '../components/Navbar'
-
 const teamMembers = [
     {
         name: "amk",
@@ -36,8 +34,14 @@ export default function AboutPage() {
     const navigate = useNavigate()
 
     return (
-        <div className="min-h-screen font-sans text-custom-textDark overflow-x-hidden relative">
-            <Navbar />
+        <div className="min-h-screen bg-white font-sans text-custom-textDark overflow-x-hidden">
+            {/* Minimal Logo Positioned Top-Left */}
+            <div className="fixed top-0 left-0 w-full z-50 px-6 py-6 pointer-events-none">
+                <button onClick={() => navigate('/')} className="flex items-center gap-2 pointer-events-auto group">
+                    <img src={logoImage} alt="TaxMantri Logo" className="h-9 w-auto object-contain group-hover:scale-105 transition-transform" />
+                    <span className="font-extrabold text-2xl tracking-tighter text-black group-hover:text-custom-purple transition-colors">TaxMantri</span>
+                </button>
+            </div>
 
             {/* Main Content */}
             <main className="pt-36 pb-24 px-6 max-w-5xl mx-auto">
