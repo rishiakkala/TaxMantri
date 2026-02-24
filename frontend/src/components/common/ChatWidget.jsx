@@ -27,13 +27,6 @@ function getSessionId() {
     return id
 }
 
-/** Colour + label for confidence level */
-const CONFIDENCE = {
-    high: { color: 'bg-green-100 text-green-700', label: '● High confidence' },
-    medium: { color: 'bg-yellow-100 text-yellow-700', label: '◐ Medium confidence' },
-    low: { color: 'bg-red-100 text-red-600', label: '○ Low confidence' },
-}
-
 // ── Sub-components ────────────────────────────────────────────────────────────
 
 function TypingDots() {
@@ -89,15 +82,6 @@ function MessageBubble({ msg }) {
                             {c}
                         </span>
                     ))}
-                </div>
-            )}
-
-            {/* Confidence badge (AI only, non-loading) */}
-            {!isUser && !msg.loading && msg.confidence && (
-                <div className="ml-9 mt-1">
-                    <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${CONFIDENCE[msg.confidence]?.color || ''}`}>
-                        {CONFIDENCE[msg.confidence]?.label || msg.confidence}
-                    </span>
                 </div>
             )}
         </div>
@@ -165,7 +149,6 @@ export default function ChatWidget({ profileId = null }) {
                         loading: false,
                         text: data.answer || 'No answer returned.',
                         citations: data.citations || [],
-                        confidence: data.confidence || 'low',
                     }
                     : m
             ))
@@ -180,7 +163,6 @@ export default function ChatWidget({ profileId = null }) {
                             ? 'The knowledge base is still loading. Please try again in a moment.'
                             : 'Something went wrong. Please try again.',
                         citations: [],
-                        confidence: 'low',
                     }
                     : m
             ))
