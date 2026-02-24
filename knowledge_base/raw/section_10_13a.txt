@@ -1,0 +1,38 @@
+Section 10(13A) — HRA Exemption
+[IT Act 1961, as amended up to Finance Act 2025]
+
+10. In computing the total income of a previous year of any person, any income falling within any of the following clauses shall not be included—
+
+10(13A): any special allowance specifically granted to an assessee by his employer to meet expenditure actually incurred on payment of rent (by whatever name called) in respect of residential accommodation occupied by the assessee, to such extent as may be prescribed having regard to the area or place in which such accommodation is situate and other relevant considerations.
+
+Proviso to 10(13A): Nothing in this clause shall apply to any such allowance received by an assessee who—
+(a) owns any residential accommodation at the place at which he ordinarily resides or performs duties of his office or employment; or
+(b) does not actually incur expenditure on payment of rent (by whatever name called) in respect of the residential accommodation occupied by him.
+
+Explanation.— For the purposes of this clause, "prescribed" means prescribed by the rules made under this Act.
+
+[The extent of exemption is prescribed in Rule 2A of the Income Tax Rules, 1962. See the Rule 2A file for the min-of-3 computation formula.]
+
+Conditions for claiming 10(13A) exemption:
+1. The assessee must be a salaried employee — self-employed individuals cannot claim HRA exemption.
+2. The allowance must be specifically granted by the employer to meet rent expenditure (HRA component must appear in the salary structure).
+3. The assessee must actually pay rent for residential accommodation.
+4. The assessee must not own a residential house in the city where the duty is performed or where the residence is located.
+5. If the assessee owns a house in a different city but rents accommodation in the place of employment, the exemption is still available.
+
+Computation of HRA Exemption (Rule 2A — min-of-3 formula):
+The exempt portion of HRA is the LEAST of the following three amounts:
+(a) Actual HRA received from employer (annual amount)
+(b) 50% of salary (basic + DA) for metro cities (Delhi, Mumbai, Kolkata, Chennai)
+    OR 40% of salary (basic + DA) for non-metro/other cities
+(c) Actual rent paid annually MINUS 10% of salary (basic + DA)
+
+The balance of HRA (received minus exempt) is taxable as part of salary.
+
+"Salary" for HRA purposes means: Basic Salary + Dearness Allowance forming part of salary for retirement benefits. Other allowances and perquisites are excluded.
+
+If the assessee does not pay any rent, no exemption is available — the entire HRA received is taxable.
+
+Rent receipts and landlord's PAN: If annual rent paid exceeds ₹1,00,000 (i.e., monthly rent > ₹8,333), the landlord's PAN must be furnished to the employer for the HRA exemption to be allowed by the employer in Form 16.
+
+ITR-1 Schedule S Field 5: HRA exemption under Section 10(13A) is reported as an exempt allowance in Field 5 (Allowances to the extent exempt under Section 10). The exempt HRA amount is deducted from gross salary to arrive at net salary.

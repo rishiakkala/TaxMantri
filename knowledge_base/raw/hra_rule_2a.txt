@@ -1,0 +1,73 @@
+Rule 2A — Limits for the purposes of Section 10(13A)
+[Income Tax Rules, 1962, as amended up to 2025]
+
+2A. For the purposes of sub-clause (i) of clause (13A) of section 10, the amount not includible in the total income of an individual in respect of the special allowance referred to in that sub-clause shall be—
+
+(i) the actual amount of such allowance received by the assessee in respect of the relevant period; or
+
+(ii) the rent actually paid in excess of one-tenth of the salary due to the assessee in respect of the relevant period; or
+
+(iii) where such accommodation is situated in Bombay (Mumbai), Calcutta (Kolkata), Delhi, or Madras (Chennai) — an amount equal to fifty per cent of the salary due to the assessee;
+    where such accommodation is situated in any other place — an amount equal to forty per cent of the salary due to the assessee;
+
+whichever is the LEAST of the above amounts.
+
+THE MIN-OF-3 FORMULA:
+HRA Exemption = MIN(A, B, C) where:
+
+A = Actual HRA received during the year (annual amount from salary slip/Form 16)
+B = Actual rent paid per year MINUS 10% of "salary"
+C = 50% of "salary" (if accommodation in metro: Mumbai, Kolkata, Delhi, Chennai)
+    OR 40% of "salary" (if accommodation in any other city/town)
+
+"Salary" for Rule 2A means:
+"Salary" in Rule 2A refers to the basic salary plus dearness allowance (DA) to the extent that it forms part of retirement benefits (i.e., DA factored into PF computation). Any other allowances, perquisites, bonus, commission, or benefits are NOT included in "salary" for this rule.
+
+Metro cities (50% applicable): Mumbai (Bombay), Kolkata (Calcutta), Delhi (New Delhi), Chennai (Madras). ANY OTHER city is non-metro (40%).
+
+Cities treated as non-metro (40% applicable): Bengaluru, Hyderabad, Pune, Ahmedabad, Gurugram (Gurgaon), Noida, and all other cities not in the explicit metro list.
+
+Computation example (Metro — Delhi):
+- Basic salary: ₹5,00,000 per year
+- DA (forming part of salary for retirement): ₹1,00,000 per year
+- "Salary" for HRA = ₹5,00,000 + ₹1,00,000 = ₹6,00,000
+- HRA received (annual): ₹2,40,000
+- Actual rent paid (annual): ₹3,00,000
+
+Calculation:
+A = ₹2,40,000 (actual HRA received)
+B = ₹3,00,000 - (10% × ₹6,00,000) = ₹3,00,000 - ₹60,000 = ₹2,40,000
+C = 50% × ₹6,00,000 = ₹3,00,000
+
+MIN(₹2,40,000, ₹2,40,000, ₹3,00,000) = ₹2,40,000
+
+HRA Exemption = ₹2,40,000
+Taxable HRA = ₹2,40,000 (received) - ₹2,40,000 (exempt) = NIL
+
+Computation example (Non-metro — Bengaluru):
+- Basic salary: ₹6,00,000 per year; HRA received: ₹1,80,000; Rent paid: ₹2,40,000; DA = NIL
+- "Salary" = ₹6,00,000
+
+A = ₹1,80,000
+B = ₹2,40,000 - (10% × ₹6,00,000) = ₹2,40,000 - ₹60,000 = ₹1,80,000
+C = 40% × ₹6,00,000 = ₹2,40,000
+
+MIN(₹1,80,000, ₹1,80,000, ₹2,40,000) = ₹1,80,000
+
+HRA Exemption = ₹1,80,000
+Taxable HRA = ₹0
+
+Case where excess rent is the bottleneck:
+- Salary ₹8,00,000; HRA received ₹3,20,000; Rent paid ₹2,00,000 (non-metro)
+A = ₹3,20,000
+B = ₹2,00,000 - ₹80,000 = ₹1,20,000
+C = 40% × ₹8,00,000 = ₹3,20,000
+MIN = ₹1,20,000 → Exemption limited to ₹1,20,000, taxable HRA = ₹2,00,000
+
+Key compliance points from Rule 2A:
+1. Rent certificate / rent agreement required as evidence.
+2. Where monthly rent exceeds ₹8,333 (i.e., annual exceeds ₹1,00,000), the assessee must furnish the landlord's PAN to the employer.
+3. If both H-O claim (self-occupied property with interest deduction) and HRA claim are made for the same city at the same time, HMRC/CBDT may disallow HRA (Rule 2A conditions not met if assessee owns a residential house in the same city).
+4. Joint landlord: If the property is rented from a family member (parent), it is permissible provided the rent is actually paid and the parent declares it as rental income in their ITR.
+
+ITR-1 Schedule S — HRA fields: The exempt HRA amount computed using Rule 2A appears as an exemption in Schedule S. The employer may compute it and show it in Form 16 Part B; the assessee should verify and correct if needed.

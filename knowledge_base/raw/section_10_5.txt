@@ -1,0 +1,41 @@
+Section 10(5) — LTA Exemption
+[IT Act 1961, as amended up to Finance Act 2025]
+
+10. In computing the total income of a previous year of any person, any income falling within any of the following clauses shall not be included—
+
+10(5): the value of any travel concession or assistance received by or due to an employee from his employer or former employer for himself and his family, in connection with his proceeding—
+(a) on leave to any place in India;
+(b) to any place in India after retirement from service or after the termination of his service,
+
+subject to such conditions as may be prescribed (including conditions as to number of journeys and the amount which shall be exempt per head) having regard to the travel by the shortest route to that place.
+
+Explanation.— For the purposes of this clause, "family", in relation to an individual, means—
+(i) the spouse and children of the individual; and
+(ii) the parents, brothers and sisters of the individual or any of them, wholly or mainly dependent on the individual.
+
+Prescribed Conditions (Rule 6B of Income Tax Rules, 1962):
+
+Block of 4 years:
+The Central Government notifies 4-year calendar blocks for LTA purposes. Current block: 2022–2025 (January 2022 to December 2025). Two journeys are permissible in each 4-year block.
+
+Number of journeys:
+An employee can claim LTA exemption for maximum 2 journeys within a 4-year block. If the employee does not claim exemption for 1 or both journeys in a block, the unclaimed journey(s) can be carried forward to the first calendar year of the immediately succeeding block (one carry-forward journey only).
+
+Qualifying travel:
+Travel must be within India only. International travel does not qualify. Travel must be for the purpose of leave — the employee must actually travel (not just receive a travel allowance without travelling).
+
+Mode of travel and limits:
+(a) Travel by air: Economy class airfare by the shortest route. If no air service, then as per (b) below.
+(b) Travel by rail: AC First Class rail fare by the shortest route (or actual if less than AC First Class).
+(c) Travel by any other mode to destinations not connected by rail or air: First class or deluxe class fare by the shortest route.
+
+Family coverage:
+The exemption covers the employee AND family members (as defined in the Explanation above). However, where the number of family members accompanying the employee exceeds 2 children born on or after 01-10-1998, the exemption for the excess children is NOT available (i.e., only 2 children born after 01-10-1998 qualify; children born before 01-10-1998 are not subject to this limit; twins or triplets in a single birth are treated as one child for this purpose).
+
+What is exempt:
+Only actual travel costs are exempt — hotel accommodation, sightseeing, local conveyance at the destination are not covered. The exemption is limited to the cost of travel to and from the destination by the eligible mode and class.
+
+Proof and employer claim:
+The exemption is available to employees who declare LTA travel to their employer. The employer may verify travel tickets and boarding passes. The excess (LTA received minus exempt portion) is taxable as salary.
+
+ITR-1 Schedule S Field 5: LTA exemption under Section 10(5) is included in Field 5 (Allowances exempt under Section 10) along with HRA and other exemptions.

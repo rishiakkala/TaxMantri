@@ -1,0 +1,61 @@
+# TaxMantri Backend — Pinned dependencies
+# Install all: pip install -r requirements.txt
+# NOTE: python-magic-bin is Windows-only (provides libmagic DLL).
+#       On Linux/Mac, remove python-magic-bin and keep only python-magic.
+
+# --- Web framework ---
+fastapi==0.115.5
+uvicorn[standard]==0.32.1
+
+# --- Validation & config ---
+pydantic==2.10.3
+pydantic-settings==2.6.1
+
+# --- Database ---
+sqlalchemy==2.0.36
+alembic==1.14.0
+asyncpg==0.30.0
+
+# --- Cache ---
+redis==5.2.1
+
+# --- Auth ---
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.18
+
+# --- OCR ---
+pytesseract==0.3.13
+pdf2image==1.17.0
+Pillow==11.0.0
+python-magic==0.4.27
+python-magic-bin==0.4.14   # Windows only — remove on Linux/Mac
+
+# --- RAG / Embeddings ---
+faiss-cpu>=1.13.2        # 1.9.0 crashed on Python 3.13; 1.13.2+ supports numpy 2.x
+sentence-transformers==3.3.1
+rank-bm25==0.2.2
+numpy>=2.0               # Python 3.13 requires numpy 2.x with faiss-cpu 1.13.2+
+
+# --- LLM ---
+mistralai==1.2.4
+
+# --- LangGraph agent pipeline ---
+langgraph>=0.2.0
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-mistralai>=0.2.0
+
+# --- PDF export ---
+reportlab==4.2.5
+
+# --- HTTP client (tests + async calls) ---
+httpx==0.27.2
+
+# --- Testing ---
+pytest==8.3.4
+pytest-asyncio==0.24.0
+pytest-cov==4.1.0
+
+# --- Logging ---
+structlog==24.4.0

@@ -1,0 +1,52 @@
+Section 80D — Deduction in respect of health insurance premia and preventive health check-up
+[IT Act 1961, as amended up to Finance Act 2025]
+
+80D. (1) In computing the total income of an assessee, being an individual or a Hindu undivided family, there shall be deducted such sum, as specified in sub-section (2) or sub-section (3), as the case may be.
+
+80D(2) — For INDIVIDUALS: In the case of an individual being an assessee, the sums referred to in sub-section (1) shall be the following, namely:—
+
+(a) the whole of the amount paid to effect or to keep in force an insurance on the health of the assessee or his family (as defined below) or any contribution made to the Central Government Health Scheme or such other scheme as notified by the Central Government in this behalf; or
+
+(b) the whole of the amount paid to effect or to keep in force an insurance on the health of the parent or parents of the assessee.
+
+Ceiling for 80D(2):
+- Health insurance premium for self + family (spouse + dependent children): Deduction up to ₹25,000 per annum
+- If the insured (assessee or spouse) is a senior citizen (aged 60 years or more): Up to ₹50,000 per annum
+- Preventive health check-up: A deduction of up to ₹5,000 is allowed per family (self + family) from within the above ceilings (not in addition). This ₹5,000 sub-limit may be paid in cash (cash payment is not allowed for insurance premium except for preventive health check-up).
+
+Additional deduction for parents:
+- Premium paid for health insurance of parents: Up to ₹25,000 per annum
+- If any parent is a senior citizen (aged 60 years or more): Up to ₹50,000 per annum
+
+Maximum possible deduction under 80D for an individual:
+- Own family (non-senior citizens) + Parents (non-senior citizens): ₹25,000 + ₹25,000 = ₹50,000
+- Own family (senior citizen assessee or spouse) + Parents (senior citizens): ₹50,000 + ₹50,000 = ₹1,00,000
+- Own family (non-senior citizen) + Parents (senior citizens): ₹25,000 + ₹50,000 = ₹75,000
+
+"Family" for 80D purposes means the spouse and dependent children of the individual assessee.
+
+Uninsured senior citizen parents (without any health insurance policy):
+Where neither the assessee nor any member of his family or parent has a health insurance policy, but the assessee has incurred medical expenditure in respect of a senior citizen parent (aged 60 years or more), such medical expenditure paid shall be allowed as a deduction of up to ₹50,000 under Section 80D. This covers actual medical expenditure (hospital bills, doctor fees, medicines) for uninsured senior citizen parents.
+
+80D(3) — For HUFs: In the case of a Hindu undivided family, the sums referred to in sub-section (1) shall be the whole of the amount paid to effect or to keep in force an insurance on the health of any member of the HUF. Deduction ceiling: up to ₹25,000 (₹50,000 if insured member is a senior citizen aged 60+).
+
+Mode of Payment:
+Premium must be paid by any mode other than cash. The ₹5,000 sub-limit for preventive health check-up is the only component that can be paid in cash and still be eligible for deduction.
+
+Conditions:
+1. Premium must be paid by the assessee out of his income chargeable to tax (not from income exempt from tax).
+2. The insurance must be with an insurer approved by IRDA (Insurance Regulatory and Development Authority of India).
+3. The insurance policy must be mediclaim/health insurance only (not life insurance).
+4. Group insurance paid through employer: If the employer deducts health insurance premium from salary, the employee can claim deduction only for the employee's share; the employer's contribution is a perquisite valued at nil or at actual if applicable.
+
+Assessment Year 2025-26 (Budget 2025) — No change to Section 80D limits:
+Deduction limits under Section 80D remain unchanged for AY2025-26. The caps of ₹25,000 (non-senior) and ₹50,000 (senior citizen) continue to apply.
+
+Availability under tax regimes:
+Section 80D deduction is NOT available under the new tax regime (Section 115BAC), unless specifically retained. As per the current law, Section 80D is available ONLY under the old (regular) tax regime.
+
+Example for ITR-1:
+An assessee (age 45) pays ₹18,000 health insurance premium for self + family, ₹45,000 for parents (father 68 years old, mother 63 years old). Preventive check-up ₹3,000.
+- Self + family: ₹18,000 (within ₹25,000 cap; check-up ₹3,000 included within the cap = total ₹21,000)
+- Parents (both senior citizens): ₹45,000 (within ₹50,000 cap)
+- Total 80D deduction: ₹21,000 + ₹45,000 = ₹66,000

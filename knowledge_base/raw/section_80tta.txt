@@ -1,0 +1,53 @@
+Section 80TTA — Deduction in respect of interest on deposits in savings account
+[IT Act 1961, as amended up to Finance Act 2025]
+
+80TTA. (1) Where the gross total income of an assessee, being an individual or a Hindu undivided family—
+(a) includes any income by way of interest on deposits (not being time deposits) in a savings account with—
+    (i) a banking company to which the Banking Regulation Act, 1949 applies (including any bank or banking institution referred to in section 51 of that Act);
+    (ii) a co-operative society engaged in carrying on the business of banking (including a co-operative land mortgage bank or a co-operative land development bank); or
+    (iii) a Post Office as defined in clause (k) of section 2 of the Indian Post Office Act, 1898;
+
+there shall be allowed, in computing the total income of the assessee, a deduction of an amount equal to the whole of such income or ten thousand rupees, whichever is less.
+
+CEILING: ₹10,000 per annum
+
+Key definitions and scope:
+"Deposits" include savings bank account deposits only. Time deposits (Fixed Deposits, Recurring Deposits) are EXCLUDED. Interest from FDs and RDs is fully taxable as Income from Other Sources.
+
+"Savings accounts" covered: Regular savings bank accounts in scheduled commercial banks, co-operative banks, or Post Office savings accounts. This includes SB accounts under Post Office Savings Account Scheme.
+
+What is NOT covered:
+- Fixed Deposit (FD) interest — NOT covered by 80TTA
+- Recurring Deposit (RD) interest — NOT covered by 80TTA
+- Interest from loans given to friends, relatives — NOT covered
+- Interest from corporate bonds, debentures, NSC — NOT covered
+- PPF interest — exempt under Section 10(11), separately
+
+Section 80TTB — For Senior Citizens (supersedes 80TTA):
+Section 80TTB (inserted from AY2019-20) provides a HIGHER deduction to senior citizens (age 60 years or more). Under 80TTB:
+- Deduction on interest from savings accounts, FDs, RDs, and any deposit with bank, cooperative bank or post office.
+- Limit: ₹50,000 per annum (vs ₹10,000 under 80TTA)
+- Senior citizens (60+) should claim 80TTB instead of 80TTA.
+- 80TTA is NOT available to senior citizens who are eligible to claim 80TTB.
+
+Interaction between 80TTA and 80TTB:
+- If the assessee is BELOW 60 years: 80TTA applies (savings account interest only, up to ₹10,000)
+- If the assessee is 60 YEARS or MORE: 80TTB applies (all interest including FD/RD, up to ₹50,000)
+- A senior citizen cannot claim BOTH 80TTA and 80TTB simultaneously.
+
+Availability under new tax regime (Section 115BAC):
+Deduction under Section 80TTA is NOT available under the new tax regime. Section 80TTB (senior citizen interest deduction) is also NOT available under the new tax regime.
+
+TDS on savings account interest:
+TDS is NOT deducted on savings bank account interest (banks do not deduct TDS on SB interest). TDS is deducted only on interest from TD (FD/RD) exceeding ₹40,000 per year (₹50,000 for senior citizens). The assessesee must self-declare savings account interest in ITR-1 under "Income from Other Sources" and claim 80TTA deduction.
+
+Example for ITR-1:
+An individual (age 35) earned ₹9,500 as savings account interest from SBI and ₹4,200 from Post Office savings account. Total savings interest = ₹13,700.
+- Enter ₹13,700 under "Income from Other Sources" in ITR-1.
+- Claim ₹10,000 as 80TTA deduction (limited to ₹10,000 ceiling).
+- Net taxable interest from savings = ₹3,700.
+
+For a senior citizen (age 65) earning FD interest of ₹38,000 and savings account interest of ₹5,000 = total ₹43,000:
+- Claim ₹43,000 under IFOS.
+- 80TTB deduction: ₹43,000 (entire amount, since it is below ₹50,000 cap).
+- Net taxable interest = NIL.

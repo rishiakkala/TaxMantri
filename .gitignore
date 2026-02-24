@@ -1,0 +1,66 @@
+# TaxMantri .gitignore
+
+# Environment secrets — NEVER commit these
+backend/.env
+.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyc
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Pytest
+.pytest_cache/
+*.pytest_cache
+htmlcov/
+.coverage
+coverage.xml
+
+# Knowledge base generated artifacts (large binary files)
+knowledge_base/indexes/
+knowledge_base/chunks/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Alembic (don't ignore versions — those are source-controlled)
+# backend/alembic/versions/*.py  ← keep these
+
+# Temp uploads
+/tmp/
+*.tmp
+
+# Node / Frontend
+node_modules/
+frontend/node_modules/
+.eslintcache
+.stylelintcache
+*.local
+.pnp.*
+.pnp
+.pnpm-debug.log*
+
+# Vite
+dist/
+frontend/dist/
+.vite/

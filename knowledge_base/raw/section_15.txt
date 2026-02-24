@@ -1,0 +1,24 @@
+Section 15 — Salaries
+[IT Act 1961, as amended up to Finance Act 2025]
+
+15. The following incomes shall be chargeable to income-tax under the head "Salaries"—
+
+(a) any salary due from an employer or a former employer to an assessee in the previous year, whether paid or not;
+
+(b) any salary paid or allowed to him in the previous year by or on behalf of an employer or a former employer though not due or before it became due to him;
+
+(c) any arrears of salary paid or allowed to him in the previous year by or on behalf of an employer or a former employer, if not charged to income-tax for any earlier previous year.
+
+Explanation 1.—For the removal of doubts, it is hereby declared that where any salary paid before it became due is included in the total income of the assessee for the previous year in which it is paid, it shall not be included again in the total income of the assessee for the previous year in which the salary becomes due.
+
+Explanation 2.—For the purposes of this section, "salary" includes wages, any annuity or pension, any gratuity, any fees, commission, perquisite or profits in lieu of or in addition to any salary or wages, any advance of salary, any payment received in respect of any period of leave not availed of by him, and the annual accretion to the balance at the credit of an employee participating in a recognised provident fund, to the extent to which it is chargeable to tax under rule 6 of Part A of the Fourth Schedule, and the aggregate of all sums that are comprised in the transferred balance of an employee participating in a recognised provident fund, to the extent to which it is chargeable to tax under sub-rule (4) of rule 11 of Part A of the Fourth Schedule.
+
+Note: The full definition of "salary" is contained in Section 17 of the IT Act. Section 17(1) defines salary as including wages, annuity, pension, gratuity, fees, commissions, perquisites, profits in lieu of salary, leave encashment, and EPF accretions. Section 17(2) defines perquisites. Section 17(3) defines profits in lieu of salary. All three sub-sections together constitute the comprehensive definition of taxable salary income for purposes of Section 15.
+
+Note on "due, paid, or allowed":
+- Salary "due" means earned in the previous year, regardless of when received.
+- Salary "paid" or "allowed" includes advance salary credited in the previous year.
+- Arrears of salary are included in the year of receipt, not the year to which they relate, unless already charged in a prior year.
+
+Relief for arrears of salary:
+Where salary arrears are taxable in the current year but relate to past years, relief may be claimed under Section 89(1) read with Rule 21A — allowing the assessee to recompute tax as if the arrears had been received in the respective earlier years and claim the differential as relief.

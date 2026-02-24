@@ -1,0 +1,111 @@
+ITR-1 (Sahaj) Filing Instructions — Assessment Year 2025-26 (FY 2024-25)
+[Based on CBDT Form ITR-1 Sahaj instructions for AY2025-26]
+
+OVERVIEW:
+ITR-1 (Sahaj) is the simplest income tax return form applicable to individual resident taxpayers with straightforward income profiles. This guide explains who should file ITR-1, which fields correspond to which income/deduction, and how to compute the tax liability.
+
+ELIGIBILITY — WHO CAN FILE ITR-1?
+ITR-1 can be filed by an individual who is:
+1. A RESIDENT (not NRI, RNOR, or NR) of India for the previous year.
+2. Total income does NOT exceed ₹50,00,000.
+3. Income is from ONE OR MORE of these sources ONLY:
+   (a) Salary / Pension
+   (b) Income from ONE house property (not more than one)
+   (c) Income from other sources (interest income, family pension, etc.) — EXCLUDING winning from lotteries/puzzles/horse races
+   (d) Agricultural income up to ₹5,000
+
+WHO CANNOT USE ITR-1?
+- Persons with more than one house property
+- Persons having income from business or profession (including freelancing, professional practice)
+- Persons having capital gains (equity, mutual fund, property, etc.)
+- Persons having agricultural income exceeding ₹5,000
+- Persons who are directors of a company
+- Persons who have invested in unlisted equity shares
+- Persons with foreign assets or income
+- Persons claiming benefits under treaty (DTAA)
+- Persons having tax deferred on trust/ESOP
+- Persons with income > ₹50 lakh
+- Hindu Undivided Families (HUFs)
+- Non-residents and RNOR
+
+SCHEDULE S — INCOME FROM SALARY:
+
+Field 1: Name of employer
+Field 2: TAN of employer
+Field 3: Nature of employment (Government / Public sector / Pensioners / Others)
+Field 4: Gross salary
+  4a: Salary as per provisions contained in Section 17(1)
+  4b: Value of perquisites as per Section 17(2)
+  4c: Profits in lieu of salary under Section 17(3)
+Field 5: Allowances to the extent exempt under Section 10 (HRA, LTA, etc.)
+Field 6: Net salary (Field 4 minus Field 5) = Chargeable salary before 16 deductions
+Field 7: Deductions under Section 16:
+  7a: Standard deduction under Section 16(ia): ₹50,000 (old regime) or ₹75,000 (new regime)
+  7b: Entertainment allowance [Section 16(ii)] — Government employees only
+  7c: Tax on employment / Professional tax [Section 16(iii)]
+  7d: Total deductions under Section 16 (sum of 7a+7b+7c)
+Field 8: Income chargeable under head "Salaries" = Field 6 minus Field 7d
+
+SCHEDULE HP — INCOME FROM HOUSE PROPERTY:
+Applicable for ONE house property only. If more than one property, ITR-2 must be filed.
+
+Self-occupied property:
+- Annual value: NIL
+- Deduction under Section 24(b) interest: Up to ₹2,00,000 (if conditions under 24(b) are met)
+- Net income from SOP = NEGATIVE (loss up to ₹2,00,000)
+- This loss can be set off against salary income (old regime only)
+
+Let-out property:
+- Expected Rent (ER) = Municipal Value or Fair Rental Value, whichever is higher, compared with standard rent
+- Actual Rent received / Receivable (ARR)
+- Gross Annual Value (GAV) = Higher of ER and ARR
+- Municipal taxes paid = deductible
+- Net Annual Value (NAV) = GAV minus Municipal Taxes
+- Standard deduction u/s 24(a) = 30% of NAV
+- Interest u/s 24(b) = actual interest (no ceiling for let-out)
+
+SCHEDULE OS — INCOME FROM OTHER SOURCES:
+- Savings account interest (80TTA applies)
+- FD / RD interest (fully taxable, no 80TTA)
+- Family pension (standard deduction = lower of ₹25,000 or 1/3 of pension)
+- Dividends from shares/MFs
+- Any other income (specify)
+
+SCHEDULE VI-A — DEDUCTIONS UNDER CHAPTER VIA:
+Section 80C: LIC premium, PPF, ELSS, Home loan principal, tuition fees, etc. — max ₹1,50,000
+Section 80CCC: LIC pension plan premium — max ₹1,50,000 (within 80CCE aggregate)
+Section 80CCD(1): NPS own contribution — within 80CCE ceiling (10% of salary)
+Section 80CCD(1B): Extra NPS contribution — additional ₹50,000 (not in 80CCE)
+Section 80CCD(2): Employer NPS — 14%/10% of salary (not in 80CCE)
+Section 80D: Health insurance premium — self/family up to ₹25,000/₹50,000, parents ₹25,000/₹50,000
+Section 80DD: Handicapped dependent — ₹75,000 (severe disability: ₹1,25,000)
+Section 80DDB: Specified diseases treatment — ₹40,000 (senior citizens: ₹1,00,000)
+Section 80E: Education loan interest — no ceiling, up to 8 years
+Section 80EEA: Interest on home loan for affordable housing — ₹1,50,000 (last year for AY2024-25; not extended for AY2025-26, verify)
+Section 80G: Donations — as per category
+Section 80GG: HRA not received from employer (rent paid by self-employed/those without HRA)
+Section 80TTA: Savings account interest up to ₹10,000
+Section 80TTB: All interest for senior citizens up to ₹50,000
+Section 80U: Disability (self) — ₹75,000 (severe: ₹1,25,000)
+
+PART B — TAX COMPUTATION (TTI):
+Gross Total Income = Sum of all schedule heads
+Total Deductions (Chapter VI-A) = as per Schedule VI-A
+Total Taxable Income = GTI minus deductions
+Tax on Total Income = As per applicable slabs (old or new regime)
+Add: Surcharge (if applicable)
+Add: Health & Education Cess (4%)
+Tax Payable before rebate = Above total
+Less: Rebate under Section 87A
+Total Tax Liability = Tax payable after rebate
+Less: TDS/TCS/Advance Tax paid
+Self-Assessment Tax / Refund = Balance payable or refundable
+
+REGIME SELECTION IN ITR-1:
+From AY2024-25, the assessee must specify in ITR-1 whether they are opting for old or new regime. The new regime (115BAC) is the DEFAULT. If old regime is chosen, the checkbox under 'Filing under old regime' must be ticked (or Form 10-IEA must have been filed).
+
+IMPORTANT FILING DETAILS:
+- Due date: 31st July of the Assessment Year without late fee (AY2025-26: 31 July 2025)
+- Late filing: Up to 31 December with late fee (₹5,000 if income > ₹5 lakh; ₹1,000 otherwise under Section 234F)
+- Verification: Can be verified online (OTP, Aadhaar OTP, net banking) or by sending signed ITR-V to CPC within 30 days of filing
+- Mandatory Aadhaar-PAN linkage: Required for filing; ITR processed only after PAN is linked to Aadhaar

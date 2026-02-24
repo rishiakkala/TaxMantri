@@ -1,0 +1,39 @@
+Section 16 — Deductions from salaries
+[IT Act 1961, as amended up to Finance Act 2025]
+
+16. In computing the income chargeable under the head "Salaries", the following deductions shall be allowed, namely:—
+
+16(i) Standard deduction:
+
+A deduction of a sum equal to fifty thousand rupees or the amount of salary, whichever is less, shall be allowed under this clause.
+
+[AY2025-26 Budget 2025 Note: For taxpayers opting for the new tax regime under Section 115BAC, the standard deduction has been enhanced to seventy-five thousand rupees effective Assessment Year 2025-26 (Financial Year 2024-25), by insertion of sub-section (2A) in Section 115BAC. The standard deduction under Section 16(i) for the old (regular) tax regime remains fifty thousand rupees.]
+
+16(ii) Entertainment allowance:
+
+Any allowance in the nature of an entertainment allowance, not exceeding the least of—
+(a) one-fifth of the salary (exclusive of any allowance, benefit or other perquisite) of the employee, or
+(b) five thousand rupees,
+shall be deductible in the case of an employee of the Government (not of a company or of any other employer). In computing the income of an employee other than a Government employee, entertainment allowance is not deductible under this clause.
+
+Proviso to 16(ii): The deduction under clause (ii) shall be equal to the least of—
+(a) the amount of the allowance actually received by the assessee in the previous year in respect of the said period; or
+(b) one-fifth of his salary for the said period, excluding all allowances, benefits or other perquisites; or
+(c) five thousand rupees.
+
+This deduction is available ONLY to Government employees (Central Government and State Government). Private sector employees cannot claim entertainment allowance deduction.
+
+16(iii) Tax on employment (professional tax):
+
+The tax on employment within the meaning of sub-clause (ii) of clause (24) of article 276 of the Constitution (hereinafter referred to as "professional tax"), leviable by or under any law, to the extent to which such tax is actually paid by the assessee, shall be deductible.
+
+Professional tax is a tax levied by State Governments under Article 276 of the Constitution of India. It is deductible in full — the entire amount of professional tax paid during the previous year is deductible under Section 16(iii), without any ceiling.
+
+Note: Professional tax paid by the employer on behalf of the employee is first treated as a perquisite (taxable income) and then simultaneously allowed as a deduction under 16(iii), resulting in a net nil tax impact.
+
+Summary of Section 16 Deductions (for ITR-1 Schedule S):
+
+Field 7a — Standard deduction: ₹50,000 (old regime) or ₹75,000 (new regime, AY2025-26)
+Field 7b — Entertainment allowance [Section 16(ii)]: Government employees only; limited to least of actual allowance, 1/5th of salary, or ₹5,000
+Field 7c — Professional tax [Section 16(iii)]: Full amount paid by assessee during previous year
+Field 7d — Total deductions under Section 16: Sum of 7a + 7b + 7c

@@ -1,0 +1,72 @@
+Budget 2025 — Key Tax Amendments for Assessment Year 2025-26 (FY 2024-25)
+[Union Budget 2025 / Finance Act 2024 and Finance Act 2025 consolidated amendments]
+
+INTRODUCTION:
+The Union Budget 2025 (presented 1 February 2025) introduced broad reforms to personal income tax. The most significant changes pertain to the new tax regime under Section 115BAC, the rebate under Section 87A, standard deduction enhancement, and employer NPS contribution limits. This document summarises the amendments effective from Assessment Year 2025-26 (Financial Year 2024-25).
+
+1. NEW TAX REGIME — REVISED SLAB RATES (AY2025-26):
+[Section 115BAC(1A) as amended by Finance Act 2024, effective AY2025-26]
+
+Income Slab                          | New Tax Rate (AY2025-26)
+-------------------------------------|-------------------------
+Up to ₹3,00,000                      | NIL
+₹3,00,001 – ₹7,00,000                | 5%
+₹7,00,001 – ₹10,00,000               | 10%
+₹10,00,001 – ₹12,00,000              | 15%
+₹12,00,001 – ₹15,00,000              | 20%
+Above ₹15,00,000                      | 30%
+
+[Previous slabs AY2024-25: Nil up to ₹3L, 5% for ₹3-6L, 10% for ₹6-9L, 15% for ₹9-12L, 20% for ₹12-15L, 30% above ₹15L]
+
+2. SECTION 87A REBATE ENHANCED (New Regime):
+[Section 87A as amended for new regime, effective AY2025-26]
+- Old limit (AY2024-25): Income up to ₹7,00,000 → zero tax (rebate of tax payable)
+- New limit (AY2025-26): Income up to ₹12,00,000 → zero tax (full rebate of income tax)
+- Old regime 87A threshold remains unchanged at ₹5,00,000 (rebate ₹12,500)
+
+Effective zero-tax income under new regime AY2025-26:
+- With ₹75,000 standard deduction → salary gross income up to ₹12,75,000 = zero tax
+- Without standard deduction (e.g., self-employed) → gross income up to ₹12,00,000 = zero tax
+
+Marginal relief: Tax payable for income slightly above ₹12,00,000 shall not exceed the excess income over ₹12,00,000.
+
+3. STANDARD DEDUCTION ENHANCED (New Regime):
+[Section 16(ia) as inserted in Section 115BAC, effective AY2025-26]
+- Old standard deduction (both regimes AY2024-25): ₹50,000
+- New regime standard deduction AY2025-26: ₹75,000 (increased by ₹25,000)
+- Old regime standard deduction AY2025-26: ₹50,000 (unchanged)
+- Family pensioners (new regime AY2025-26): ₹25,000 standard deduction from pension income
+
+4. EMPLOYER NPS CONTRIBUTION — LIMIT ENHANCED:
+[Section 80CCD(2) as amended, effective AY2025-26]
+- Old limit: 10% of basic + DA for private sector employers; 14% for Central Govt
+- New limit AY2025-26: 14% of basic + DA for ALL employers (Central Govt, State Govt, private sector)
+This deduction is available under BOTH old and new regimes.
+
+5. SURCHARGE CAP UNDER NEW REGIME:
+Maximum surcharge under new regime: 25% (for income above ₹2 crore)
+Old regime surcharge: 25% for ₹2-5 crore; 37% for income above ₹5 crore
+[The 37% surcharge is NOT applicable under the new regime — capped at 25%]
+Maximum effective tax rate under new regime = 30% + 25% + 4% cess ≈ 39%
+
+6. CHANGES TO CAPITAL GAINS TAXATION (AY2025-26):
+[Finance Act 2024 — effective 23 July 2024 for new transfer scenarios]
+- Short-term capital gains on listed equity / equity MF: Increased from 15% to 20% (for transfers on/after 23-07-2024)
+- Long-term capital gains on listed equity / equity MF: Increased from 10% to 12.5% (for transfers on/after 23-07-2024)
+- LTCG exemption threshold: ₹1,25,000 per year (increased from ₹1,00,000) for listed equity and equity-oriented MF
+- Holding period: 12 months for listed securities, 24 months for unlisted shares and immovable property (for AY2025-26 — change from 36 months for immovable property effective 23-07-2024)
+- Indexation benefit: Removed for properties purchased on or after 23-07-2024 for capital gains computation. Properties purchased before 23-07-2024 have the option to compute with or without indexation (whichever is beneficial as per CBDT clarification).
+
+7. TDS THRESHOLD CHANGES (effective FY 2025-26 / AY2026-27 — informational):
+Note: Some changes announced in Budget 2025 are effective from 01-04-2025:
+- TDS threshold on interest (non-senior citizens) — FD interest via Section 194A: ₹50,000 (up from ₹40,000)
+- TDS on senior citizen interest (Section 194A): ₹1,00,000 (up from ₹50,000)
+
+8. NEW REGIME AS DEFAULT:
+From AY2024-25 onwards (Finance Act 2023), the new regime is the DEFAULT. Taxpayers who want to continue with the old regime must explicitly opt out using Form 10-IEA or as per their employer's process. Salaried individuals may change their regime choice every year.
+
+9. SECTION 80CCH — AGNIVEER CORPUS FUND:
+Entire amount received from the Corpus of Agniveer at the time of exit/death is exempt. Deduction of employer's contribution to Agniveer Corpus Fund is available under both old and new regimes.
+
+REGIME SELECTION BREAKEVEN (rough rule of thumb AY2025-26):
+If total deductions (80C + 80D + HRA + 24(b) interest + others) under old regime > ₹3,75,000, then old regime may be more beneficial above ₹15 lakh income. Otherwise, new regime is generally beneficial.

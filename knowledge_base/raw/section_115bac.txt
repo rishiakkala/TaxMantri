@@ -1,0 +1,99 @@
+Section 115BAC — Tax on income of individuals, Hindu undivided families, association of persons, body of individuals, and artificial juridical person
+[IT Act 1961, as amended up to Finance Act 2025 — Budget 2025 Slabs effective AY2025-26]
+
+OVERVIEW:
+Section 115BAC introduces the "New Tax Regime" (also called the "Simplified Tax Regime" or "Concessional Tax Regime"). Budget 2025 (Union Budget for FY 2025-26) further modified the slab rates. The new regime is THE DEFAULT regime from AY2024-25 onwards — taxpayers must actively opt out to use the old (regular) regime.
+
+115BAC(1A) — NEW TAX REGIME SLAB RATES for AY2025-26 (FY 2024-25):
+[As amended by Finance Act 2024, applicable from Assessment Year 2025-26]
+
+Slab (Total Income)                  | Tax Rate
+--------------------------------------|----------
+Up to ₹3,00,000                      | NIL
+₹3,00,001 to ₹7,00,000               | 5%
+₹7,00,001 to ₹10,00,000              | 10%
+₹10,00,001 to ₹12,00,000             | 15%
+₹12,00,001 to ₹15,00,000             | 20%
+Above ₹15,00,000                      | 30%
+
+Note: Basic exemption limit under new regime = ₹3,00,000 (vs ₹2,50,000 under old regime).
+
+87A Rebate under new regime (AY2025-26): Individuals with total income up to ₹12,00,000 pay ZERO tax (full rebate under section 87A as amended).
+
+Standard Deduction under new regime (AY2025-26): ₹75,000 (enhanced from ₹50,000 under old regime). This standard deduction is available to salaried employees and pensioners.
+
+Effective zero-tax scenario: With ₹75,000 standard deduction and ₹12,00,000 rebate threshold:
+Salary income up to ₹12,75,000 → After ₹75,000 SD → ₹12,00,000 taxable income → ZERO TAX (full rebate).
+
+Surcharge under new regime (AY2025-26):
+- Income > ₹50,00,000 but ≤ ₹1 crore: 10%
+- Income > ₹1 crore but ≤ ₹2 crore: 15%
+- Income > ₹2 crore but ≤ ₹5 crore: 25%
+- Income > ₹5 crore: 25% (capped at 25% under new regime, as opposed to old regime's 37% for income above ₹5 crore)
+Note: Maximum surcharge under new regime is 25%; maximum marginal rate is thus 39% (30% + 25% surcharge + 4% cess).
+
+Health and Education Cess: 4% on (income tax + surcharge).
+
+OLD TAX REGIME SLAB RATES for AY2025-26 (FY 2024-25):
+[Continuing slabs under regular (old) regime — unchanged]
+
+Slab (Total Income)                  | Tax Rate
+--------------------------------------|----------
+Up to ₹2,50,000                      | NIL
+₹2,50,001 to ₹5,00,000               | 5%
+₹5,00,001 to ₹10,00,000              | 20%
+Above ₹10,00,000                      | 30%
+
+For senior citizens (age 60-79 years): Nil slab up to ₹3,00,000
+For super senior citizens (age 80+ years): Nil slab up to ₹5,00,000
+
+87A Rebate under old regime (AY2025-26): Up to ₹12,500 rebate for income ≤ ₹5,00,000.
+
+DEDUCTIONS AND EXEMPTIONS — NEW REGIME vs OLD REGIME:
+
+Under new regime (Section 115BAC), the following deductions/exemptions are NOT available:
+- Section 80C (LIC/PPF/ELSS/NPS employee contribution/home loan principal): NOT available
+- Section 80D (health insurance premium): NOT available
+- Section 80E (education loan interest): NOT available
+- Section 80TTA/80TTB (savings/deposit interest): NOT available
+- Section 80CCD(1B) (additional NPS ₹50,000): NOT available
+- House rent allowance [Section 10(13A)]: NOT available
+- Leave travel allowance [Section 10(5)]: NOT available
+- Children education allowance [Section 10(14)]: NOT available
+- Interest on self-occupied property [Section 24(b)]: NOT available
+- Entertainment allowance [Section 16(ii)]: NOT available (professional tax under 16(iii) IS available)
+- Set-off of house property loss against other heads: NOT available
+- Chapter VI-A deductions (except 80CCD(2), 80JJAA, 80CCH): NOT available
+
+Under new regime, the following ARE STILL AVAILABLE:
+- Standard deduction of ₹75,000 for salaried individuals (enhanced for AY2025-26)
+- Section 80CCD(2) — Employer's NPS contribution (up to 14%/10% of salary)
+- Section 80CCH — Agniveer Corpus Fund contributions
+- Section 80JJAA — Employment of new employees
+- Section 80G — Donations to eligible funds (retained for new regime) [Note: verify per latest gazette — 80G was proposed for retention]
+- Gratuity exemption [Section 10(10)]
+- Commutation of pension [Section 10(10A)]
+- Leave encashment on retirement [Section 10(10AA)]
+- Employer's EPF contribution [Section 10(12)]
+- Standard deduction for family pension (₹25,000 or 1/3 of pension, whichever is less)
+
+OPTING OUT of new regime:
+A salaried employee (without business income) can opt for old regime by filing Form 10-IEA or by declaring to the employer to deduct TDS as per old regime. The option can be changed every year.
+
+Business income taxpayers (self-employed) can switch to old regime only once. Once they switch back to old regime, they cannot return to new regime except in one circumstance.
+
+115BAC vs 115BAC(1A):
+115BAC was originally introduced by Finance Act 2020 (AY2021-22 onwards). 115BAC(1A) was inserted by Finance Act 2023 (effective AY2024-25) to make the new regime the default and to introduce the modified slabs. Finance Act 2024 further enhanced: standard deduction from ₹50,000 to ₹75,000, employer NPS from 10% to 14%, and 87A rebate threshold from ₹7,00,000 to ₹12,00,000.
+
+COMBINED COMPARISON TABLE — AY2025-26:
+
+Income Level      | Old Regime Tax  | New Regime Tax  | Net Saving (New vs Old)
+------------------|-----------------|-----------------|------------------------
+₹5,00,000         | NIL (87A)       | NIL (87A)       | Equal
+₹7,00,000         | ₹52,000         | NIL (87A)       | New regime saves ₹52,000
+₹10,00,000        | ₹1,12,500       | ₹54,600         | New regime saves ₹57,900
+₹12,00,000        | ₹1,72,500       | NIL (87A)       | New regime saves ₹1,72,500
+₹15,00,000        | ₹2,62,500       | ₹1,45,600       | New regime saves ₹1,16,900
+Above ₹15,00,000  | Varies with deductions | Varies   | Depends on deductions
+
+At higher income levels with significant deductions (80C: ₹1.5L, 80D: ₹50K, HRA: ₹1L+, 24(b): ₹2L), old regime may become more beneficial. The crossover point depends on individual deductions claimed.

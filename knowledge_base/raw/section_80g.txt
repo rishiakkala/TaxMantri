@@ -1,0 +1,64 @@
+Section 80G — Deductions in respect of donations to certain funds, charitable institutions, etc.
+[IT Act 1961, as amended up to Finance Act 2025]
+
+80G. (1) In computing the total income of an assessee, there shall be deducted, in accordance with and subject to the provisions of this section—
+
+(i) in a case where the aggregate of the sums donated exceeds ten per cent of the gross total income (as reduced by any portion thereof on which income tax is not payable under any provision of this Act and by any amount in respect of which the assessee is entitled to a deduction under any other provision of this Chapter) (such excess being hereinafter referred to as "the excess sum"), a sum equal to fifty per cent of the qualifying amount (i.e., aggregate donations minus the excess sum above 10%); and
+
+(ii) in any other case, a sum equal to fifty per cent of the aggregate of sums donated.
+
+Overview of Section 80G:
+Donations to eligible funds and charitable institutions qualify for deduction. The deduction is EITHER 100% or 50% of the donation amount. Additionally, some funds have a 10% of GTI qualifying limit, while others do not.
+
+Categories of Donations:
+
+Category A — 100% deduction WITHOUT qualifying limit (no 10% GTI cap):
+- National Defence Fund set up by the Central Government
+- Prime Minister's National Relief Fund (PMNRF)
+- PM CARES Fund (PM Citizen Assistance and Relief in Emergency Situations Fund)
+- National Foundation for Communal Harmony
+- Chief Minister's Relief Fund (only for states specified)
+- Lt. Governor's Relief Fund
+- A University or educational institution of national eminence approved by the prescribed authority
+- National Blood Transfusion Council or State Blood Transfusion Council
+- Zila Saksharta Samiti
+- National/State Children's Fund
+- National Illness Assistance Fund
+- Army Central Welfare Fund / Indian Naval Benevolent Fund / Air Force Central Welfare Fund
+- Andhra Pradesh Chief Minister's Cyclone Relief Fund (and similar disaster relief funds notified by CG)
+
+Category B — 50% deduction WITHOUT qualifying limit (no 10% GTI cap):
+- Jawaharlal Nehru Memorial Fund
+- Prime Minister's Drought Relief Fund
+- Indira Gandhi Memorial Trust
+- Rajiv Gandhi Foundation
+
+Category C — 100% deduction WITH 10% of GTI qualifying limit:
+- Donations to Government or any local authority to be utilised for promoting family planning
+- Donations made to the Indian Olympic Association or notified sports associations for development of infrastructure for sports
+
+Category D — 50% deduction WITH 10% of GTI qualifying limit (most common category):
+- Any other fund or institution satisfying conditions of section 80G(5), i.e., registered charitable institutions, temples, churches, mosques, etc.
+- Government or local authority for any charitable purpose other than family planning
+- Corporations established by Central or State Government for promotion of interest of minority community
+
+10% Qualifying Limit (applies to Categories C and D):
+The total qualifying amount for donations with the 10% limit shall not exceed 10% of the "Adjusted Gross Total Income" (AGTI), which is:
+AGTI = Gross Total Income minus long-term capital gains minus short-term capital gains covered under section 111A minus income referred to in sections 115A, 115AB, 115AC, 115AD, 115D minus deductions allowed under any other provisions of Chapter VI-A.
+
+For donations to Category D institutions:
+Deduction = 50% × (amount donated OR 10% of AGTI, whichever is less)
+
+Mode of Payment:
+Effective from AY2018-19: Donations in CASH exceeding ₹2,000 shall NOT be eligible for deduction under Section 80G. Only non-cash donations (cheque, DD, electronic transfer) are allowed for amounts above ₹2,000.
+
+Donation to political parties:
+Donations to political parties or electoral trusts are NOT deductible under 80G. They may be eligible under Section 80GGB (companies) or 80GGC (non-companies) as separate provisions.
+
+Documentation required:
+1. Receipt from the donee institution with name, address, PAN and 80G registration number.
+2. Unique Registration Number (URN) of the donee institution under Section 80G (now issued via online registration on the Income Tax portal).
+3. From FY 2021-22 onwards, Form 10BE is issued by donee institutions, and prepopulated in Form 26AS/AIS.
+
+Availability under new tax regime (Section 115BAC):
+Deductions under Section 80G are available EVEN under the new tax regime (Section 115BAC). Section 80G is one of the few deductions that is preserved under the new tax regime.

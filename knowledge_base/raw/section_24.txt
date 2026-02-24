@@ -1,0 +1,44 @@
+Section 24 — Deductions from income from house property
+[IT Act 1961, as amended up to Finance Act 2025]
+
+24. Income chargeable under the head "Income from house property" shall be computed after making the following deductions, namely:—
+
+24(a) Standard deduction:
+A sum equal to thirty per cent of the annual value.
+
+24(b) Interest on borrowed capital:
+Where the property has been acquired, constructed, repaired, renewed or reconstructed with borrowed capital, the amount of any interest payable on such capital:
+
+Provided that in respect of property referred to in sub-section (2) of section 23 (i.e., self-occupied property), the amount of deduction shall not exceed—
+
+(A) two lakh rupees, if—
+    (i) the property is acquired or constructed with capital borrowed on or after the 1st day of April, 1999;
+    (ii) the acquisition or construction is completed within five years from the end of the financial year in which the capital was borrowed; and
+    (iii) the assessee furnishes a certificate, from the person to whom any interest is payable on the capital borrowed, specifying the amount of interest payable by the assessee for the purpose of such acquisition or construction of the property;
+
+(B) thirty thousand rupees in any other case.
+
+Proviso to 24(b): According to sub-section (2) of section 23, where the property is used for self-occupation throughout the previous year, the annual value shall be taken to be nil. In such a case:
+- If capital is borrowed on or after 01-04-1999 AND construction is completed within 5 years from the end of the FY in which loan is taken, deduction limit is ₹2,00,000.
+- In any other case (e.g., loan taken before 01-04-1999, or construction not completed within 5 years), deduction limit is ₹30,000.
+
+Explanation.— Where the acquisition or construction of the house property is not completed within the period mentioned in sub-clause (ii) of clause (A) above, the deduction allowable shall be as per clause (B), i.e., ₹30,000 only.
+
+Pre-construction interest:
+Interest paid prior to the year in which the house property is acquired or construction is completed is called "pre-construction period interest". This interest is NOT deductible in the year it is paid. Instead, it is aggregated and allowed as a deduction in 5 equal instalments commencing from the year of completion or acquisition. Each annual instalment is deductible under section 24(b) subject to the overall ceiling.
+
+Section 25A — Deduction of unrealised rent:
+If any portion of arrears of rent is deemed to be income of the previous year under section 25A, then from the amount so deemed, a deduction of thirty per cent (standard deduction) shall be allowed.
+
+Section 26 — Co-owners:
+Where a property belongs to more than one person and their shares are definite and ascertainable, each co-owner shall be assessed in respect of their respective share.
+
+Important Conditions for claiming ₹2,00,000 deduction for self-occupied property under section 24(b):
+1. Loan must be taken on or after 01-04-1999 for acquisition or construction (not for repair, renewal or reconstruction — those are capped at ₹30,000).
+2. Property must be acquired or construction must be completed within 5 years from the end of the financial year in which the loan was taken (i.e., within 5 years from the end of FY in which the EMI started for the first time).
+3. Lender's certificate must be obtained certifying the interest amount.
+
+Interaction with new tax regime (Section 115BAC):
+Under the new tax regime (Section 115BAC), the deduction under Section 24(b) is NOT available for self-occupied property. The interest deduction under Section 24(b) is restricted only to let-out properties under the new regime, and only up to the extent of rental income (no loss can be set off under other heads).
+
+For old regime: Set-off of house property loss (due to interest in excess of rental income) against other heads is allowed up to ₹2,00,000 per year. The unabsorbed loss can be carried forward for 8 assessment years.

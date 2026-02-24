@@ -1,0 +1,55 @@
+Section 87A — Rebate of income-tax
+[IT Act 1961, as amended up to Finance Act 2025]
+
+87A. An assessee, being an individual resident in India, whose total income does not exceed five hundred thousand rupees, shall be entitled to a deduction from the amount of income-tax (before adding Education Cess) on his total income with which he is chargeable under this Act, of an amount equal to hundred per cent of such income-tax or two thousand and five hundred rupees, whichever is less.
+
+[PLAIN TEXT: Rebate of ₹12,500 where total taxable income ≤ ₹5,00,000. Applicable under OLD tax regime only at this limit.]
+
+OLD REGIME — Section 87A Rebate (AY2025-26 and earlier):
+- Available to: Individual residents only (non-residents, HUFs, companies, etc. are not eligible)
+- Condition: Total income (after all deductions but before Cess) must NOT exceed ₹5,00,000
+- Rebate amount: 100% of income tax or ₹12,500, whichever is LESS
+- If total income > ₹5,00,000 under old regime: NO rebate
+
+NEW REGIME — Section 87A Rebate under Section 115BAC (Budget 2025 amendment for AY2025-26):
+[Finance (No.2) Act 2024 / Union Budget 2024 — effective 01-04-2025, i.e., AY2025-26]
+
+For taxpayers opting for the new tax regime under Section 115BAC(1A):
+- Available to: Individual residents, HUFs, and eligible assessees opting for 115BAC new regime
+- Condition: Total income (new regime) must NOT exceed ₹12,00,000
+- Rebate amount: 100% of income tax (under new regime slabs) on total income up to ₹12,00,000
+- Effective result: Zero income tax for individuals with total income up to ₹12,00,000 under the new regime
+
+MARGINAL RELIEF for new regime near ₹12,00,000 threshold:
+Where total income slightly exceeds ₹12,00,000 (e.g., ₹12,10,000), the tax payable should not exceed the income that exceeds ₹12,00,000. Marginal relief ensures that tax does not exceed the amount by which income exceeds ₹12,00,000.
+
+Example marginal relief: If total income = ₹12,50,000 under new regime:
+- Tax on ₹12,50,000 (new slabs) = ₹65,000 + 4% cess = ₹67,600
+- But without rebate, marginal relief limits tax to: ₹12,50,000 - ₹12,00,000 = ₹50,000
+- Therefore tax payable: ₹50,000 (plus cess on that amount)
+
+NOTE: The ₹12,00,000 threshold rebate under new regime is specifically enacted through Section 87A as amended for the new regime. The old ₹5,00,000 threshold under Section 87A continues to apply for the old (regular) regime.
+
+SPECIAL TAX FOR CAPITAL GAINS (applies to BOTH regimes):
+Rebate under Section 87A is NOT available against:
+(i) Tax on Short-Term Capital Gains (STCG) chargeable under Section 111A [taxed at 15% — for equity STCG before 23-07-2024, or 20% for equity STCG after 23-07-2024]
+(ii) Tax on Long-Term Capital Gains (LTCG) chargeable under Sections 112 and 112A [taxed at special rates]
+(iii) Tax on special rate income under Section 115BB (lottery, etc.)
+This restriction means that if the individual's regular income is within the rebate threshold but there are capital gains, the rebate applies only to the regular income tax and NOT to the special-rate capital gains tax.
+
+This is a critical planning point: An individual with income of ₹4,00,000 + STCG of ₹2,00,000 under old regime:
+- Tax on ₹4,00,000 = NIL (within basic exemption of ₹2,50,000 for old regime in slabs)
+- Tax on STCG ₹2,00,000 @15% = ₹30,000
+- Rebate 87A available only on regular income tax — no rebate available on STCG tax since STCG rate is a special rate under 111A.
+- Total tax = ₹30,000 + cess.
+
+ITR-1 applicability: Section 87A rebate is shown as a deduction from tax in ITR-1 Part B TTI (Computation of tax). It is also a key factor in determining whether the individual is in a "zero tax" scenario.
+
+Summary table:
+
+Regime          | Threshold       | Max Rebate     | Effective Zero-Tax Limit
+----------------|-----------------|----------------|-------------------------
+Old regime      | ₹5,00,000       | ₹12,500        | ₹5,00,000 (with deductions)
+New regime      | ₹12,00,000      | Full tax        | ₹12,00,000 (gross income, no deductions needed)
+
+Assessment Year 2025-26 specific: The ₹12,00,000 rebate limit for new regime is effective from AY2025-26 (FY 2024-25). Prior AY (AY2024-25), the new regime rebate threshold was ₹7,00,000.

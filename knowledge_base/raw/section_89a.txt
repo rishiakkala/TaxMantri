@@ -1,0 +1,38 @@
+Section 89A — Relief from taxation in income from retirement benefit account maintained in a notified country
+[IT Act 1961, as amended up to Finance Act 2025]
+
+89A. Where a specified person has any income of the nature of income from retirement benefit accounts maintained in a notified country, such income shall be taxed in the manner and in the year as may be prescribed.
+
+Explanation.— For the purposes of this section—
+(a) "notified country" means a country notified by the Central Government for the purposes of this section;
+(b) "retirement benefit account" means an account maintained in the notified country which is similar in nature to the retirement benefit accounts maintained in India (e.g., 401(k), Roth IRA in the USA, similar accounts in Canada, UK);
+(c) "specified person" means a person who is a citizen of India or a person of Indian origin, and who is or was a resident of a country notified under this section.
+
+Background and Purpose:
+This section was inserted by the Finance Act 2021, effective from Assessment Year 2022-23. Its primary aim is to provide relief to Non-Resident Indians (NRIs) or Persons of Indian Origin (PIOs) who return to India and become tax residents here but have retirement savings in foreign countries (particularly the US, Canada, UK, etc.) maintained in tax-deferred accounts.
+
+Without Section 89A: When such a person becomes a resident and ordinarily resident (ROR) in India, the income accruing in their foreign retirement account (e.g., 401(k) growth in the US) becomes taxable in India in the year it accrues, even if no withdrawal is made. This created a double-taxation hardship since the foreign country (e.g., USA) typically taxes such income only at the time of distribution/withdrawal.
+
+With Section 89A: The income from the notified foreign retirement account is taxed in India in the year it is received or withdrawn (consistent with how it is taxed in the notified country), not in the year it accrues. This aligns India's taxing point with the foreign country's taxing point, eliminating the mismatch.
+
+Notified Countries (as per CBDT notifications):
+- United States of America (USA) — retirement accounts like 401(k), 403(b), Traditional IRA are covered
+- Canada — retirement accounts like RRSP (Registered Retirement Savings Plan), RRIF are covered
+- United Kingdom — retirement pension schemes covered
+(New countries may be notified by CBDT from time to time)
+
+Prescribed rules (Rule 21AAA of Income Tax Rules):
+- Income from notified foreign retirement account that remains in the account (not withdrawn) shall NOT be included in the total income in the year of accrual.
+- The income shall be included in the total income in the year of withdrawal/distribution from the account.
+- Where the assessee ceases to be a resident in India before withdrawal, an appropriate method for inclusion and taxation of the accumulated income shall apply.
+
+Key points for ITR filing (Form ITR-2, not ITR-1):
+Section 89A relief is relevant for individuals who:
+1. Were non-residents in an earlier period and held foreign retirement accounts
+2. Have now become tax residents of India
+3. Have income accruing in foreign retirement accounts (interest, capital appreciation, dividends within the account)
+The relief is primarily relevant for Schedule FSI (Foreign Source Income) and Schedule TR (Tax Relief) in ITR-2. ITR-1 does not accommodate foreign income.
+
+Interaction with DTAA: Section 89A works in conjunction with applicable Double Taxation Avoidance Agreement (DTAA) provisions. The applicable DTAA (e.g., India-USA DTAA) may also provide relief; Section 89A provides additional statutory relief where DTAA does not fully address the timing mismatch.
+
+Note for ITR-1: ITR-1 (Sahaj) is not applicable for persons with foreign income. Individuals with Section 89A income must file ITR-2. This section is documented here for completeness of the knowledge base.

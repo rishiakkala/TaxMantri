@@ -1,0 +1,61 @@
+Section 80C — Deduction in respect of life insurance premia, deferred annuity, contributions to provident fund, subscription to certain equity shares or debentures, etc.
+[IT Act 1961, as amended up to Finance Act 2025]
+
+80C. (1) In computing the total income of an assessee, being an individual or a Hindu undivided family, there shall be deducted, in accordance with and subject to the provisions of this section, the whole of the amount paid or deposited in the previous year, being the aggregate of the sums referred to in sub-section (2), as does not exceed one lakh and fifty thousand rupees.
+
+CEILING: ₹1,50,000 per annum (aggregate across all instruments listed in 80C(2))
+
+80C(2) — Qualifying Investments and Payments:
+
+The eligible instruments under Section 80C(2) include:
+
+(i) Life Insurance Premium: Premium paid to effect or to keep in force an insurance on the life of the individual assessee, or the spouse or any child of such individual (not more than 10% of the actual capital sum assured; 15% for disabled/critical illness policies).
+
+(ii) Deferred annuity: Sum paid to effect or keep in force a contract for a deferred annuity on his own life or the life of his spouse or any child.
+
+(iii) Provident Fund contributions:
+- Public Provident Fund (PPF): Any sum deposited in a PPF account under the PPF Scheme, 1968, or any scheme framed thereunder. Maximum deposit: ₹1,50,000 per year.
+- Employees' Provident Fund (EPF): Employee's contribution to a Recognised Provident Fund (as defined in rule 67 of Part A of the Fourth Schedule).
+- Voluntary Provident Fund (VPF): Employee's voluntary contribution over and above the statutory PF contribution.
+
+(iv) National Savings Certificate (NSC): Any sum deposited as subscription to National Savings Certificates, VIII Issue (or any other NSC issued under Government Savings Certificates Act, 1959). Accrued interest on NSC is also deemed to be reinvested and qualifies for 80C deduction in subsequent years.
+
+(v) ULIP / Pension funds: Sum paid or deposited under UTI Unit Linked Insurance Plan, or eligible pension fund policies.
+
+(vi) Home loan repayment (Principal): Any payment made towards the repayment of the amount borrowed by the assessee from—
+- Central Government or any State Government
+- Any bank, including a co-operative bank
+- Life Insurance Corporation of India
+- National Housing Bank
+- Any public company formed and registered in India with the principal object of carrying on the business of providing long-term finance for construction or purchase of houses in India
+- Any co-operative society engaged in the business of financing the construction of houses
+for the purpose of purchase or construction of a residential house property, PROVIDED that no deduction under this section shall be allowable in respect of any portion of the repayment which is attributable to interest on such borrowing.
+Only principal repayment qualifies under 80C — interest is deductible under Section 24(b).
+
+(vii) Tuition fees: Any payment made to a university, college, school or other educational institution situated within India, for the purpose of full-time education of any 2 children of the assessee. Only tuition fees are eligible — development fees, donation, capitation fee are not eligible.
+
+(viii) Equity Linked Savings Scheme (ELSS): Amount invested in units of an Equity Linked Savings Scheme (ELSS) of a Mutual Fund as notified by the Central Government or as specified under Schedule IV of this Act. Lock-in period: 3 years.
+
+(ix) Senior Citizen Savings Scheme (SCSS): Subscription to Senior Citizens Savings Scheme, 2004. Amount at the time of deposit qualifies.
+
+(x) Sukanya Samriddhi Account: Amount deposited in Sukanya Samriddhi Account — eligible for 80C deduction. Interest earned and maturity amount are also exempt.
+
+(xi) 5-Year Tax Saving Fixed Deposit (FD): A term deposit for not less than 5 years with a scheduled bank with minimum lock-in of 5 years (introduced by Finance (No.2) Act, 2004).
+
+(xii) Post Office Time Deposit (5-year): 5-year time deposit under Post Office Time Deposit Rules, 1981.
+
+(xiii) Unit Linked Insurance Plans (ULIP): Specified ULIPs from LIC Mutual Fund, UTI, etc.
+
+80C(3) — Deduction on premium ratio (for policies issued on or after 01-04-2012): Where the premium payable for any year during the term of the policy exceeds ten per cent of the actual capital sum assured, the amount deductible under this section shall be limited to ten per cent of the actual capital sum assured.
+
+80C(3A) — Persons with disability: Where insurance is on the life of a person with disability or severe disability as referred to in section 80U or suffering from any illness specified in section 80DDB, the premium cap is fifteen per cent (instead of ten per cent) for policies issued on or after 01-04-2013.
+
+80C(5) — Clawback on premature withdrawal: If any amount, in respect of which a deduction is allowed under section 80C, is received back by the assessee—
+(a) in the case of a life insurance policy, before the end of 5 years from the date of commencement of the insurance; or
+(b) in other cases, before the expiry of 5 years from the close of the financial year in which the payment was made;
+then the amount so received (to the extent it was allowed as deduction) shall be deemed to be the income of the assessee in the year of receipt and shall be charged to tax accordingly. For EPF, a similar rule applies if funds are withdrawn before 5 years of continuous service.
+
+Important Notes:
+- Total deduction ceiling under 80C + 80CCC + 80CCD(1) combined = ₹1,50,000 [Section 80CCE]
+- 80C is NOT available to a company, firm, or AOP/BOI. It is only for individuals and HUFs.
+- Under the new tax regime (Section 115BAC), deduction under Section 80C is NOT available.

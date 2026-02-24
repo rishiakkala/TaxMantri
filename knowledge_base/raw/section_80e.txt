@@ -1,0 +1,42 @@
+Section 80E — Deduction in respect of repayment of loan taken for higher education
+[IT Act 1961, as amended up to Finance Act 2025]
+
+80E. (1) In computing the total income of an assessee, being an individual, there shall be deducted, in accordance with and subject to the provisions of this section, any amount paid by him in the previous year, out of his income chargeable to tax, by way of payment of interest on loan taken by him from any financial institution or any approved charitable institution for the purpose of pursuing his higher education or for the purpose of higher education of his relative.
+
+No upper limit: There is NO ceiling on the amount of deduction — the full interest paid during the year is deductible.
+
+What is deductible: ONLY the interest component of the EMI/instalment. Principal repayment is NOT deductible under 80E (unlike home loan principal which qualifies under 80C).
+
+Eligible borrowers:
+The deduction is available only to individuals — not HUFs, companies or other entities.
+
+"Higher education" — defined in the Act:
+"Higher education" means any course of study pursued after passing the Senior Secondary Examination or its equivalent from any school, board or university recognised by the Central Government or State Government or local authority or by any other authority authorised by the Central Government or State Government or local authority to do so.
+
+"Relative" — defined in the Act:
+"Relative" in relation to an individual means the spouse and children of that individual or the student for whom the individual is a legal guardian. This covers the assessee's own education, education of spouse, and education of dependent children (including children for whom the individual is the legal guardian).
+
+However, brother's, sister's or parents' education does NOT qualify under section 80E.
+
+"Financial institution" — defined in the Act:
+The loan must be taken from a banking company (including co-operative bank) or any other financial institution notified by the Central Government. Loan from an employer, friend, relative, or private lender does NOT qualify.
+
+"Approved charitable institution":
+Any institution established for charitable purposes and approved by the prescribed authority under section 10(23C) or section 80G(5)(vi).
+
+Duration of deduction:
+The deduction is available for a MAXIMUM of 8 assessment years (8 years) starting from the year in which the assessee begins to repay the loan, or until the interest is fully repaid, whichever is earlier. If loan repayment extends beyond 8 years, no further 80E deduction is available after the 8th year.
+
+Conditions for claiming 80E:
+1. Assessee must be an individual.
+2. Loan must be taken from an eligible financial institution or approved charitable institution.
+3. Loan must be for higher education of self, spouse, or children/legal ward.
+4. Deduction is available for interest paid — not principal.
+5. No ceiling on deduction amount.
+6. Deduction period: Up to 8 assessment years from the year of commencement of repayment.
+
+Availability under new tax regime (Section 115BAC):
+Section 80E deduction for education loan interest is NOT available under the new tax regime. It is exclusively an old (regular) tax regime benefit.
+
+Example — ITR-1:
+An individual paid ₹85,000 as interest on education loan in FY 2024-25 for his daughter's MBA programme. The entire ₹85,000 is deductible under Section 80E (no ceiling applies). This loan was taken in FY 2020-21, so this is the 5th assessment year — deduction is still available for 3 more years after the current year.

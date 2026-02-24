@@ -1,0 +1,43 @@
+Section 10(10D) — Life Insurance Maturity Proceeds
+[IT Act 1961, as amended up to Finance Act 2025]
+
+10. In computing the total income of a previous year of any person, any income falling within any of the following clauses shall not be included—
+
+10(10D): any sum received under a life insurance policy, including the sum allocated by way of bonus on such policy, other than—
+
+(a) any sum received under sub-section (3) of section 80DD or sub-section (3) of section 80DDA; or
+
+(b) any sum received under a Keyman insurance policy; or
+
+(c) any sum received under an insurance policy issued on or after the 1st day of April, 2003, in respect of which the premium payable for any of the years during the term of the policy exceeds twenty per cent of the actual capital sum assured; or
+
+(d) any sum received under an insurance policy issued on or after the 1st day of April, 2012, in respect of which the premium payable for any of the years during the term of the policy exceeds ten per cent of the actual capital sum assured:
+
+Provided that the provisions of sub-clauses (c) and (d) shall not apply to any sum received on the death of a person.
+
+Provided further that where the premium payable for any of the years during the term of a policy of insurance referred to in sub-clause (c) or sub-clause (d), issued on or after the 1st day of April, 2013, in respect of persons with disability or persons with severe disability as referred to in section 80U or suffering from disease or ailment as specified in the rules made under section 80DDB, exceeds fifteen per cent of the actual capital sum assured, the exemption under this clause shall not apply to such policy.
+
+[Finance Act 2021 Amendment — ULIPs issued on or after 01-02-2021]:
+
+(e) any sum received under a Unit Linked Insurance Plan (ULIP) issued on or after the 1st day of February, 2021, where the amount of premium payable for any of the previous years during the term of such policy exceeds two lakh and fifty thousand rupees:
+
+Provided that where premium is payable by a person for more than one such ULIP issued on or after the 1st day of February, 2021, the exemption under this clause shall not apply with respect to such ULIP or ULIPs where the aggregate amount of premium exceeds two lakh and fifty thousand rupees in any previous year.
+
+Provided further that the provisions of this sub-clause shall not apply to any sum received on the death of a person.
+
+Explanation for 10(10D):
+(i) "Keyman insurance policy" means a life insurance policy taken by a person on the life of another person who is or was the employee of the first-mentioned person or is or was connected in any manner whatsoever with the business of the first-mentioned person.
+
+(ii) For the purposes of this clause, the expression "actual capital sum assured" in relation to a life insurance policy means the minimum amount assured under the policy on happening of the insured event at any time during the term of the policy, excluding—
+(a) the value of any premium agreed to be returned; or
+(b) any benefit by way of bonus or otherwise over and above the sum actually assured, which is to be or may be received under the policy by any person.
+
+Summary of 10(10D) Exemption with premium thresholds:
+- Policy issued BEFORE 01-04-2003: Maturity proceeds fully exempt (no premium cap)
+- Policy issued ON/AFTER 01-04-2003 but BEFORE 01-04-2012: Exempt only if annual premium ≤ 20% of sum assured
+- Policy issued ON/AFTER 01-04-2012: Exempt only if annual premium ≤ 10% of sum assured
+- ULIP issued ON/AFTER 01-02-2021: Exempt only if annual premium ≤ ₹2,50,000
+- Disability/critical illness policies (post 01-04-2013): Exempt if premium ≤ 15% of sum assured
+- Death benefit: ALWAYS exempt regardless of premium percentage or ULIP cap
+
+Note: Policies where the premium exceeds the applicable threshold do not get full exemption — the maturity proceeds become taxable (either under "Capital gains" for ULIP or "Income from other sources"). This makes Section 10(10D) exclusions a critical planning consideration for high-premium life insurance purchasers.

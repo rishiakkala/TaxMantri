@@ -1,0 +1,55 @@
+Section 80CCD — Deduction in respect of contribution to pension scheme of Central Government (NPS)
+[IT Act 1961, as amended up to Finance Act 2025]
+
+80CCD(1) — Employee's own contribution to NPS:
+
+80CCD. (1) Where an assessee, being an individual employed by the Central Government on or after the 1st day of January, 2004 or being an individual employed by any other employer or any other assessee being an individual has in the previous year paid or deposited any amount in his account under a pension scheme notified or as may be notified by the Central Government, he shall, in accordance with and subject to the provisions of this section, be allowed a deduction in the computation of his total income, of the whole of the amount so paid or deposited as does not exceed—
+
+(a) in the case of an employee, ten per cent of his salary in the previous year; and
+(b) in any other case (self-employed), twenty per cent of his gross total income in the previous year.
+
+[Budget 2025 Amendment: For contributions on or after 01-04-2025, the employee contribution limit under 80CCD(1) for employees is enhanced to fourteen per cent of salary for Central Government employees.]
+
+Important: The deduction under 80CCD(1) is subject to the aggregate ceiling of ₹1,50,000 under Section 80CCE (combined with 80C + 80CCC). This means 80CCD(1) NPS deduction does NOT give additional room beyond ₹1,50,000 unless it falls within the 80CCE ceiling.
+
+80CCD(1B) — Additional contribution up to ₹50,000:
+
+80CCD(1B): An assessee referred to in sub-section (1), shall be allowed a deduction in computation of his total income, in addition to the deduction allowed under sub-section (1), of the whole of the amount paid or deposited by him in the previous year in his account under a pension scheme notified or as may be notified by the Central Government, as does not exceed fifty thousand rupees.
+
+THIS IS THE KEY PROVISION: Section 80CCD(1B) allows an ADDITIONAL deduction of up to ₹50,000 for NPS contributions, OVER AND ABOVE the ₹1,50,000 ceiling under Section 80CCE. Thus, the effective maximum NPS deduction for an employee is:
+- 80CCD(1) within the ₹1,50,000 80CCE cap, PLUS
+- 80CCD(1B) = up to ₹50,000 extra exclusively for NPS
+
+Combined maximum for a salaried individual optimally investing in NPS:
+₹1,50,000 (80CCE ceiling via 80C/80CCC/80CCD(1)) + ₹50,000 (80CCD(1B)) = ₹2,00,000.
+
+80CCD(2) — Employer's contribution to NPS:
+
+80CCD(2): Where an assessee, being an individual employed by the Central Government or any other employer on or after the 1st day of January, 2004, has in the previous year paid or deposited any amount in his account under a pension scheme notified or as may be notified by the Central Government, and the employer of such assessee has also contributed any amount to that account—
+
+Such employer contribution shall be allowed as deduction to the employee to the extent of—
+(a) fourteen per cent of salary in the case of Central Government employees (Budget 2025 increase from 10% to 14%, effective AY2025-26)
+(b) fourteen per cent of salary in the case of State Government employees (Budget 2025 increase from 10% to 14%)
+(c) ten per cent of salary in the case of any other employer
+
+[Previously, the employer contribution deduction was limited to 10% for all employees. Finance Act 2024 enhanced this to 14% for ALL employers (central, state, and private sector). Earlier only CG was at 14%.]
+
+Note: The deduction under 80CCD(2) is OVER AND ABOVE the ₹1,50,000 ceiling of section 80CCE. It is a separate deduction not subject to any overall ceiling, but capped at 14% or 10% of salary as applicable.
+
+"Salary" for 80CCD purposes means basic salary plus dearness allowance (DA forming part of salary for retirement benefits). Other allowances are excluded.
+
+80CCD(3) — Clawback on NPS withdrawals:
+Any amount withdrawn from the NPS account shall be deemed to be the income of the assessee in the year of withdrawal. Exceptions apply for annuity amounts used to purchase annuity plans (not taxable on investment of 40% or more in annuity under NPS exit rules).
+
+Section 80CCE — Aggregate ceiling for 80C + 80CCC + 80CCD(1):
+The aggregate deduction allowed under sections 80C, 80CCC and 80CCD(1) shall not exceed one lakh and fifty thousand rupees.
+
+Summary of NPS deductions:
+- 80CCD(1): NPS contribution by employee — within ₹1,50,000 (80CCE cap)
+- 80CCD(1B): Additional NPS contribution — up to ₹50,000 EXTRA (not subject to 80CCE cap)
+- 80CCD(2): NPS contribution by employer — 14% or 10% of basic + DA (not subject to 80CCE cap)
+- Maximum salaried employee can claim: ₹1,50,000 + ₹50,000 + employer contribution
+
+Availability under new tax regime (115BAC):
+80CCD(1B) deduction (up to ₹50,000) is NOT available under the new tax regime.
+80CCD(2) employer contribution deduction IS RETAINED even under the new tax regime.
