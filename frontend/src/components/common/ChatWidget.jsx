@@ -73,15 +73,21 @@ function MessageBubble({ msg }) {
             {/* Citation badges (AI only) */}
             {!isUser && msg.citations?.length > 0 && (
                 <div className="flex flex-wrap gap-1.5 mt-1.5 ml-9">
-                    {msg.citations.map((c, i) => (
-                        <span
-                            key={i}
-                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 text-xs font-bold border border-purple-200"
-                        >
-                            <BookOpen className="w-2.5 h-2.5" />
-                            {c}
-                        </span>
-                    ))}
+                    {msg.citations.map((c, i) => {
+                        // API returns {section, excerpt} objects — extract the section string
+                        const label = typeof c === 'string' ? c : (c?.section || `Ref ${i + 1}`)
+                        const tip = typeof c === 'object' ? (c?.excerpt || '') : ''
+                        return (
+                            <span
+                                key={i}
+                                title={tip}
+                                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 text-xs font-bold border border-purple-200"
+                            >
+                                <BookOpen className="w-2.5 h-2.5" />
+                                {label}
+                            </span>
+                        )
+                    })}
                 </div>
             )}
         </div>
