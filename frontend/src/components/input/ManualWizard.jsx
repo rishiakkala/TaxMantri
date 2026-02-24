@@ -17,7 +17,7 @@ import { createProfile, calculateTax } from '../../api/endpoints.js'
 // ---- Zod schema ----
 const schema = z.object({
   // Step 1 — Income
-  basic_salary: z.number({ invalid_type_error: 'Required' }).min(0, 'Must be ≥ 0'),
+  basic_salary: z.number({ invalid_type_error: 'Required' }).min(0, 'Must be ≥ 0').max(5000000, 'ITR-1 limit: Basic salary cannot exceed ₹50,00,000'),
   hra_received: z.number().min(0).default(0).optional(),
   lta: z.number().min(0).default(0).optional(),
   special_allowance: z.number().min(0).default(0).optional(),

@@ -16,7 +16,7 @@ export default function Step1Income({ register, errors }) {
         label="Basic Salary (Annual)"
         required
         error={errors.basic_salary?.message}
-        helpText="Annual basic salary before any deductions"
+        helpText="Annual basic salary before deductions · ITR-1 limit: ₹50,00,000"
         {...register('basic_salary', { valueAsNumber: true })}
       />
 
