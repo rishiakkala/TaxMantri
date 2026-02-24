@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
@@ -17,7 +16,7 @@ import { createProfile, calculateTax } from '../../api/endpoints.js'
 // ---- Zod schema ----
 const schema = z.object({
   // Step 1 — Income
-  basic_salary: z.number({ invalid_type_error: 'Required' }).min(0, 'Must be ≥ 0').max(5000000, 'ITR-1 limit: Basic salary cannot exceed ₹50,00,000'),
+  basic_salary: z.number({ invalid_type_error: 'Required' }).min(0, 'Must be ≥ 0'),
   hra_received: z.number().min(0).default(0).optional(),
   lta: z.number().min(0).default(0).optional(),
   special_allowance: z.number().min(0).default(0).optional(),
@@ -59,24 +58,9 @@ const TOTAL_STEPS = 5
  *   onCalculationComplete (fn) — called with (profileId, taxResult)
  *   onCalculating (fn)         — called with bool
  */
-const FORM_STORAGE_KEY = 'taxmantri_last_form'
-
-/** Reads saved form values from localStorage (returns {} if none saved yet) */
-function getSavedFormValues() {
-  try {
-    const raw = localStorage.getItem(FORM_STORAGE_KEY)
-    return raw ? JSON.parse(raw) : {}
-  } catch {
-    return {}
-  }
-}
-
 export default function ManualWizard({ onCalculationComplete, onCalculating }) {
-  const navigate = useNavigate()
   const [step, setStep] = useState(0)
   const [apiError, setApiError] = useState(null)
-
-  const saved = getSavedFormValues()
 
   const {
     register,
@@ -88,24 +72,24 @@ export default function ManualWizard({ onCalculationComplete, onCalculating }) {
   } = useForm({
     resolver: zodResolver(schema),
     defaultValues: {
-      basic_salary: saved.basic_salary ?? undefined,
-      hra_received: saved.hra_received ?? 0,
-      lta: saved.lta ?? 0,
-      special_allowance: saved.special_allowance ?? 0,
-      other_allowances: saved.other_allowances ?? 0,
-      professional_tax: saved.professional_tax ?? 0,
-      investments_80c: saved.investments_80c ?? 0,
-      health_insurance_self: saved.health_insurance_self ?? 0,
-      health_insurance_parents: saved.health_insurance_parents ?? 0,
-      parent_senior_citizen: saved.parent_senior_citizen ?? false,
-      employee_nps_80ccd1b: saved.employee_nps_80ccd1b ?? 0,
-      employer_nps_80ccd2: saved.employer_nps_80ccd2 ?? 0,
-      home_loan_interest: saved.home_loan_interest ?? 0,
-      savings_interest_80tta: saved.savings_interest_80tta ?? 0,
-      monthly_rent_paid: saved.monthly_rent_paid ?? 0,
-      city_type: saved.city_type ?? 'metro',
-      age_bracket: saved.age_bracket ?? 'under60',
-      other_income: saved.other_income ?? 0,
+      basic_salary: undefined,
+      hra_received: 0,
+      lta: 0,
+      special_allowance: 0,
+      other_allowances: 0,
+      professional_tax: 0,
+      investments_80c: 0,
+      health_insurance_self: 0,
+      health_insurance_parents: 0,
+      parent_senior_citizen: false,
+      employee_nps_80ccd1b: 0,
+      employer_nps_80ccd2: 0,
+      home_loan_interest: 0,
+      savings_interest_80tta: 0,
+      monthly_rent_paid: 0,
+      city_type: 'metro',
+      age_bracket: 'under60',
+      other_income: 0,
     },
     mode: 'onTouched',
   })
@@ -136,9 +120,6 @@ export default function ManualWizard({ onCalculationComplete, onCalculating }) {
           Object.entries(data).map(([k, v]) => [k, typeof v === 'number' && isNaN(v) ? 0 : v]),
         ),
       }
-
-      // Persist form values so the user can go back and edit without re-typing
-      localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(payload))
 
       const profileResult = await createProfile(payload)
       const profileId = profileResult.profile_id
@@ -191,7 +172,7 @@ export default function ManualWizard({ onCalculationComplete, onCalculating }) {
           <button
             type="button"
             onClick={goNext}
-            className="ml-auto flex items-center gap-1.5 px-6 py-2.5 bg-custom-dark text-white font-semibold text-sm rounded-xl hover:bg-black transition-colors shadow-md shadow-black/10"
+            className="ml-auto flex items-center gap-1.5 px-6 py-2.5 bg-navy text-white font-semibold text-sm rounded-xl hover:bg-navy-700 transition-colors"
           >
             Next
             <ChevronRight className="w-4 h-4" />
@@ -199,7 +180,7 @@ export default function ManualWizard({ onCalculationComplete, onCalculating }) {
         ) : (
           <button
             type="submit"
-            className="ml-auto px-8 py-2.5 bg-[#5ce1ca] hover:bg-[#4dd0b9] text-black font-extrabold text-sm rounded-xl transition-colors shadow-lg shadow-[#5ce1ca]/20"
+            className="ml-auto px-8 py-2.5 bg-amber hover:bg-yellow-400 text-navy font-bold text-sm rounded-xl transition-colors shadow-lg shadow-amber/20"
           >
             Analyse My Tax →
           </button>
