@@ -1,7 +1,7 @@
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { RotateCcw } from 'lucide-react'
+import { RotateCcw, Pencil } from 'lucide-react'
 import SavingsBanner from '../components/results/SavingsBanner.jsx'
 import AIInsightsCard from '../components/results/AIInsightsCard.jsx'
 import RegimeCardPair from '../components/results/RegimeCardPair.jsx'
@@ -58,7 +58,14 @@ export default function ResultsPage() {
           <img src={logoImage} alt="TaxMantri Logo" className="h-9 w-auto object-contain group-hover:scale-105 transition-transform" />
           <span className="font-extrabold text-2xl tracking-tighter text-black group-hover:text-custom-purple transition-colors">TaxMantri</span>
         </button>
-        <div className="pointer-events-auto">
+        <div className="pointer-events-auto flex items-center gap-3">
+          <button
+            onClick={() => navigate('/input')}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 text-sm font-semibold shadow-sm hover:bg-gray-50 hover:border-gray-300 transition-all"
+          >
+            <Pencil className="w-3.5 h-3.5" />
+            Edit Details
+          </button>
           <PDFDownloadButton profileId={profileId} />
         </div>
       </div>
