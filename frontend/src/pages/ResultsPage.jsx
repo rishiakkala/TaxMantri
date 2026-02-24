@@ -5,9 +5,8 @@ import { RotateCcw, Pencil } from 'lucide-react'
 import SavingsBanner from '../components/results/SavingsBanner.jsx'
 import AIInsightsCard from '../components/results/AIInsightsCard.jsx'
 import RegimeCardPair from '../components/results/RegimeCardPair.jsx'
-import PDFDownloadButton from '../components/results/PDFDownloadButton.jsx'
 import ITR1Table from '../components/results/ITR1Table.jsx'
-import logoImage from '../images/justice_scales_black_gold.png'
+import Navbar from '../components/Navbar'
 
 /**
  * Results page — renders immediately from router state (no API refetch).
@@ -30,7 +29,7 @@ export default function ResultsPage() {
   // ---- Fallback: page refresh lost router state ----
   if (!taxResult) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center px-6 font-sans">
+      <div className="min-h-screen flex items-center justify-center px-6 font-sans relative">
         <div className="text-center max-w-sm">
           <div className="w-20 h-20 rounded-3xl bg-gray-50 flex items-center justify-center mx-auto mb-6 border border-gray-100 shadow-sm">
             <RotateCcw className="w-10 h-10 text-gray-400" />
@@ -41,7 +40,7 @@ export default function ResultsPage() {
           </p>
           <button
             onClick={() => navigate('/input')}
-            className="px-8 py-4 bg-custom-dark text-white font-bold text-lg rounded-full hover:bg-black transition-transform active:scale-95 shadow-xl shadow-black/10 w-full"
+            className="px-8 py-4 bg-black/60 backdrop-blur-md border border-white/20 text-white font-bold text-lg rounded-full hover:bg-black/80 transition-all duration-300 active:scale-95 shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)] w-full"
           >
             Start Over
           </button>
@@ -74,8 +73,9 @@ export default function ResultsPage() {
       <main className="max-w-4xl mx-auto px-6 pt-32 pb-16 space-y-8">
         {/* Title */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, type: 'spring', bounce: 0.4 }}
         >
           <h1 className="text-4xl font-extrabold text-black mb-2 tracking-tight">Your Tax Analysis</h1>
           <p className="text-gray-500 text-lg font-medium">
@@ -85,9 +85,9 @@ export default function ResultsPage() {
 
         {/* Savings banner */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
+          initial={{ opacity: 0, scale: 0.95, y: 10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ delay: 0.15, duration: 0.5, type: 'spring', bounce: 0.3 }}
         >
           <SavingsBanner taxResult={taxResult} />
         </motion.div>
@@ -97,18 +97,18 @@ export default function ResultsPage() {
 
         {/* Regime cards */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
+          transition={{ delay: 0.3, duration: 0.5, type: 'spring' }}
         >
           <RegimeCardPair taxResult={taxResult} />
         </motion.div>
 
         {/* ITR-1 mapping (lazy) */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          transition={{ delay: 0.4, duration: 0.5, type: 'spring' }}
         >
           <ITR1Table profileId={profileId} />
         </motion.div>

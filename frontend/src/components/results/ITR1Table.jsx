@@ -15,6 +15,7 @@ export default function ITR1Table({ profileId }) {
   const [loading, setLoading] = useState(false)
   const [mapping, setMapping] = useState(null)
   const [error, setError] = useState(null)
+  const [activeTab, setActiveTab] = useState('new')
 
   const handleToggle = async () => {
     if (!expanded && !mapping && !loading) {
@@ -73,10 +74,30 @@ export default function ITR1Table({ profileId }) {
             </div>
           ) : mapping ? (
             <div className="space-y-5">
+              {/* Sliding Toggle */}
+              <div className="flex bg-gray-100 p-1.5 rounded-2xl mb-4 max-w-sm mx-auto">
+                {[
+                  { id: 'old', label: 'Old Regime' },
+                  { id: 'new', label: 'New Regime' }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => setActiveTab(tab.id)}
+                    className={[
+                      'flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-sm font-bold transition-all duration-200',
+                      activeTab === tab.id
+                        ? 'bg-black/60 backdrop-blur-md text-white border border-white/20 shadow-md'
+                        : 'text-gray-500 hover:text-white hover:bg-black/40',
+                    ].join(' ')}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
+
               {[
                 { label: 'Common Fields (Both Regimes)', entries: commonEntries },
-                { label: 'Old Regime Fields', entries: oldEntries },
-                { label: 'New Regime Fields', entries: newEntries },
+                { label: activeTab === 'old' ? 'Old Regime Fields' : 'New Regime Fields', entries: activeTab === 'old' ? oldEntries : newEntries },
               ].map(({ label, entries }) => {
                 if (entries.length === 0) return null
                 return (

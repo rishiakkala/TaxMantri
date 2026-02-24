@@ -22,8 +22,7 @@ export default function RegimeCard({ regime, data, isRecommended, isExpanded, on
   return (
     <motion.div
       onClick={onClick}
-      style={{ transformPerspective: 1000 }}
-      animate={{ rotateY: isExpanded ? 5 : 0, scale: isExpanded ? 0.98 : 1 }}
+      animate={{ scale: isExpanded ? 0.98 : 1 }}
       transition={{ duration: 0.3 }}
       className={[
         'rounded-3xl border cursor-pointer transition-all duration-300 relative overflow-hidden',

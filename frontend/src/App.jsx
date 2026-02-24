@@ -6,6 +6,7 @@ import ResultsPage from './pages/ResultsPage.jsx'
 import HowItWorksPage from './pages/HowItWorksPage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
 import ChatWidget from './components/common/ChatWidget.jsx'
+import AnimatedBackground from './components/common/AnimatedBackground.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -20,6 +21,7 @@ function ScrollToTop() {
 export default function App() {
   return (
     <>
+      <AnimatedBackground />
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<HeroPage />} />

@@ -37,6 +37,7 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
+        quicksand: ['Quicksand', 'sans-serif'],
       },
       gridTemplateColumns: {
         'regime-left': '280px 1fr',
