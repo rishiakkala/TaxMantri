@@ -172,7 +172,7 @@ export default function ManualWizard({ onCalculationComplete, onCalculating }) {
           <button
             type="button"
             onClick={goNext}
-            className="ml-auto flex items-center gap-1.5 px-6 py-2.5 bg-custom-dark text-white font-semibold text-sm rounded-xl hover:bg-black transition-colors shadow-md shadow-black/10"
+            className="ml-auto flex items-center gap-1.5 px-6 py-2.5 bg-black/30 backdrop-blur-md border border-white/10 text-gray-300 font-semibold text-sm rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:bg-black/50 hover:text-white hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)] transition-all duration-300 active:scale-95"
           >
             Next
             <ChevronRight className="w-4 h-4" />
@@ -180,7 +180,7 @@ export default function ManualWizard({ onCalculationComplete, onCalculating }) {
         ) : (
           <button
             type="submit"
-            className="ml-auto px-8 py-2.5 bg-[#5ce1ca] hover:bg-[#4dd0b9] text-black font-extrabold text-sm rounded-xl transition-colors shadow-lg shadow-[#5ce1ca]/20"
+            className="ml-auto px-8 py-2.5 bg-black/30 backdrop-blur-md border border-teal-500/30 hover:bg-teal-900/40 hover:text-white hover:-translate-y-0.5 text-gray-300 font-semibold text-sm rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)] transition-all duration-300 active:scale-95"
           >
             Analyse My Tax →
           </button>

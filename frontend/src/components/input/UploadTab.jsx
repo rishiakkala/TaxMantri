@@ -262,7 +262,7 @@ export default function UploadTab({ onCalculationComplete, onCalculating }) {
               <button
                 onClick={handleConfirm}
                 disabled={phase === 'confirming'}
-                className="flex-1 px-6 py-2.5 bg-navy text-white font-semibold text-sm rounded-xl hover:bg-navy-700 disabled:opacity-60 transition-colors"
+                className="flex-1 px-6 py-2.5 bg-black/30 backdrop-blur-md border border-navy/30 text-gray-300 hover:text-white font-semibold text-sm rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:bg-black/50 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)] transition-all duration-300 active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:translate-y-0"
               >
                 {phase === 'confirming' ? 'Confirming…' : 'Confirm & Analyse Tax'}
               </button>

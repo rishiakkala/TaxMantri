@@ -64,12 +64,12 @@ export default function HeroPage() {
           </h1>
 
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto font-medium">
-            Tax smarter, Save better.
+            File smarter, Save better.
           </p>
 
           <button
             onClick={() => navigate('/input')}
-            className="bg-[#1a1924] hover:bg-black text-white font-semibold text-lg px-8 py-4 rounded-full shadow-xl shadow-black/10 transition-transform active:scale-95"
+            className="bg-black/30 backdrop-blur-md border border-white/10 hover:bg-black/50 hover:-translate-y-1 text-gray-300 hover:text-white font-semibold text-lg px-8 py-4 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] transition-all duration-300 active:scale-95"
           >
             Calculate my tax refund
           </button>
@@ -80,7 +80,7 @@ export default function HeroPage() {
       <section className="px-4 md:px-8 pb-12" ref={scrollRef}>
         <motion.div
           style={{ scale: purpleScale }}
-          className="bg-custom-purple rounded-3xl w-full max-w-7xl mx-auto overflow-hidden relative flex flex-col md:flex-row shadow-2xl"
+          className="bg-gradient-to-br from-blue-950 to-blue-600 rounded-3xl w-full max-w-7xl mx-auto overflow-hidden relative flex flex-col md:flex-row shadow-2xl"
         >
           {/* Subtle background graphic */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
@@ -124,7 +124,7 @@ export default function HeroPage() {
                   </p>
                   <p className="text-white text-3xl font-bold">₹43,500.67</p>
                   <div className="w-full h-1 bg-gray-700 mt-4 rounded-full overflow-hidden">
-                    <div className="h-full bg-custom-purple w-2/3 rounded-full" />
+                    <div className="h-full bg-blue-400 w-2/3 rounded-full" />
                   </div>
                 </div>
               </div>
@@ -150,7 +150,7 @@ export default function HeroPage() {
                 <h3 className="text-3xl font-bold mb-6 max-w-[250px] leading-tight">Personal tax management for retail</h3>
                 <button
                   onClick={() => navigate('/how-it-works')}
-                  className="flex items-center gap-2 text-sm font-semibold border border-white/20 rounded-full py-2 px-5 hover:bg-white/10 transition-colors"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-300 bg-black/30 backdrop-blur-md border border-white/10 shadow-[0_4px_16px_rgba(0,0,0,0.2)] rounded-full py-2.5 px-6 hover:bg-black/50 hover:text-white hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)] transition-all duration-300"
                 >
                   How it works <ArrowRight className="w-4 h-4" />
                 </button>
@@ -159,7 +159,7 @@ export default function HeroPage() {
               <div className="absolute right-0 bottom-0 w-48 h-48 pointer-events-none">
                 <div className="w-full h-full flex flex-col items-center justify-end">
                   <div className="w-24 h-24 bg-[#5ce1ca] rounded-full translate-y-4" />
-                  <div className="w-32 h-20 bg-custom-purple rounded-t-lg shadow-lg relative z-10 flex">
+                  <div className="w-32 h-20 bg-blue-500 rounded-t-lg shadow-lg relative z-10 flex">
                     <div className="w-1/2 h-full bg-white ml-auto border-l-4 border-gray-200" />
                   </div>
                 </div>
@@ -176,7 +176,7 @@ export default function HeroPage() {
               className="bg-custom-green text-black rounded-3xl p-10 flex flex-col md:flex-row items-center overflow-hidden min-h-[300px] cursor-pointer hover:shadow-lg transition-transform hover:scale-[1.02]"
             >
               <div className="bg-white rounded-2xl p-6 shadow-xl relative w-full md:w-1/2 min-h-[200px] flex items-center justify-center gap-2 rotate-[-2deg]">
-                <Code className="w-24 h-24 text-custom-purple" strokeWidth={1.5} />
+                <Code className="w-24 h-24 text-blue-600" strokeWidth={1.5} />
               </div>
               <div className="mt-8 md:mt-0 md:ml-10 flex-1">
                 <h3 className="text-4xl font-extrabold leading-tight text-black">About Us</h3>
@@ -207,7 +207,7 @@ export default function HeroPage() {
               <h3 className="text-white text-3xl font-bold mb-6 max-w-[300px] leading-snug">
                 Thanks to TaxMantri, priya claimed back ₹1,00,600
               </h3>
-              <button className="flex items-center gap-2 text-white text-sm font-semibold border border-white/30 rounded-full py-2 px-5 hover:bg-white/20 backdrop-blur-sm transition-colors w-fit">
+              <button onClick={() => navigate('/input')} className="flex items-center gap-2 text-gray-300 font-medium bg-black/30 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-full py-2.5 px-6 hover:bg-black/50 hover:text-white hover:-translate-y-0.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] transition-all duration-300 w-fit">
                 Check my refund <ArrowRight className="w-4 h-4" />
               </button>
             </div>
