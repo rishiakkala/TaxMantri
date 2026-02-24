@@ -63,3 +63,28 @@ export async function exportPDF(profileId) {
   })
   return response.data
 }
+
+/**
+ * Ask a tax question — RAG retrieval + Mistral answer with IT Act citations.
+ * question:   plain-English tax query
+ * sessionId:  UUID for chat history tracking (persisted in localStorage)
+ * profileId:  optional — personalises answer using user's financial profile
+ *
+ * Returns { answer, confidence, citations, cached }
+ */
+export async function queryChat(question, sessionId, profileId = null) {
+  const body = { question, session_id: sessionId }
+  if (profileId) body.profile_id = profileId
+  const response = await client.post('/query', body)
+  return response.data
+}
+
+/**
+ * Fetch full Q&A chat history for a session from PostgreSQL.
+ * Returns { session_id, messages: [{question, answer, confidence, created_at}] }
+ */
+export async function getChatHistory(sessionId) {
+  const response = await client.get(`/chat/history`, { params: { session_id: sessionId } })
+  return response.data
+}
+

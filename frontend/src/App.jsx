@@ -5,6 +5,7 @@ import InputPage from './pages/InputPage.jsx'
 import ResultsPage from './pages/ResultsPage.jsx'
 import HowItWorksPage from './pages/HowItWorksPage.jsx'
 import AboutPage from './pages/AboutPage.jsx'
+import ChatWidget from './components/common/ChatWidget.jsx'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -28,6 +29,10 @@ export default function App() {
         <Route path="/results/:profileId" element={<ResultsPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
+
+      {/* Floating RAG chatbot — available on every page */}
+      <ChatWidget />
     </>
   )
 }
+
