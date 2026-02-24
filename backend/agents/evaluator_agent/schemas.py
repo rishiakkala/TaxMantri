@@ -86,8 +86,12 @@ class TaxResult(BaseModel):
 
     old_regime_suggestions: headroom in 80C, 80D, NPS, 24b (old regime only).
     new_regime_suggestions: employer NPS 80CCD(2) headroom (new regime only).
+
+    Agentic orchestration additions (populated by LangGraph pipeline):
+    citations: IT Act section references retrieved by MatcherAgent RAG.
+    law_context: Mistral-synthesized legal summary from MatcherAgent.
     """
-    model_config = ConfigDict(extra="forbid")
+    model_config = ConfigDict(extra="ignore")   # ignore lets graph inject extra fields safely
 
     profile_id: Optional[str] = None     # Set by caller after persisting to DB
 
@@ -96,11 +100,15 @@ class TaxResult(BaseModel):
 
     recommended_regime: str              # "old" | "new"
     savings_amount: float                # abs(old_tax - new_tax)
-    rationale: str                       # 2-3 sentences per CONTEXT.md format
+    rationale: str                       # LLM-grounded rationale (EvaluatorAgent).
 
     # Separate lists — never merge these into a single field
     old_regime_suggestions: List[str] = []   # Up to 3, sorted by saving desc
     new_regime_suggestions: List[str] = []   # Up to 3, sorted by saving desc
+
+    # Agentic orchestration — populated by LangGraph pipeline, empty for direct calls
+    citations: List[dict] = []           # [{section, excerpt}] from MatcherAgent
+    law_context: str = ""               # Synthesized IT Act context from MatcherAgent
 
 
 # ---------------------------------------------------------------------------

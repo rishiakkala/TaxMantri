@@ -32,7 +32,7 @@ class Settings(BaseSettings):
     secret_key: str = "change-me-in-production-at-least-32-chars"
 
     # --- External APIs ---
-    mistral_api_key: str = ""
+    mistral_api_key: str = "fJnFRNG3SEJqfwatCYwauPnqE2oduoi6"
 
     # --- CORS ---
     # Comma-separated list of allowed frontend origins

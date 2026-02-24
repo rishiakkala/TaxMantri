@@ -1,15 +1,33 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import HeroPage from './pages/HeroPage.jsx'
 import InputPage from './pages/InputPage.jsx'
 import ResultsPage from './pages/ResultsPage.jsx'
+import HowItWorksPage from './pages/HowItWorksPage.jsx'
+import AboutPage from './pages/AboutPage.jsx'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
 
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HeroPage />} />
-      <Route path="/input" element={<InputPage />} />
-      <Route path="/results/:profileId" element={<ResultsPage />} />
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<HeroPage />} />
+        <Route path="/how-it-works" element={<HowItWorksPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/input" element={<InputPage />} />
+        <Route path="/results/:profileId" element={<ResultsPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </>
   )
 }

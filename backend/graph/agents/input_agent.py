@@ -4,14 +4,12 @@ input_agent.py — InputAgent LangGraph node.
 Responsibility: Capture + Validate + Structure
 
 The InputAgent is the entry point of the TaxMantri pipeline. It decides:
-  1. For "manual" input: calls validate_profile_tool → structure_profile_tool
-  2. For "ocr" input: calls ocr_extract_tool → merges with user edits → validate → structure
+  Mode A (profile_id in state): Load pre-confirmed profile from DB — no re-validation.
+  Mode B (manual/ocr raw_input): validate_profile_tool → structure_profile_tool
+  Mode C (ocr file_path): ocr_extract_tool → merge → validate → structure
 
 On success, writes `profile` and `profile_dict` to state and routes to MatcherAgent.
 On failure, writes `input_errors` and sets `should_stop = True`, ending the graph.
-
-LLM usage: Uses Mistral to intelligently decide on data merging strategy and
-generate meaningful error messages — NOT for tax computation.
 """
 from __future__ import annotations
 
@@ -19,60 +17,82 @@ import json
 import logging
 from typing import Any
 
-from langchain_core.messages import HumanMessage, SystemMessage
-from langchain_mistralai import ChatMistralAI
-
 from backend.graph.state import TaxMantriState
 
 logger = logging.getLogger(__name__)
 
-# System prompt for InputAgent's LLM decision-making
-INPUT_AGENT_SYSTEM = """You are the InputAgent for TaxMantri, an Indian tax filing assistant.
-Your job is to validate, clean, and structure taxpayer financial data.
-
-When given financial data, you must:
-1. Call validate_profile_tool to check for errors
-2. If valid, call structure_profile_tool to finalize the structured profile
-3. If invalid, report exactly which fields failed and why
-
-You are precise, never guess or fill in missing required fields. 
-Required fields: basic_salary, city_type, age_bracket, input_method.
-"""
-
 
 async def input_agent_node(state: TaxMantriState) -> dict:
     """
-    InputAgent node — validates and structures the incoming financial profile.
+    InputAgent node — loads or validates/structures the incoming financial profile.
 
-    Reads:
-      state["raw_input"]    — raw dict from the API request
-      state["input_method"] — "manual" | "ocr"
-      state["file_path"]    — temp file path for OCR (None for manual)
-
-    Writes:
-      state["profile"]         — UserFinancialProfile instance
-      state["profile_dict"]    — profile as dict for downstream tools
-      state["input_errors"]    — list of validation errors (empty if success)
-      state["input_confidence"]— 1.0 if valid, 0.0 if not
-      state["should_stop"]     — True if validation failed
-      state["current_agent"]   — "input"
+    Mode A — profile_id present: load stored confirmed profile from DB.
+    Mode B — manual input: validate + structure from raw_input.
+    Mode C — ocr input: extract → merge → validate → structure.
     """
+    from backend.agents.input_agent.schemas import UserFinancialProfile
     from backend.graph.tools.profile_tools import validate_profile_tool, structure_profile_tool
     from backend.graph.tools.ocr_tools import ocr_extract_tool
-    from backend.agents.input_agent.schemas import UserFinancialProfile
-    from backend.graph.graph import get_mistral_client, get_llm
 
-    logger.info("InputAgent starting input_method=%s", state.get("input_method", "manual"))
-
-    raw_input: dict = state.get("raw_input", {})
     input_method: str = state.get("input_method", "manual")
     file_path: str | None = state.get("file_path")
+    profile_id: str | None = state.get("profile_id")
 
     # -------------------------------------------------------------------------
-    # Step 1: OCR path — extract fields from Form 16, then merge with raw_input
+    # Mode A: Load a pre-confirmed profile from DB by profile_id (skip re-validation)
+    # This is the standard path when called from POST /api/calculate with profile_id.
     # -------------------------------------------------------------------------
+    if profile_id:
+        logger.info("InputAgent Mode A — loading stored profile_id=%s", profile_id)
+        try:
+            from backend.database import AsyncSessionLocal
+            from backend.store import get_profile
+
+            async with AsyncSessionLocal() as db:
+                profile_obj = await get_profile(db, profile_id)
+
+            if profile_obj is None:
+                error_msg = f"Profile '{profile_id}' not found in database."
+                logger.error(error_msg)
+                return {
+                    "input_errors": [error_msg],
+                    "input_confidence": 0.0,
+                    "should_stop": True,
+                    "current_agent": "input",
+                }
+
+            profile_dict = profile_obj.model_dump()
+            logger.info(
+                "InputAgent Mode A success profile_id=%s basic_salary=%.0f",
+                profile_obj.profile_id,
+                profile_obj.basic_salary,
+            )
+            return {
+                "profile": profile_obj,
+                "profile_dict": profile_dict,
+                "input_errors": [],
+                "input_confidence": 1.0,
+                "should_stop": False,
+                "current_agent": "input",
+            }
+
+        except Exception as exc:
+            error_msg = f"Failed to load profile from database: {exc}"
+            logger.error(error_msg)
+            return {
+                "input_errors": [error_msg],
+                "input_confidence": 0.0,
+                "should_stop": True,
+                "current_agent": "input",
+            }
+
+    # -------------------------------------------------------------------------
+    # Mode C: OCR path — extract from Form 16 PDF, then merge with raw_input
+    # -------------------------------------------------------------------------
+    raw_input: dict = state.get("raw_input", {})
+
     if input_method == "ocr" and file_path:
-        logger.info("InputAgent running OCR on %s", file_path)
+        logger.info("InputAgent Mode C — OCR extraction from %s", file_path)
         ocr_result = ocr_extract_tool.invoke({"file_path": file_path})
 
         if not ocr_result.get("success"):
@@ -85,15 +105,17 @@ async def input_agent_node(state: TaxMantriState) -> dict:
                 "current_agent": "input",
             }
 
-        # Merge OCR profile_fields with any user-provided overrides in raw_input
         ocr_fields = ocr_result.get("profile_fields", {})
         merged = {**ocr_fields, **raw_input, "input_method": "ocr"}
     else:
-        # Manual input — use raw_input directly
+        # -------------------------------------------------------------------------
+        # Mode B: Manual input — use raw_input directly
+        # -------------------------------------------------------------------------
+        logger.info("InputAgent Mode B — manual input validation")
         merged = {**raw_input, "input_method": input_method or "manual"}
 
     # -------------------------------------------------------------------------
-    # Step 2: Validate the merged data
+    # Validate the merged data
     # -------------------------------------------------------------------------
     logger.info("InputAgent validating profile data")
     validation_result = validate_profile_tool.invoke({"profile_data": merged})
@@ -109,7 +131,7 @@ async def input_agent_node(state: TaxMantriState) -> dict:
         }
 
     # -------------------------------------------------------------------------
-    # Step 3: Structure the validated profile
+    # Structure the validated profile
     # -------------------------------------------------------------------------
     structure_result = structure_profile_tool.invoke({"profile_data": validation_result["profile"]})
 
@@ -123,8 +145,6 @@ async def input_agent_node(state: TaxMantriState) -> dict:
         }
 
     profile_dict = structure_result["profile"]
-
-    # Reconstruct the actual Pydantic object for downstream use
     profile_obj = UserFinancialProfile.model_validate(profile_dict)
 
     logger.info(

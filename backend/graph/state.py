@@ -28,6 +28,7 @@ class TaxMantriState(TypedDict, total=False):
     """
 
     # ---- Raw input (set before graph.invoke) --------------------------------
+    profile_id: Optional[str]            # Pre-confirmed profile UUID (skips re-validation)
     raw_input: dict                      # Original request payload (manual form data)
     input_method: str                    # "manual" | "ocr"
     file_path: Optional[str]             # Temp file path for OCR uploads (None for manual)

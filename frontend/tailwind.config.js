@@ -27,6 +27,13 @@ export default {
           DEFAULT: '#16a34a',
           light: '#d5f5e3',
         },
+        custom: {
+          dark: '#1a1924',
+          purple: '#8450f5', // Vibrant purple for the animated section
+          green: '#2eac85', // Vibrant green block
+          grayLight: '#f6f6f9',
+          textDark: '#1a1a1a',
+        }
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

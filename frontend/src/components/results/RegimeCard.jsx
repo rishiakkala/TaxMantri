@@ -26,28 +26,32 @@ export default function RegimeCard({ regime, data, isRecommended, isExpanded, on
       animate={{ rotateY: isExpanded ? 5 : 0, scale: isExpanded ? 0.98 : 1 }}
       transition={{ duration: 0.3 }}
       className={[
-        'rounded-2xl border-2 cursor-pointer transition-shadow',
-        'hover:shadow-lg active:scale-[0.98]',
+        'rounded-3xl border cursor-pointer transition-all duration-300 relative overflow-hidden',
+        'hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] active:scale-[0.98] group',
         isRecommended
-          ? 'border-success bg-success-light shadow-success/20'
-          : 'border-gray-200 bg-white',
-        isExpanded ? 'shadow-md' : '',
+          ? 'border-custom-green bg-custom-green/5 shadow-[0_8px_30px_rgb(46,172,133,0.15)] ring-2 ring-custom-green/20'
+          : 'border-gray-100 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)]',
+        isExpanded ? 'ring-2 ring-custom-purple border-custom-purple bg-gray-50' : '',
       ].join(' ')}
     >
+      {/* Recommended Badge Gradient */}
+      {isRecommended && (
+        <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-custom-green to-[#5ce1ca]" />
+      )}
       <div className="p-5">
         {/* Header */}
         <div className="flex items-start justify-between mb-4">
           <div>
-            <div className="flex items-center gap-2">
-              <h3 className="font-bold text-navy text-lg">{label}</h3>
+            <div className="flex items-center gap-3">
+              <h3 className="font-extrabold text-black text-xl">{label}</h3>
               {isRecommended && (
-                <span className="inline-flex items-center gap-1 text-xs font-semibold text-success bg-white px-2 py-0.5 rounded-full border border-success/30">
-                  <CheckCircle className="w-3 h-3" />
+                <span className="inline-flex items-center gap-1.5 text-xs font-bold text-custom-green bg-white px-3 py-1 rounded-full border border-custom-green/30 shadow-sm">
+                  <CheckCircle className="w-3.5 h-3.5" />
                   Recommended
                 </span>
               )}
             </div>
-            <p className="text-gray-500 text-xs mt-0.5">{subtitle}</p>
+            <p className="text-gray-500 text-sm mt-1 font-medium">{subtitle}</p>
           </div>
           <ChevronDown
             className={[
@@ -58,11 +62,11 @@ export default function RegimeCard({ regime, data, isRecommended, isExpanded, on
         </div>
 
         {/* Total tax — hero number */}
-        <div className="mb-4">
-          <p className="text-xs text-gray-500 mb-0.5">Total Tax Payable</p>
+        <div className="mb-6">
+          <p className="text-sm font-medium text-gray-500 mb-1">Total Tax Payable</p>
           <p className={[
-            'text-3xl font-extrabold tracking-tight',
-            isRecommended ? 'text-success' : 'text-navy',
+            'text-4xl font-extrabold tracking-tight',
+            isRecommended ? 'text-custom-green' : 'text-black',
           ].join(' ')}>
             {INR(data.total_tax)}
           </p>
@@ -74,22 +78,22 @@ export default function RegimeCard({ regime, data, isRecommended, isExpanded, on
         </div>
 
         {/* Key stats */}
-        <div className="space-y-2">
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Gross Income</span>
-            <span className="font-medium text-gray-800">{INR(data.gross_income)}</span>
+        <div className="space-y-3">
+          <div className="flex justify-between text-[15px]">
+            <span className="text-gray-500 font-medium">Gross Income</span>
+            <span className="font-bold text-gray-900">{INR(data.gross_income)}</span>
           </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Total Deductions</span>
-            <span className="font-medium text-gray-800">{INR(data.total_deductions)}</span>
+          <div className="flex justify-between text-[15px]">
+            <span className="text-gray-500 font-medium">Total Deductions</span>
+            <span className="font-bold text-gray-900">{INR(data.total_deductions)}</span>
           </div>
-          <div className="flex justify-between text-sm border-t border-gray-100 pt-2 mt-2">
-            <span className="text-gray-700 font-medium">Taxable Income</span>
-            <span className="font-semibold text-navy">{INR(data.taxable_income)}</span>
+          <div className="flex justify-between text-[15px] border-t border-gray-100 pt-3 mt-3">
+            <span className="text-gray-800 font-bold">Taxable Income</span>
+            <span className="font-extrabold text-black">{INR(data.taxable_income)}</span>
           </div>
         </div>
 
-        <p className="text-xs text-center text-gray-400 mt-4">
+        <p className="text-sm text-center text-custom-purple font-semibold mt-6 opacity-0 group-hover:opacity-100 transition-opacity">
           Click to see full breakdown
         </p>
       </div>

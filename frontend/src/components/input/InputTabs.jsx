@@ -20,17 +20,17 @@ export default function InputTabs({ onCalculationComplete, onCalculating }) {
   return (
     <div>
       {/* Tab switcher */}
-      <div className="flex rounded-xl border border-gray-200 bg-gray-50 p-1 mb-6">
+      <div className="flex rounded-2xl bg-gray-100/80 p-1.5 mb-8">
         {TABS.map((tab) => (
           <button
             key={tab.id}
             type="button"
             onClick={() => setActiveTab(tab.id)}
             className={[
-              'flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg text-sm font-medium transition-all duration-200',
+              'flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-200',
               activeTab === tab.id
-                ? 'bg-white text-navy shadow-sm border border-gray-200'
-                : 'text-gray-500 hover:text-gray-700',
+                ? 'bg-white text-black shadow-md'
+                : 'text-gray-500 hover:text-custom-purple hover:bg-white/50',
             ].join(' ')}
           >
             {tab.icon}

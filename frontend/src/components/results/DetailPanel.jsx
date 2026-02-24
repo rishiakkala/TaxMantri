@@ -40,19 +40,19 @@ export default function DetailPanel({ regime, data, taxResult, side, onClose }) 
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: side === 'left' ? -80 : 80 }}
       transition={{ duration: 0.3, ease: 'easeOut' }}
-      className="rounded-2xl border-2 border-navy/20 bg-white shadow-xl overflow-hidden flex flex-col h-full"
+      className="rounded-3xl border border-gray-100 bg-white shadow-[0_20px_40px_rgb(0,0,0,0.12)] overflow-hidden flex flex-col h-full"
     >
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-4 bg-navy text-white">
+      <div className="flex items-center justify-between px-6 py-5 bg-custom-dark text-white">
         <div>
-          <h3 className="font-bold text-lg">{label} — Full Breakdown</h3>
-          <p className="text-navy-200 text-xs mt-0.5">
+          <h3 className="font-extrabold text-xl">{label} — Full Breakdown</h3>
+          <p className="text-gray-400 text-sm font-medium mt-1">
             Total Tax: {INR(data.total_tax)}
           </p>
         </div>
         <button
           onClick={onClose}
-          className="p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+          className="p-2 rounded-xl hover:bg-white/10 transition-colors"
         >
           <X className="w-5 h-5" />
         </button>
@@ -76,17 +76,17 @@ export default function DetailPanel({ regime, data, taxResult, side, onClose }) 
               <div
                 key={i}
                 className={[
-                  'flex justify-between items-center py-1.5 px-3 rounded-lg text-sm',
-                  row.highlight ? 'bg-navy/5 border border-navy/10' : '',
+                  'flex justify-between items-center py-2 px-3 rounded-xl text-[15px]',
+                  row.highlight ? 'bg-custom-purple/10 border border-custom-purple/20' : '',
                 ].join(' ')}
               >
-                <span className={row.bold ? 'font-semibold text-gray-800' : 'text-gray-600'}>
+                <span className={row.bold ? 'font-bold text-gray-900' : 'text-gray-600'}>
                   {row.label}
                 </span>
                 <span className={[
-                  row.bold ? 'font-bold' : 'font-medium',
-                  row.highlight ? 'text-navy' : 'text-gray-800',
-                  row.negative ? 'text-success' : '',
+                  row.bold ? 'font-extrabold' : 'font-semibold',
+                  row.highlight ? 'text-custom-purple' : 'text-gray-800',
+                  row.negative ? 'text-custom-green' : '',
                 ].join(' ')}>
                   {row.negative ? `−${INR(row.value)}` : INR(row.value)}
                 </span>
@@ -113,7 +113,7 @@ export default function DetailPanel({ regime, data, taxResult, side, onClose }) 
                   <span className="text-gray-600">
                     {DEDUCTION_LABELS[key] ?? key}
                   </span>
-                  <span className="font-medium text-success">
+                  <span className="font-bold text-custom-green">
                     −{INR(value)}
                   </span>
                 </div>
