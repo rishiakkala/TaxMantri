@@ -1,4 +1,5 @@
 import { useParams, useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { RotateCcw } from 'lucide-react'
 import SavingsBanner from '../components/results/SavingsBanner.jsx'
@@ -20,6 +21,11 @@ export default function ResultsPage() {
   const navigate = useNavigate()
 
   const taxResult = state?.taxResult ?? null
+
+  // Persist profileId so ChatWidget can personalise answers with the current session
+  useEffect(() => {
+    if (profileId) localStorage.setItem('taxmantri_profile_id', profileId)
+  }, [profileId])
 
   // ---- Fallback: page refresh lost router state ----
   if (!taxResult) {

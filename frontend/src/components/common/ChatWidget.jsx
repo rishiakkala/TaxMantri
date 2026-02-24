@@ -117,7 +117,7 @@ const SAMPLE_QUESTIONS = [
  * ChatWidget — mounts at app root, floats bottom-right on all pages.
  * Optional prop: profileId — if provided, answers are personalised.
  */
-export default function ChatWidget({ profileId = null }) {
+export default function ChatWidget({ profileId: propProfileId = null }) {
     const [open, setOpen] = useState(false)
     const [messages, setMessages] = useState([WELCOME])
     const [input, setInput] = useState('')
@@ -125,6 +125,10 @@ export default function ChatWidget({ profileId = null }) {
     const sessionId = useRef(getSessionId())
     const bottomRef = useRef(null)
     const inputRef = useRef(null)
+
+    // Use prop if given, otherwise read the profileId the ResultsPage saved to localStorage.
+    // This lets the backend personalise answers with the user's own salary/deductions/regime.
+    const profileId = propProfileId || localStorage.getItem('taxmantri_profile_id')
 
     // Auto-scroll to bottom on new message
     useEffect(() => {
