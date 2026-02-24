@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { ArrowRight, Star, User } from 'lucide-react'
+import { ArrowRight, Star, User, Code } from 'lucide-react'
 import { useRef } from 'react'
 import heroImage from '../images/Gemini_Generated_Image_m5ixi9m5ixi9m5ix.png'
 import logoImage from '../images/justice_scales_black_gold.png'
+
+import Navbar from '../components/Navbar'
 
 export default function HeroPage() {
   const navigate = useNavigate()
@@ -17,14 +19,31 @@ export default function HeroPage() {
   const purpleScale = useTransform(scrollYProgress, [0, 0.5], [0.95, 1])
 
   return (
-    <div className="min-h-screen bg-white font-sans text-custom-textDark overflow-x-hidden">
-      {/* Minimal Logo Positioned Top-Left */}
-      <div className="fixed top-0 left-0 w-full z-50 px-6 py-6 pointer-events-none">
-        <button onClick={() => navigate('/')} className="flex items-center gap-2 pointer-events-auto group">
-          <img src={logoImage} alt="TaxMantri Logo" className="h-9 w-auto object-contain group-hover:scale-105 transition-transform" />
-          <span className="font-extrabold text-2xl tracking-tighter text-black group-hover:text-custom-purple transition-colors">TaxMantri</span>
-        </button>
+    <div className="min-h-screen font-sans text-custom-textDark overflow-x-hidden relative">
+      {/* Animated Background */}
+      <div className="fixed inset-0 w-full h-full pointer-events-none -z-10 overflow-hidden bg-gradient-to-br from-[#cbe0f5] to-[#aaccf0]">
+        {/* Floating Circle 1 */}
+        <motion.div
+          animate={{ y: [0, -50, 0], x: [0, 20, 0] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[5%] left-[-5%] w-80 h-80 bg-blue-300 rounded-full blur-[100px] opacity-70"
+        />
+        {/* Floating Circle 2 */}
+        <motion.div
+          animate={{ y: [0, 50, 0], x: [0, -30, 0] }}
+          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="absolute top-[40%] right-[-10%] w-[500px] h-[500px] bg-cyan-200 rounded-full blur-[120px] opacity-40"
+        />
+        {/* Floating Circle 3 */}
+        <motion.div
+          animate={{ y: [0, -40, 0], x: [0, 40, 0] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+          className="absolute bottom-[-10%] left-[20%] w-96 h-96 bg-blue-400 rounded-full blur-[120px] opacity-20"
+        />
       </div>
+
+      {/* Translucent Navigation Tab */}
+      <Navbar />
 
       {/* Hero Section */}
       <main className="pt-36 pb-20 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
@@ -33,12 +52,19 @@ export default function HeroPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <h1 className="text-6xl md:text-[5.5rem] font-extrabold text-black leading-[1.05] tracking-tight mb-6">
-            Tax smarter, Save better.
+          <h1
+            style={{ fontFamily: "'Quicksand', sans-serif" }}
+            className="text-6xl md:text-[5.5rem] font-extrabold leading-[1.05] tracking-tight mb-6 relative inline-block z-10"
+          >
+            <span className="bg-gradient-to-r from-blue-900 to-blue-600 text-transparent bg-clip-text">
+              TaxMantri
+            </span>
+            {/* Thick decorative underline behind the text */}
+            <span className="absolute bottom-2 left-0 w-full h-8 bg-blue-200/50 -z-10 rounded-sm"></span>
           </h1>
 
           <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto font-medium">
-            See how much tax you can claim or save with TaxMantri
+            Tax smarter, Save better.
           </p>
 
           <button
@@ -142,21 +168,18 @@ export default function HeroPage() {
 
             {/* Green Card */}
             <motion.div
+              onClick={() => navigate('/about')}
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-custom-green text-black rounded-3xl p-10 flex flex-col md:flex-row items-center overflow-hidden min-h-[300px]"
+              className="bg-custom-green text-black rounded-3xl p-10 flex flex-col md:flex-row items-center overflow-hidden min-h-[300px] cursor-pointer hover:shadow-lg transition-transform hover:scale-[1.02]"
             >
-              <div className="bg-white rounded-2xl p-6 shadow-xl relative w-full md:w-1/2 min-h-[200px] flex items-end justify-center gap-2 rotate-[-2deg]">
-                {/* Fake Chart bars */}
-                <div className="w-1/3 bg-[#ffb6ff] h-16 rounded-t-md" />
-                <div className="w-1/3 bg-[#1a1924] h-32 rounded-t-md" />
-                <div className="w-1/3 bg-custom-purple h-24 rounded-t-md" />
+              <div className="bg-white rounded-2xl p-6 shadow-xl relative w-full md:w-1/2 min-h-[200px] flex items-center justify-center gap-2 rotate-[-2deg]">
+                <Code className="w-24 h-24 text-custom-purple" strokeWidth={1.5} />
               </div>
               <div className="mt-8 md:mt-0 md:ml-10 flex-1">
-                <p className="text-sm font-bold text-black/60 uppercase tracking-widest mb-2">about</p>
-                <h3 className="text-3xl font-extrabold leading-tight">We're all set</h3>
+                <h3 className="text-4xl font-extrabold leading-tight text-black">About Us</h3>
               </div>
             </motion.div>
           </div>

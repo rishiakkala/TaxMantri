@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import InputTabs from '../components/input/InputTabs.jsx'
 import LoadingOverlay from '../components/common/LoadingOverlay.jsx'
-import logoImage from '../images/justice_scales_black_gold.png'
+import Navbar from '../components/Navbar'
 
 /**
  * The state bridge between InputTabs and ResultsPage.
@@ -37,13 +37,7 @@ export default function InputPage() {
     <div className="min-h-screen bg-white font-sans text-custom-textDark">
       <LoadingOverlay visible={isCalculating} onComplete={handleOverlayComplete} />
 
-      {/* Minimal Logo Positioned Top-Left */}
-      <div className="fixed top-0 left-0 w-full z-50 px-6 py-6 pointer-events-none">
-        <button onClick={() => navigate('/')} className="flex items-center gap-2 pointer-events-auto group">
-          <img src={logoImage} alt="TaxMantri Logo" className="h-9 w-auto object-contain group-hover:scale-105 transition-transform" />
-          <span className="font-extrabold text-2xl tracking-tighter text-black group-hover:text-custom-purple transition-colors">TaxMantri</span>
-        </button>
-      </div>
+      <Navbar />
 
 
 
