@@ -1,9 +1,5 @@
 # TaxMantri .gitignore
 
-# AI assistant config folders — never commit these
-.agent/
-.claude/
-
 
 # Environment secrets — NEVER commit these
 backend/.env
