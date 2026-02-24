@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { FileSearch, Calculator, Database, LineChart } from 'lucide-react'
 
 const STEPS = [
-  { label: 'Parsing your profile…', duration: 700 },
-  { label: 'Calculating Old Regime tax…', duration: 800 },
-  { label: 'Calculating New Regime tax…', duration: 800 },
-  { label: 'Comparing regimes…', duration: 600 },
-  { label: 'Generating optimisation tips…', duration: 600 },
+  { label: 'Data reading', icon: FileSearch, duration: 1500 },
+  { label: 'TAX Calculation', icon: Calculator, duration: 1500 },
+  { label: 'RAG Retrieval', icon: Database, duration: 2500 },
+  { label: 'Comparative Analysis', icon: LineChart, duration: 1500 },
 ]
 
 /**
- * Full-screen animated loading overlay.
+ * Full-screen animated loading overlay matching the user's sketch.
  *
  * Props:
  *   visible (bool)   — show/hide
- *   onComplete (fn)  — called after all steps finish (≥4s total)
+ *   onComplete (fn)  — called after all steps finish
  */
 export default function LoadingOverlay({ visible, onComplete }) {
   const [stepIndex, setStepIndex] = useState(0)
@@ -26,22 +26,21 @@ export default function LoadingOverlay({ visible, onComplete }) {
     }
 
     let idx = 0
+    let timer = null
     const advance = () => {
       if (idx >= STEPS.length - 1) {
         // All steps done — wait a beat then call onComplete
-        setTimeout(() => onComplete?.(), 400)
+        timer = setTimeout(() => onComplete?.(), 600)
         return
       }
       idx += 1
       setStepIndex(idx)
-      setTimeout(advance, STEPS[idx].duration)
+      timer = setTimeout(advance, STEPS[idx].duration)
     }
 
-    const timer = setTimeout(advance, STEPS[0].duration)
+    timer = setTimeout(advance, STEPS[0].duration)
     return () => clearTimeout(timer)
   }, [visible, onComplete])
-
-  const progress = ((stepIndex + 1) / STEPS.length) * 100
 
   return (
     <AnimatePresence>
@@ -51,59 +50,62 @@ export default function LoadingOverlay({ visible, onComplete }) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-navy/95 backdrop-blur-sm"
+          // Added z-[100] to ensure it covers the Navbar!
+          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/95 backdrop-blur-xl"
         >
-          {/* Spinning ring */}
-          <div className="relative mb-8">
-            <div className="w-20 h-20 rounded-full border-4 border-white/10" />
-            <motion.div
-              className="absolute inset-0 w-20 h-20 rounded-full border-4 border-t-amber border-r-amber border-b-transparent border-l-transparent animate-spin"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-amber font-bold text-lg">₹</span>
-            </div>
-          </div>
+          {/* Title */}
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-14 text-center"
+          >
+            <h2 className="text-white font-extrabold text-3xl md:text-4xl mb-3 tracking-tight">
+              Agents working in the background
+            </h2>
+            <div className="w-32 h-1 bg-gradient-to-r from-transparent via-white/40 to-transparent mx-auto rounded-full" />
+          </motion.div>
 
-          <h2 className="text-white font-bold text-2xl mb-2">Analysing your tax…</h2>
+          {/* 4 Boxes Grid */}
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-8 max-w-6xl px-6">
+            {STEPS.map((step, i) => {
+              const isActive = i === stepIndex;
+              const isPast = i < stepIndex;
+              const isPending = i > stepIndex;
 
-          {/* Step label */}
-          <AnimatePresence mode="wait">
-            <motion.p
-              key={stepIndex}
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="text-navy-200 text-sm mb-8"
-            >
-              {STEPS[stepIndex].label}
-            </motion.p>
-          </AnimatePresence>
+              const Icon = step.icon;
 
-          {/* Progress bar */}
-          <div className="w-64 h-1.5 bg-white/10 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-amber rounded-full"
-              animate={{ width: `${progress}%` }}
-              transition={{ duration: 0.4, ease: 'easeOut' }}
-            />
-          </div>
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className={`
+                    relative flex flex-col items-center justify-center w-40 h-40 md:w-52 md:h-52 rounded-3xl border transition-all duration-700
+                    ${isPast ? 'bg-white/10 border-white/20 text-white' : ''}
+                    ${isActive ? 'bg-white text-black border-white shadow-[0_0_50px_rgba(255,255,255,0.4)] scale-110 z-10' : ''}
+                    ${isPending ? 'bg-white/5 border-white/5 text-gray-500' : ''}
+                  `}
+                >
+                  <motion.div
+                    animate={isActive ? { scale: [1, 1.15, 1], rotate: [0, 5, -5, 0] } : {}}
+                    transition={{ repeat: isActive ? Infinity : 0, duration: 2, ease: "easeInOut" }}
+                    className="mb-4"
+                  >
+                    <Icon className="w-10 h-10 md:w-12 md:h-12" />
+                  </motion.div>
 
-          {/* Step dots */}
-          <div className="flex gap-2 mt-4">
-            {STEPS.map((_, i) => (
-              <motion.div
-                key={i}
-                className="w-2 h-2 rounded-full"
-                animate={{
-                  backgroundColor: i <= stepIndex ? '#f59e0b' : 'rgba(255,255,255,0.2)',
-                  scale: i === stepIndex ? 1.3 : 1,
-                }}
-                transition={{ duration: 0.3 }}
-              />
-            ))}
+                  <p className="font-extrabold text-center text-sm md:text-lg leading-tight px-4">{step.label}</p>
+
+                  {/* Status Indicator */}
+                  <div className="absolute bottom-4 flex items-center gap-2">
+                    {isPast && <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-green-500">Done</span>}
+                    {isActive && <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest animate-pulse text-gray-500">Processing...</span>}
+                    {isPending && <span className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-gray-600">Waiting</span>}
+                  </div>
+                </motion.div>
+              )
+            })}
           </div>
         </motion.div>
       )}

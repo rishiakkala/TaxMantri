@@ -45,9 +45,9 @@ export default function RegimeCardPair({ taxResult }) {
         // Detail panel shows on left when new is expanded
         <AnimatePresence mode="sync">
           <DetailPanel
-            key="old-detail"
-            regime="old"
-            data={old_regime}
+            key="new-detail"
+            regime="new"
+            data={new_regime}
             taxResult={taxResult}
             side="left"
             onClose={() => setExpandedRegime(null)}
@@ -68,9 +68,9 @@ export default function RegimeCardPair({ taxResult }) {
         // Detail panel shows on right when old is expanded
         <AnimatePresence mode="sync">
           <DetailPanel
-            key="new-detail"
-            regime="new"
-            data={new_regime}
+            key="old-detail"
+            regime="old"
+            data={old_regime}
             taxResult={taxResult}
             side="right"
             onClose={() => setExpandedRegime(null)}

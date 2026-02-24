@@ -20,27 +20,7 @@ export default function HeroPage() {
 
   return (
     <div className="min-h-screen font-sans text-custom-textDark overflow-x-hidden relative">
-      {/* Animated Background */}
-      <div className="fixed inset-0 w-full h-full pointer-events-none -z-10 overflow-hidden bg-gradient-to-br from-[#cbe0f5] to-[#aaccf0]">
-        {/* Floating Circle 1 */}
-        <motion.div
-          animate={{ y: [0, -50, 0], x: [0, 20, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[5%] left-[-5%] w-80 h-80 bg-blue-300 rounded-full blur-[100px] opacity-70"
-        />
-        {/* Floating Circle 2 */}
-        <motion.div
-          animate={{ y: [0, 50, 0], x: [0, -30, 0] }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="absolute top-[40%] right-[-10%] w-[500px] h-[500px] bg-cyan-200 rounded-full blur-[120px] opacity-40"
-        />
-        {/* Floating Circle 3 */}
-        <motion.div
-          animate={{ y: [0, -40, 0], x: [0, 40, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-          className="absolute bottom-[-10%] left-[20%] w-96 h-96 bg-blue-400 rounded-full blur-[120px] opacity-20"
-        />
-      </div>
+
 
       {/* Translucent Navigation Tab */}
       <Navbar />
@@ -69,7 +49,7 @@ export default function HeroPage() {
 
           <button
             onClick={() => navigate('/input')}
-            className="bg-black/30 backdrop-blur-md border border-white/10 hover:bg-black/50 hover:-translate-y-1 text-gray-300 hover:text-white font-semibold text-lg px-8 py-4 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] transition-all duration-300 active:scale-95"
+            className="bg-black/60 backdrop-blur-md border border-white/20 hover:bg-black/80 hover:-translate-y-1 text-white font-semibold text-lg px-8 py-4 rounded-full shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] transition-all duration-300 active:scale-95"
           >
             Calculate my tax refund
           </button>
@@ -150,7 +130,7 @@ export default function HeroPage() {
                 <h3 className="text-3xl font-bold mb-6 max-w-[250px] leading-tight">Personal tax management for retail</h3>
                 <button
                   onClick={() => navigate('/how-it-works')}
-                  className="flex items-center gap-2 text-sm font-medium text-gray-300 bg-black/30 backdrop-blur-md border border-white/10 shadow-[0_4px_16px_rgba(0,0,0,0.2)] rounded-full py-2.5 px-6 hover:bg-black/50 hover:text-white hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)] transition-all duration-300"
+                  className="flex items-center gap-2 text-sm font-medium text-white bg-black/60 backdrop-blur-md border border-white/20 shadow-[0_4px_16px_rgba(0,0,0,0.2)] rounded-full py-2.5 px-6 hover:bg-black/80 hover:-translate-y-0.5 hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)] transition-all duration-300"
                 >
                   How it works <ArrowRight className="w-4 h-4" />
                 </button>
@@ -207,7 +187,7 @@ export default function HeroPage() {
               <h3 className="text-white text-3xl font-bold mb-6 max-w-[300px] leading-snug">
                 Thanks to TaxMantri, priya claimed back ₹1,00,600
               </h3>
-              <button onClick={() => navigate('/input')} className="flex items-center gap-2 text-gray-300 font-medium bg-black/30 backdrop-blur-md border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-full py-2.5 px-6 hover:bg-black/50 hover:text-white hover:-translate-y-0.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] transition-all duration-300 w-fit">
+              <button onClick={() => navigate('/input')} className="flex items-center gap-2 text-white font-medium bg-black/60 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.3)] rounded-full py-2.5 px-6 hover:bg-black/80 hover:-translate-y-0.5 hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] transition-all duration-300 w-fit">
                 Check my refund <ArrowRight className="w-4 h-4" />
               </button>
             </div>

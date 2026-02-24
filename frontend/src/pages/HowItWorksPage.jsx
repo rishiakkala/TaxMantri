@@ -52,7 +52,7 @@ export default function HowItWorksPage() {
     const navigate = useNavigate()
 
     return (
-        <div className="min-h-screen bg-white font-sans text-custom-textDark">
+        <div className="min-h-screen font-sans text-custom-textDark relative">
             <Navbar />
 
             {/* Hero Section */}
@@ -137,7 +137,7 @@ export default function HowItWorksPage() {
                     </p>
                     <button
                         onClick={() => navigate('/input')}
-                        className="bg-[#5ce1ca] hover:bg-[#4dd0b9] text-black font-bold text-lg px-8 py-4 rounded-full transition-transform active:scale-95 shadow-xl shadow-[#5ce1ca]/20"
+                        className="bg-black/60 backdrop-blur-md border border-white/20 hover:bg-black/80 text-white font-bold text-lg px-8 py-4 rounded-full transition-all duration-300 active:scale-95 shadow-[0_4px_16px_rgba(0,0,0,0.2)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.3)]"
                     >
                         Calculate Your Tax Now
                     </button>

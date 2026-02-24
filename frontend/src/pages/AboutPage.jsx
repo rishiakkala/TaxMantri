@@ -36,7 +36,7 @@ export default function AboutPage() {
     const navigate = useNavigate()
 
     return (
-        <div className="min-h-screen bg-white font-sans text-custom-textDark overflow-x-hidden">
+        <div className="min-h-screen font-sans text-custom-textDark overflow-x-hidden relative">
             <Navbar />
 
             {/* Main Content */}

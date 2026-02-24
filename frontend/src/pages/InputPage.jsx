@@ -34,7 +34,7 @@ export default function InputPage() {
   }, [navigate, pendingNavigation])
 
   return (
-    <div className="min-h-screen bg-white font-sans text-custom-textDark">
+    <div className="min-h-screen font-sans text-custom-textDark relative">
       <LoadingOverlay visible={isCalculating} onComplete={handleOverlayComplete} />
 
       <Navbar />

@@ -35,7 +35,7 @@ function TypingDots() {
             {[0, 1, 2].map(i => (
                 <span
                     key={i}
-                    className="w-2 h-2 rounded-full bg-purple-400 animate-bounce"
+                    className="w-2 h-2 rounded-full bg-white/50 animate-bounce"
                     style={{ animationDelay: `${i * 0.15}s` }}
                 />
             ))}
@@ -53,7 +53,7 @@ function MessageBubble({ msg }) {
                 {/* Avatar */}
                 <div className={`
           w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs
-          ${isUser ? 'bg-gray-400' : 'bg-purple-600'}
+          ${isUser ? 'bg-white/20' : 'bg-[#5ce1ca] text-black'}
         `}>
                     {isUser ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
                 </div>
@@ -62,8 +62,8 @@ function MessageBubble({ msg }) {
                 <div className={`
           max-w-[75%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed
           ${isUser
-                        ? 'bg-purple-600 text-white rounded-br-sm'
-                        : 'bg-gray-50 border border-gray-100 text-gray-800 rounded-bl-sm'
+                        ? 'bg-white/20 text-white rounded-br-sm border border-white/10'
+                        : 'bg-[#1a1a1a]/60 border border-white/10 text-gray-300 rounded-bl-sm'
                     }
         `}>
                     {msg.loading ? <TypingDots /> : msg.text}
@@ -81,7 +81,7 @@ function MessageBubble({ msg }) {
                             <span
                                 key={i}
                                 title={tip}
-                                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 text-xs font-bold border border-purple-200"
+                                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/10 text-gray-300 text-xs font-bold border border-white/20"
                             >
                                 <BookOpen className="w-2.5 h-2.5" />
                                 {label}
@@ -199,17 +199,17 @@ export default function ChatWidget({ profileId: propProfileId = null }) {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.22, ease: 'easeOut' }}
-                        className="fixed bottom-24 right-5 z-50 w-[360px] max-h-[560px] flex flex-col rounded-3xl shadow-2xl border border-purple-100 bg-white overflow-hidden"
-                        style={{ boxShadow: '0 24px 60px rgba(124,58,237,0.18)' }}
+                        className="fixed bottom-24 right-5 z-50 w-[360px] max-h-[560px] flex flex-col rounded-3xl shadow-2xl border border-white/20 bg-black/80 backdrop-blur-2xl overflow-hidden"
+                        style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.5)' }}
                     >
                         {/* Header */}
-                        <div className="flex items-center gap-3 px-4 py-3.5 bg-gradient-to-r from-purple-700 to-purple-500 text-white flex-shrink-0">
+                        <div className="flex items-center gap-3 px-4 py-3.5 bg-transparent border-b border-white/10 text-white flex-shrink-0">
                             <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
                                 <Sparkles className="w-4.5 h-4.5" />
                             </div>
                             <div className="flex-1 min-w-0">
                                 <p className="font-extrabold text-sm leading-tight">TaxMantri Assistant</p>
-                                <p className="text-xs text-purple-200 font-medium">Powered by Mistral · Income Tax Act 1961</p>
+                                <p className="text-xs text-gray-400 font-medium">Powered by Mistral · Income Tax Act 1961</p>
                             </div>
                             <button
                                 onClick={() => setOpen(false)}
@@ -220,7 +220,7 @@ export default function ChatWidget({ profileId: propProfileId = null }) {
                         </div>
 
                         {/* Messages */}
-                        <div className="flex-1 overflow-y-auto px-4 py-4 bg-white space-y-0">
+                        <div className="flex-1 overflow-y-auto px-4 py-4 bg-transparent space-y-0">
                             {messages.map(msg => (
                                 <MessageBubble key={msg.id} msg={msg} />
                             ))}
@@ -229,12 +229,12 @@ export default function ChatWidget({ profileId: propProfileId = null }) {
 
                         {/* Sample questions — shown when only welcome msg exists */}
                         {messages.length === 1 && (
-                            <div className="px-4 pb-2 flex flex-col gap-1.5 bg-white">
+                            <div className="px-4 pb-2 flex flex-col gap-1.5 bg-transparent">
                                 {SAMPLE_QUESTIONS.map((q, i) => (
                                     <button
                                         key={i}
                                         onClick={() => sendMessage(q)}
-                                        className="text-left text-xs px-3 py-2 rounded-xl bg-purple-50 border border-purple-100 text-purple-700 font-semibold hover:bg-purple-100 transition-colors"
+                                        className="text-left text-xs px-3 py-2 rounded-xl bg-black/60 backdrop-blur-md border border-white/20 text-white font-semibold hover:bg-black/80 transition-colors"
                                     >
                                         {q}
                                     </button>
@@ -245,7 +245,7 @@ export default function ChatWidget({ profileId: propProfileId = null }) {
                         {/* Input bar */}
                         <form
                             onSubmit={handleSubmit}
-                            className="flex items-center gap-2 px-3 py-3 bg-gray-50 border-t border-gray-100 flex-shrink-0"
+                            className="flex items-center gap-2 px-3 py-3 bg-transparent border-t border-white/10 flex-shrink-0"
                         >
                             <input
                                 ref={inputRef}
@@ -254,12 +254,12 @@ export default function ChatWidget({ profileId: propProfileId = null }) {
                                 onChange={e => setInput(e.target.value)}
                                 placeholder="Ask a tax question…"
                                 disabled={loading}
-                                className="flex-1 text-sm px-3.5 py-2.5 rounded-2xl border border-gray-200 bg-white outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-100 transition-all disabled:opacity-50"
+                                className="flex-1 text-sm px-3.5 py-2.5 rounded-2xl border border-white/20 bg-white/10 text-white placeholder-gray-400 outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all disabled:opacity-50"
                             />
                             <button
                                 type="submit"
                                 disabled={!input.trim() || loading}
-                                className="w-10 h-10 rounded-2xl bg-purple-600 flex items-center justify-center text-white hover:bg-purple-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
+                                className="w-10 h-10 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-black/80 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
                             >
                                 {loading
                                     ? <Loader2 className="w-4 h-4 animate-spin" />
@@ -276,7 +276,7 @@ export default function ChatWidget({ profileId: propProfileId = null }) {
                 onClick={() => setOpen(v => !v)}
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
-                className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-purple-600 text-white shadow-lg shadow-purple-300 flex items-center justify-center hover:bg-purple-700 transition-colors"
+                className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white shadow-[0_4px_16px_rgba(0,0,0,0.3)] flex items-center justify-center hover:bg-black/80 hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-all duration-300"
                 aria-label="Open tax chatbot"
             >
                 <AnimatePresence mode="wait">

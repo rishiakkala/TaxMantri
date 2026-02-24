@@ -29,8 +29,8 @@ export default function InputTabs({ onCalculationComplete, onCalculating }) {
             className={[
               'flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm font-bold transition-all duration-200',
               activeTab === tab.id
-                ? 'bg-white text-black shadow-md'
-                : 'text-gray-500 hover:text-custom-purple hover:bg-white/50',
+                ? 'bg-black/60 backdrop-blur-md text-white border border-white/20 shadow-md'
+                : 'text-gray-500 hover:text-white hover:bg-black/40',
             ].join(' ')}
           >
             {tab.icon}
