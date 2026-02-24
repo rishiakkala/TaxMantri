@@ -15,7 +15,9 @@ const TABS = [
  *   onCalculating (fn)         — passed through to child tabs
  */
 export default function InputTabs({ onCalculationComplete, onCalculating }) {
-  const [activeTab, setActiveTab] = useState('upload')
+  // Default to manual entry tab if the user has form data saved (came back via Edit Details)
+  const hasSavedForm = !!localStorage.getItem('taxmantri_last_form')
+  const [activeTab, setActiveTab] = useState(hasSavedForm ? 'manual' : 'upload')
 
   return (
     <div>
