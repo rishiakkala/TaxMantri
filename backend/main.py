@@ -61,10 +61,37 @@ async def lifespan(app: FastAPI):
     from backend.cache import create_redis_pool
     app.state.redis = await create_redis_pool()
 
-    # --- 3. RAG retriever — loaded once (slow: BGE-M3 + FAISS + BM25 reconstruct) ---
+    # --- 3. RAG retriever — auto-build index on first run, then load ─────────
     import asyncio
+    from pathlib import Path
     from backend.agents.matcher_agent.retriever import TaxRetriever
     from mistralai import Mistral
+
+    _index_dir = Path(__file__).resolve().parent.parent / "knowledge_base" / "indexes"
+    _faiss_file = _index_dir / "kb.faiss"
+    _pkl_file   = _index_dir / "chunks.pkl"
+    _index_ready = _faiss_file.exists() and _pkl_file.exists()
+
+    if not _index_ready:
+        logger.info(
+            "FAISS index not found — building knowledge base on first startup. "
+            "This will take a few minutes while the IT Act documents are embedded..."
+        )
+        try:
+            from backend.agents.matcher_agent.build_index import main as _build_index
+            # Run synchronous, CPU-heavy build in a thread so we don't block the event loop
+            await asyncio.to_thread(_build_index)
+            logger.info("Knowledge base index built successfully.")
+        except SystemExit as exc:
+            logger.warning(
+                "Index build skipped — source documents not found in knowledge_base/raw/ "
+                "(exit code %s). Chatbot will be unavailable until documents are added.",
+                exc.code,
+            )
+        except Exception as exc:
+            logger.warning("Index build failed: %s — chatbot will return 503.", exc)
+    else:
+        logger.info("FAISS index found at %s — skipping build.", _faiss_file)
 
     try:
         app.state.retriever = TaxRetriever()
@@ -74,6 +101,7 @@ async def lifespan(app: FastAPI):
             "RAG indexes missing — POST /api/query will return 503 until Phase 4 indexes are built: %s", exc
         )
         app.state.retriever = None
+
 
     # --- 4. Mistral client — singleton for HTTP connection pool reuse ---
     app.state.mistral = Mistral(api_key=settings.mistral_api_key)
