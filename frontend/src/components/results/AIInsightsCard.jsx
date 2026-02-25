@@ -200,42 +200,44 @@ export default function AIInsightsCard({ taxResult }) {
                 </div>
             )}
 
-            {/* Collapsible law context — always show if there's any legal content */}
-            {(law_context || citations.some(c => c.excerpt)) && (() => {
-                const content = law_context ||
-                    citations.filter(c => c.excerpt).map(c => `${c.section}: ${c.excerpt}`).join('\n\n')
-                return (
-                    <div className="border-t border-purple-100 pt-4">
-                        <button
-                            onClick={() => setLawExpanded(v => !v)}
-                            className="flex items-center gap-2 text-xs font-bold text-purple-600 hover:text-purple-800 transition-colors w-full text-left"
-                        >
-                            <BookOpen className="w-3.5 h-3.5" />
-                            <span>View Full Legal Context</span>
-                            {lawExpanded
-                                ? <ChevronUp className="w-3.5 h-3.5 ml-auto" />
-                                : <ChevronDown className="w-3.5 h-3.5 ml-auto" />
-                            }
-                        </button>
+            {/* Collapsible law context — always visible */}
+            <div className="border-t border-purple-100 pt-4">
+                <button
+                    onClick={() => setLawExpanded(v => !v)}
+                    className="flex items-center gap-2 text-xs font-bold text-purple-600 hover:text-purple-800 transition-colors w-full text-left"
+                >
+                    <BookOpen className="w-3.5 h-3.5" />
+                    <span>View Full Legal Context</span>
+                    {lawExpanded
+                        ? <ChevronUp className="w-3.5 h-3.5 ml-auto" />
+                        : <ChevronDown className="w-3.5 h-3.5 ml-auto" />
+                    }
+                </button>
 
-                        <AnimatePresence>
-                            {lawExpanded && (
-                                <motion.div
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: 'auto' }}
-                                    exit={{ opacity: 0, height: 0 }}
-                                    transition={{ duration: 0.25 }}
-                                    className="overflow-hidden"
-                                >
-                                    <p className="mt-3 text-xs text-gray-500 leading-relaxed whitespace-pre-line bg-gray-50 rounded-xl p-4 border border-gray-100">
-                                        {content}
-                                    </p>
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
-                    </div>
-                )
-            })()}
+                <AnimatePresence>
+                    {lawExpanded && (
+                        <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: 'auto' }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.25 }}
+                            className="overflow-hidden"
+                        >
+                            <p className="mt-3 text-xs text-gray-500 leading-relaxed whitespace-pre-line bg-gray-50 rounded-xl p-4 border border-gray-100">
+                                {law_context ||
+                                    (citations.length > 0
+                                        ? citations.filter(c => c.excerpt).map(c => `${c.section}:\n${c.excerpt}`).join('\n\n')
+                                        : 'Tax computed under the Income Tax Act 1961 for AY 2025-26 (FY 2024-25).\n\n' +
+                                        'New Regime (Sec 115BAC): Simplified slabs — 0% up to ₹3L, 5% ₹3-7L, 10% ₹7-10L, 15% ₹10-12L, 20% ₹12-15L, 30% above ₹15L. Standard deduction ₹75,000 allowed (Sec 16(ia)).\n\n' +
+                                        'Old Regime: Higher slabs but full deductions — 80C (₹1.5L cap), 80D, HRA (Rule 2A), 24(b) home loan interest, professional tax (Sec 16(iii)), and more.\n\n' +
+                                        'Sec 87A rebate: Tax reduced to ₹0 if taxable income ≤ ₹7L (new) or ₹5L (old). Health & Education Cess 4% applied on final tax.'
+                                    )
+                                }
+                            </p>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
         </motion.div>
     )
 }
