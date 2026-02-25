@@ -25,6 +25,7 @@ from backend.agents.input_agent.schemas import UserFinancialProfile
 from backend.models.chat_history import ChatHistoryORM
 from backend.models.profile import ProfileORM
 from backend.models.session import SessionORM
+from backend.models.session_event import SessionEventORM
 from backend.models.tax_result import TaxResultORM
 
 logger = logging.getLogger(__name__)
@@ -225,3 +226,146 @@ async def get_chat_history(
         }
         for row in rows
     ]
+
+
+# ---------------------------------------------------------------------------
+# Session event operations
+# ---------------------------------------------------------------------------
+
+async def save_session_event(
+    db: AsyncSession,
+    session_id: str,
+    event_type: str,
+    payload: dict,
+) -> None:
+    """
+    Persist a single UI interaction event to the session_events table.
+    payload must be PII-free — only structural data like tab names or regime strings.
+    Logs only session_id and event_type (not payload values — may contain user choices).
+    """
+    orm = SessionEventORM(
+        id=str(uuid.uuid4()),
+        session_id=session_id,
+        event_type=event_type,
+        payload=payload,
+    )
+    db.add(orm)
+    await db.flush()
+    logger.info("Saved session event session_id=%s event_type=%s", session_id, event_type)
+
+
+async def get_session_events(
+    db: AsyncSession,
+    session_id: str,
+) -> list[dict]:
+    """
+    Retrieve all UI events for a session, ordered by created_at ascending.
+    Returns empty list if no events exist.
+    """
+    result = await db.execute(
+        select(SessionEventORM)
+        .where(SessionEventORM.session_id == session_id)
+        .order_by(SessionEventORM.created_at.asc())
+    )
+    rows = result.scalars().all()
+    return [
+        {
+            "event_type": row.event_type,
+            "payload": row.payload,
+            "created_at": row.created_at.isoformat(),
+        }
+        for row in rows
+    ]
+
+
+# Topic keyword mapping — used by get_session_summary to tag questions by subject
+_TOPIC_KEYWORDS: dict[str, list[str]] = {
+    "HRA": ["hra", "house rent", "rent allowance"],
+    "80C": ["80c", "ppf", "elss", "nsc", "life insurance"],
+    "NPS": ["nps", "national pension", "80ccd"],
+    "80D": ["80d", "health insurance", "medical insurance"],
+    "Home Loan": ["home loan", "housing loan", "section 24", "interest on loan"],
+    "Standard Deduction": ["standard deduction"],
+    "Regime": ["regime", "old regime", "new regime"],
+    "Tax Slabs": ["slab", "tax rate", "income tax rate"],
+    "ITR-1": ["itr", "itr-1", "income tax return", "filing"],
+    "Capital Gains": ["capital gain", "ltcg", "stcg"],
+}
+
+
+def _extract_topics(questions: list[str]) -> list[str]:
+    """Return topic labels that appear in any of the questions (case-insensitive)."""
+    combined = " ".join(questions).lower()
+    return [
+        topic
+        for topic, keywords in _TOPIC_KEYWORDS.items()
+        if any(kw in combined for kw in keywords)
+    ]
+
+
+async def get_session_summary(
+    db: AsyncSession,
+    session_id: str,
+) -> dict:
+    """
+    Derive and return a structured session summary from chat_history + session_events.
+
+    Computed metrics:
+      - question_count, high_confidence_pct
+      - session_duration_s (first_event → last_event across both tables)
+      - topics_asked (keyword-matched against chat questions)
+      - tabs_visited, pdf_downloaded, regime_compared, pages_visited
+    """
+    chat_rows = await get_chat_history(db, session_id)
+    event_rows = await get_session_events(db, session_id)
+
+    # ── Chat metrics ────────────────────────────────────────────────────────
+    question_count = len(chat_rows)
+    high_count = sum(1 for r in chat_rows if r["confidence"] == "high")
+    high_confidence_pct = round(high_count / question_count * 100, 1) if question_count else 0.0
+    topics_asked = _extract_topics([r["question"] for r in chat_rows])
+
+    # ── UI event metrics ─────────────────────────────────────────────────────
+    tabs_visited = list({
+        e["payload"].get("tab")
+        for e in event_rows
+        if e["event_type"] == "tab_click" and e["payload"].get("tab")
+    })
+    pdf_downloaded = any(e["event_type"] == "pdf_download" for e in event_rows)
+    regime_compared = any(e["event_type"] == "regime_compare" for e in event_rows)
+    pages_visited = list({
+        e["payload"].get("page")
+        for e in event_rows
+        if e["event_type"] == "page_view" and e["payload"].get("page")
+    })
+
+    # ── Session duration ─────────────────────────────────────────────────────
+    all_timestamps = [r["created_at"] for r in chat_rows] + [e["created_at"] for e in event_rows]
+    started_at = min(all_timestamps) if all_timestamps else None
+    last_active_at = max(all_timestamps) if all_timestamps else None
+    if started_at and last_active_at:
+        from datetime import datetime as _dt
+        fmt = "%Y-%m-%dT%H:%M:%S.%f%z" if "." in started_at else "%Y-%m-%dT%H:%M:%S%z"
+        try:
+            t0 = _dt.fromisoformat(started_at)
+            t1 = _dt.fromisoformat(last_active_at)
+            duration_s = int((t1 - t0).total_seconds())
+        except ValueError:
+            duration_s = 0
+    else:
+        duration_s = 0
+
+    return {
+        "session_id": session_id,
+        "started_at": started_at,
+        "last_active_at": last_active_at,
+        "duration_seconds": duration_s,
+        "question_count": question_count,
+        "high_confidence_pct": high_confidence_pct,
+        "topics_asked": topics_asked,
+        "tabs_visited": tabs_visited,
+        "pdf_downloaded": pdf_downloaded,
+        "regime_compared": regime_compared,
+        "pages_visited": pages_visited,
+        "chat_history": chat_rows,
+    }

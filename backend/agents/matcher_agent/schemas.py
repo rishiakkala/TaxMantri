@@ -12,7 +12,7 @@ Citation format enforced downstream by llm_service.py:
   r'\[(?:Section|Rule)\s+[\w().,\s-]+,\s*(?:IT Act 1961|Income Tax Act|IT Rules 1962)\]'
 """
 from enum import Enum
-from typing import List, Optional
+from typing import List, Literal, Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -91,6 +91,18 @@ class QueryRequest(BaseModel):
 # RAGResponse — LLM answer with structured citations
 # ---------------------------------------------------------------------------
 
+class SessionEventRequest(BaseModel):
+    """Incoming UI interaction event from the frontend."""
+    model_config = ConfigDict(extra="forbid")
+
+    session_id: str = Field(..., min_length=1, description="Session identifier")
+    event_type: str = Field(
+        ...,
+        description="Category of action: tab_click, page_view, pdf_download, regime_compare, chat_open",
+    )
+    payload: dict = Field(default_factory=dict, description="Structured event context — no PII")
+
+
 class RAGResponse(BaseModel):
     """
     Output of MatcherAgent — LLM answer with structured legal citations.
@@ -102,6 +114,10 @@ class RAGResponse(BaseModel):
 
     cached=True means this answer was served from the Redis FAQ cache
     (TTL 1 hour) without calling the LLM.
+
+    answer_mode='kb_grounded' means the answer used retrieved IT Act chunks.
+    answer_mode='general' means no relevant chunks were found and Mistral answered
+    from general knowledge (with a disclaimer appended).
 
     retrieved_chunks: only present when ?debug=true is set. Not part of
     the normal response contract — excluded from serialization by default.
@@ -122,6 +138,10 @@ class RAGResponse(BaseModel):
         default=False,
         description="True if this response was served from Redis FAQ cache.",
     )
+    answer_mode: Literal["kb_grounded", "general"] = Field(
+        default="kb_grounded",
+        description="'kb_grounded' if answered from IT Act KB; 'general' if KB had no relevant chunks.",
+    )
 
 
 __all__ = [
@@ -130,4 +150,5 @@ __all__ = [
     "ChatMessage",
     "QueryRequest",
     "RAGResponse",
+    "SessionEventRequest",
 ]
