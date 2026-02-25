@@ -171,7 +171,7 @@ export default function AIInsightsCard({ taxResult }) {
             {/* Deduction breakdown table */}
             <DeductionTable breakdown={breakdown} />
 
-            {/* Citation badges */}
+            {/* Citation cards with explanation */}
             {citations.length > 0 && (
                 <div className="mb-5">
                     <div className="flex items-center gap-1.5 mb-2.5">
@@ -180,52 +180,62 @@ export default function AIInsightsCard({ taxResult }) {
                             Referenced IT Act Sections
                         </span>
                     </div>
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-col gap-2">
                         {citations.map((c, i) => (
-                            <span
+                            <div
                                 key={i}
-                                className="inline-flex items-center px-3 py-1 rounded-full bg-purple-100 text-purple-800 text-xs font-bold border border-purple-200"
-                                title={c.excerpt || ''}
+                                className="rounded-xl bg-purple-50 border border-purple-100 px-3 py-2.5"
                             >
-                                {c.section || `Section ${i + 1}`}
-                            </span>
+                                <span className="inline-block bg-purple-100 text-purple-800 text-xs font-bold px-2.5 py-0.5 rounded-full border border-purple-200 mb-1.5">
+                                    {c.section || `Section ${i + 1}`}
+                                </span>
+                                {c.excerpt && (
+                                    <p className="text-xs text-gray-600 leading-relaxed">
+                                        {c.excerpt}
+                                    </p>
+                                )}
+                            </div>
                         ))}
                     </div>
                 </div>
             )}
 
-            {/* Collapsible law context */}
-            {law_context && (
-                <div className="border-t border-purple-100 pt-4">
-                    <button
-                        onClick={() => setLawExpanded(v => !v)}
-                        className="flex items-center gap-2 text-xs font-bold text-purple-600 hover:text-purple-800 transition-colors w-full text-left"
-                    >
-                        <BookOpen className="w-3.5 h-3.5" />
-                        <span>View Full Legal Context</span>
-                        {lawExpanded
-                            ? <ChevronUp className="w-3.5 h-3.5 ml-auto" />
-                            : <ChevronDown className="w-3.5 h-3.5 ml-auto" />
-                        }
-                    </button>
+            {/* Collapsible law context — always show if there's any legal content */}
+            {(law_context || citations.some(c => c.excerpt)) && (() => {
+                const content = law_context ||
+                    citations.filter(c => c.excerpt).map(c => `${c.section}: ${c.excerpt}`).join('\n\n')
+                return (
+                    <div className="border-t border-purple-100 pt-4">
+                        <button
+                            onClick={() => setLawExpanded(v => !v)}
+                            className="flex items-center gap-2 text-xs font-bold text-purple-600 hover:text-purple-800 transition-colors w-full text-left"
+                        >
+                            <BookOpen className="w-3.5 h-3.5" />
+                            <span>View Full Legal Context</span>
+                            {lawExpanded
+                                ? <ChevronUp className="w-3.5 h-3.5 ml-auto" />
+                                : <ChevronDown className="w-3.5 h-3.5 ml-auto" />
+                            }
+                        </button>
 
-                    <AnimatePresence>
-                        {lawExpanded && (
-                            <motion.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: 'auto' }}
-                                exit={{ opacity: 0, height: 0 }}
-                                transition={{ duration: 0.25 }}
-                                className="overflow-hidden"
-                            >
-                                <p className="mt-3 text-xs text-gray-500 leading-relaxed whitespace-pre-line bg-gray-50 rounded-xl p-4 border border-gray-100">
-                                    {law_context}
-                                </p>
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
-            )}
+                        <AnimatePresence>
+                            {lawExpanded && (
+                                <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.25 }}
+                                    className="overflow-hidden"
+                                >
+                                    <p className="mt-3 text-xs text-gray-500 leading-relaxed whitespace-pre-line bg-gray-50 rounded-xl p-4 border border-gray-100">
+                                        {content}
+                                    </p>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                )
+            })()}
         </motion.div>
     )
 }
