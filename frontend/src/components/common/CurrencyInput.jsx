@@ -10,9 +10,25 @@ import { forwardRef } from 'react'
  *   required  (bool)    — shows asterisk on label
  */
 const CurrencyInput = forwardRef(function CurrencyInput(
-  { label, error, helpText, required, className = '', ...props },
+  { label, error, helpText, required, className = '', onFocus, onChange, ...props },
   ref,
 ) {
+  // When the field is focused and currently shows 0, clear it so the user can
+  // type without "0" being prepended to their input.
+  const handleFocus = (e) => {
+    if (e.target.value === '0' || e.target.value === '') {
+      e.target.value = ''
+    }
+    onFocus?.(e)
+  }
+
+  // When the field is cleared (user deleted everything), set it to '' so
+  // react-hook-form receives an empty string → NaN → gets coerced to 0 by
+  // the NaN-cleanup in ManualWizard before submission.
+  const handleChange = (e) => {
+    onChange?.(e)
+  }
+
   return (
     <div className="flex flex-col gap-1">
       {label && (
@@ -30,6 +46,9 @@ const CurrencyInput = forwardRef(function CurrencyInput(
           type="number"
           min={0}
           step={1}
+          placeholder="0"
+          onFocus={handleFocus}
+          onChange={handleChange}
           className={[
             'w-full pl-7 pr-3 py-2.5 rounded-lg border text-sm transition-colors',
             'focus:outline-none focus:ring-2 focus:ring-navy/30 focus:border-navy',

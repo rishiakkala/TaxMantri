@@ -1,32 +1,31 @@
 import { useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowLeft, User } from 'lucide-react'
 import logoImage from '../images/justice_scales_black_gold.png'
+import amkImg from '../images/amk.jpeg'
+import chiruImg from '../images/chiru.jpeg'
+import srikanthImg from '../images/srikanth.jpeg'
+import rishiImg from '../images/rishi.jpeg'
 
 const teamMembers = [
     {
         name: "amk",
         role: "Co-Founder & Developer",
-        color: "bg-custom-purple/10",
-        iconColor: "text-custom-purple"
+        image: amkImg,
     },
     {
         name: "chiru",
         role: "Co-Founder & Developer",
-        color: "bg-custom-green/10",
-        iconColor: "text-custom-green"
+        image: chiruImg,
     },
     {
         name: "srikanth",
         role: "Co-Founder & Developer",
-        color: "bg-amber-500/10",
-        iconColor: "text-amber-500"
+        image: srikanthImg,
     },
     {
         name: "rishi",
         role: "Co-Founder & Developer",
-        color: "bg-blue-500/10",
-        iconColor: "text-blue-500"
+        image: rishiImg,
     }
 ]
 
@@ -73,9 +72,12 @@ export default function AboutPage() {
                             <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col items-center">
 
                                 {/* Image Placeholder Envelope */}
-                                <div className={`w-32 h-32 rounded-full mb-6 relative overflow-hidden flex items-center justify-center ${member.color} border-4 border-white shadow-md group-hover:scale-105 transition-transform duration-300`}>
-                                    {/* TODO: Replace this fallback icon with `<img src={...} className="w-full h-full object-cover" />` when user provides photos */}
-                                    <User className={`w-12 h-12 ${member.iconColor} opacity-50`} strokeWidth={1.5} />
+                                <div className="w-32 h-32 rounded-full mb-6 relative overflow-hidden border-4 border-white shadow-md group-hover:scale-105 transition-transform duration-300">
+                                    <img
+                                        src={member.image}
+                                        alt={member.name}
+                                        className="w-full h-full object-cover"
+                                    />
                                 </div>
 
                                 <h3 className="text-2xl font-extrabold text-black capitalize mb-1">{member.name}</h3>
