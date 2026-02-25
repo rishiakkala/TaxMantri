@@ -35,10 +35,11 @@ MISTRAL_MAX_TOKENS = 512
 
 
 # ---------------------------------------------------------------------------
-# System prompt — all 6 locked elements from CONTEXT.md
+# System prompts — grounded (KB chunks available) and open (no relevant chunks)
 # ---------------------------------------------------------------------------
 
-SYSTEM_PROMPT = """You are TaxMantri, an Indian income tax expert for ITR-1 filers (AY 2025-26).
+# Used when FAISS + BM25 retrieval returned relevant IT Act chunks.
+SYSTEM_PROMPT_GROUNDED = """You are TaxMantri, an Indian income tax expert for ITR-1 filers (AY 2025-26).
 
 Rules you MUST follow:
 1. Answer ONLY from the context provided. Do not use outside knowledge.
@@ -48,6 +49,17 @@ Rules you MUST follow:
 5. Keep your answer concise — 2 to 4 sentences maximum.
 6. Show formulas when they help. For HRA questions, include the Rule 2A min-of-3 formula.
 7. Write as a CA explaining to a client — accurate, warm, professional, no legal jargon."""
+
+# Used when retrieval found no relevant chunks — open general-knowledge fallback.
+SYSTEM_PROMPT_OPEN = """You are TaxMantri, an Indian income tax expert for ITR-1 filers (AY 2025-26).
+
+Rules you MUST follow:
+1. Answer using your general knowledge of Indian income tax law and ITR-1 filing.
+2. Keep your answer concise — 2 to 4 sentences maximum.
+3. For yes/no questions, begin your answer with "Yes" or "No" before explaining.
+4. Show formulas when they help.
+5. Always end your answer with this disclaimer on a new line: "Note: This answer is based on general knowledge — please verify with a CA or the Income Tax Department before filing."
+6. Write as a CA explaining to a client — accurate, warm, professional, no legal jargon."""
 
 
 # ---------------------------------------------------------------------------
@@ -68,11 +80,13 @@ def build_user_prompt(
     question: str,
     chunks: list[dict],
     profile_summary: Optional[str],
+    session_context: Optional[str] = None,
 ) -> str:
     """
-    Build the user-turn prompt for Mistral.
+    Build the user-turn prompt for Mistral (KB-grounded path).
     Chunks are numbered [Context N — section_ref] blocks.
     profile_summary is appended only if provided (PII-stripped numeric values only).
+    session_context is appended only if provided (derived session metrics, no PII).
     """
     context_blocks = []
     for i, chunk in enumerate(chunks, 1):
@@ -86,7 +100,31 @@ def build_user_prompt(
         if profile_summary else ""
     )
 
-    return f"Context:\n{context_text}{profile_section}\n\nQuestion: {question}"
+    session_section = (
+        f"\n\nSession context:\n{session_context}"
+        if session_context else ""
+    )
+
+    return f"Context:\n{context_text}{profile_section}{session_section}\n\nQuestion: {question}"
+
+
+def build_open_prompt(
+    question: str,
+    profile_summary: Optional[str],
+    session_context: Optional[str] = None,
+) -> str:
+    """
+    Build the user-turn prompt for the open/general fallback path (no KB chunks).
+    """
+    profile_section = (
+        f"\n\nUser profile (numeric summary — no PII):\n{profile_summary}"
+        if profile_summary else ""
+    )
+    session_section = (
+        f"\n\nSession context:\n{session_context}"
+        if session_context else ""
+    )
+    return f"{profile_section}{session_section}\n\nQuestion: {question}".lstrip()
 
 
 def build_profile_summary(profile: "UserFinancialProfile") -> str:
@@ -181,27 +219,42 @@ async def generate_answer(
     chunks: list[dict],
     profile_summary: Optional[str],
     semaphore: asyncio.Semaphore,
+    session_context: Optional[str] = None,
 ) -> dict:
     """
-    Generate a grounded answer from Mistral API.
+    Generate a grounded or open answer from Mistral API.
+
+    Routing:
+      - chunks present → KB-grounded path: SYSTEM_PROMPT_GROUNDED + IT Act context blocks
+      - no chunks      → open fallback path: SYSTEM_PROMPT_OPEN + general knowledge
 
     Applies asyncio.Semaphore(2) for rate-limit protection.
     Validates citations after generation via validate_citations().
 
-    Returns dict with keys: answer, citations, confidence
+    Returns dict with keys: answer, citations, confidence, answer_mode
     (does NOT include 'cached' — caller sets that field)
     """
-    prompt = build_user_prompt(question, chunks, profile_summary)
+    use_kb = len(chunks) > 0 and any(c.get("text") for c in chunks)
+
+    if use_kb:
+        system_prompt = SYSTEM_PROMPT_GROUNDED
+        prompt = build_user_prompt(question, chunks, profile_summary, session_context)
+        answer_mode = "kb_grounded"
+    else:
+        system_prompt = SYSTEM_PROMPT_OPEN
+        prompt = build_open_prompt(question, profile_summary, session_context)
+        answer_mode = "general"
 
     logger.info(
-        "Calling Mistral API model=%s chunks=%d", MISTRAL_MODEL, len(chunks)
+        "Calling Mistral API model=%s chunks=%d answer_mode=%s",
+        MISTRAL_MODEL, len(chunks), answer_mode,
     )
 
     async with semaphore:
         response = await client.chat.complete_async(
             model=MISTRAL_MODEL,
             messages=[
-                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": prompt},
             ],
             temperature=MISTRAL_TEMPERATURE,
@@ -209,7 +262,7 @@ async def generate_answer(
         )
 
     answer_text: str = response.choices[0].message.content or ""
-    logger.info("Mistral response received answer_len=%d", len(answer_text))
+    logger.info("Mistral response received answer_len=%d answer_mode=%s", len(answer_text), answer_mode)
 
     citations, confidence = validate_citations(answer_text, chunks)
     logger.info(
@@ -220,4 +273,5 @@ async def generate_answer(
         "answer": answer_text,
         "citations": citations,
         "confidence": confidence,
+        "answer_mode": answer_mode,
     }

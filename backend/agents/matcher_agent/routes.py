@@ -1,8 +1,10 @@
 """
 routes.py — MatcherAgent HTTP endpoints.
 
-POST /api/query  — FAQ cache check → hybrid retrieval → Mistral generation → persist → return
-GET  /api/chat/history — Return session Q&A history from PostgreSQL
+POST /api/query          — FAQ cache check → hybrid retrieval → Mistral generation → persist → return
+GET  /api/chat/history   — Return session Q&A history from PostgreSQL
+POST /api/session/event  — Store a UI interaction event (tab_click, pdf_download, etc.)
+GET  /api/session/summary — Derive and return structured session metrics
 
 No JWT authentication in v1 (hackathon decision — deferred to v2/AUTH-01).
 app.state resources (retriever, mistral, rag_semaphore) are set in main.py lifespan.
@@ -17,10 +19,17 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from backend.agents.matcher_agent.llm_service import build_profile_summary, generate_answer
 from backend.agents.matcher_agent.retriever import TaxRetriever
-from backend.agents.matcher_agent.schemas import QueryRequest, RAGResponse
+from backend.agents.matcher_agent.schemas import QueryRequest, RAGResponse, SessionEventRequest
 from backend.cache import get_faq_cache, set_faq_cache
 from backend.database import get_db
-from backend.store import get_chat_history, get_profile, save_chat_message
+from backend.store import (
+    get_chat_history,
+    get_profile,
+    get_session_events,
+    get_session_summary,
+    save_chat_message,
+    save_session_event,
+)
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/api", tags=["Matcher Agent"])
@@ -89,10 +98,34 @@ async def query_endpoint(
         if profile is not None:
             profile_summary = build_profile_summary(profile)
 
+    # ── 3b. Session context (derived from events + chat — no PII) ─────────
+    session_context: Optional[str] = None
+    try:
+        events = await get_session_events(db, body.session_id)
+        prior_chat = await get_chat_history(db, body.session_id)
+        prior_count = len(prior_chat)
+        if prior_count > 0 or events:
+            tabs = list({
+                e["payload"].get("tab")
+                for e in events
+                if e["event_type"] == "tab_click" and e["payload"].get("tab")
+            })
+            pdf_dl = any(e["event_type"] == "pdf_download" for e in events)
+            parts = [f"Prior questions: {prior_count}"]
+            if tabs:
+                parts.append(f"Tabs viewed: {', '.join(tabs)}")
+            if pdf_dl:
+                parts.append("PDF downloaded: yes")
+            session_context = " | ".join(parts)
+    except Exception:
+        pass  # session context is optional — never block the answer on it
+
     # ── 4. LLM generation + citation validation ─────────────────────────
     mistral = request.app.state.mistral
     semaphore: asyncio.Semaphore = request.app.state.rag_semaphore
-    result = await generate_answer(mistral, body.question, chunks, profile_summary, semaphore)
+    result = await generate_answer(
+        mistral, body.question, chunks, profile_summary, semaphore, session_context
+    )
     result["cached"] = False
 
     # ── 5. Persist to chat_history (cache miss path) ─────────────────────
@@ -150,3 +183,45 @@ async def chat_history_endpoint(
     messages = await get_chat_history(db, session_id)
     logger.info("Chat history request session_id=%s messages=%d", session_id, len(messages))
     return {"session_id": session_id, "messages": messages}
+
+
+@router.post("/session/event", status_code=204)
+async def record_session_event(
+    body: SessionEventRequest,
+    db: AsyncSession = Depends(get_db),
+) -> None:
+    """
+    Store a UI interaction event for session context tracking.
+
+    Called by the frontend on: tab_click, page_view, pdf_download, regime_compare, chat_open.
+    payload must be PII-free (tab names, regime strings, page names only).
+    Returns 204 No Content — fire-and-forget from the client's perspective.
+    """
+    await save_session_event(db, body.session_id, body.event_type, body.payload)
+    logger.info("Session event recorded session_id=%s event_type=%s", body.session_id, body.event_type)
+
+
+@router.get("/session/summary")
+async def session_summary_endpoint(
+    session_id: str = Query(..., description="Session ID to summarise"),
+    db: AsyncSession = Depends(get_db),
+) -> dict:
+    """
+    Return derived session metrics for a session.
+
+    Aggregates chat_history + session_events into a structured summary:
+      - question_count, high_confidence_pct
+      - topics_asked (keyword-matched)
+      - tabs_visited, pdf_downloaded, regime_compared
+      - session_duration_s, started_at, last_active_at
+
+    Used by the !session command in the chat widget.
+    """
+    summary = await get_session_summary(db, session_id)
+    logger.info(
+        "Session summary request session_id=%s questions=%d events=%s",
+        session_id,
+        summary["question_count"],
+        summary["tabs_visited"],
+    )
+    return summary
