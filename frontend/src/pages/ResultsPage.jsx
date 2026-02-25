@@ -6,10 +6,8 @@ import SavingsBanner from '../components/results/SavingsBanner.jsx'
 import AIInsightsCard from '../components/results/AIInsightsCard.jsx'
 import RegimeCardPair from '../components/results/RegimeCardPair.jsx'
 import ITR1Table from '../components/results/ITR1Table.jsx'
-import Navbar from '../components/Navbar'
-import logoImage from '../images/justice_scales_black_gold.png'
 import PDFDownloadButton from '../components/results/PDFDownloadButton.jsx'
-
+import logoImage from '../images/justice_scales_black_gold.png'
 
 /**
  * Results page — renders immediately from router state (no API refetch).
@@ -53,25 +51,34 @@ export default function ResultsPage() {
   }
 
   return (
-    <div className="min-h-screen font-sans text-custom-textDark overflow-x-hidden">
-      <Navbar />
-
+    <div className="min-h-screen bg-white font-sans text-custom-textDark overflow-x-hidden">
+      {/* Minimal Logo Positioned Top-Left & CTA top-right */}
+      <div className="fixed top-0 left-0 w-full z-50 px-6 py-6 pointer-events-none flex justify-between items-center">
+        <button onClick={() => navigate('/')} className="flex items-center gap-2 pointer-events-auto group">
+          <img src={logoImage} alt="TaxMantri Logo" className="h-9 w-auto object-contain group-hover:scale-105 transition-transform" />
+          <span className="font-extrabold text-2xl tracking-tighter text-black group-hover:text-custom-purple transition-colors">TaxMantri</span>
+        </button>
+        <div className="pointer-events-auto flex items-center gap-3">
+          <button
+            onClick={() => navigate('/input')}
+            className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white border border-gray-200 text-gray-700 text-sm font-semibold shadow-sm hover:bg-gray-50 hover:border-gray-300 transition-all"
+          >
+            <Pencil className="w-3.5 h-3.5" />
+            Edit Details
+          </button>
+          <PDFDownloadButton profileId={profileId} />
+        </div>
+      </div>
 
       {/* Main content */}
       <main className="max-w-4xl mx-auto px-6 pt-32 pb-16 space-y-8">
+        {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, type: 'spring', bounce: 0.4 }}
         >
-          <h1
-            style={{ fontFamily: "'Quicksand', sans-serif" }}
-            className="text-5xl md:text-6xl font-extrabold mb-4 tracking-tight"
-          >
-            <span className="bg-gradient-to-r from-blue-900 to-blue-600 text-transparent bg-clip-text">
-              Your Tax Analysis
-            </span>
-          </h1>
+          <h1 className="text-4xl font-extrabold text-black mb-2 tracking-tight">Your Tax Analysis</h1>
           <p className="text-gray-500 text-lg font-medium">
             Old vs New Regime comparison for AY 2025-26. Click a card to see the full breakdown.
           </p>
@@ -84,16 +91,6 @@ export default function ResultsPage() {
           transition={{ delay: 0.15, duration: 0.5, type: 'spring', bounce: 0.3 }}
         >
           <SavingsBanner taxResult={taxResult} />
-        </motion.div>
-
-        {/* PDF Download — centered below the savings banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.4 }}
-          className="flex justify-center"
-        >
-          <PDFDownloadButton profileId={profileId} />
         </motion.div>
 
         {/* AI Insights — rationale, IT Act citations, law context */}
@@ -117,20 +114,11 @@ export default function ResultsPage() {
           <ITR1Table profileId={profileId} />
         </motion.div>
 
-        {/* Outro */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.5 }}
-          className="text-center py-8 space-y-2"
-        >
-          <p className="text-2xl font-extrabold text-black tracking-tight">
-            Smart taxes. Smarter savings. 🎉
-          </p>
-          <p className="text-gray-500 text-sm">
-            You're one step closer to filing with confidence. We've done the math — now it's your move.
-          </p>
-        </motion.div>
+        {/* Footer note */}
+        <p className="text-center text-gray-400 text-xs pb-4">
+          For educational purposes only. Consult a CA before filing ITR-1.
+          Tax calculated on AY 2025-26 (FY 2024-25) rules.
+        </p>
       </main>
     </div>
   )

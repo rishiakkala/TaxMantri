@@ -5,8 +5,8 @@ import { FileSearch, Calculator, Database, LineChart } from 'lucide-react'
 const STEPS = [
   { label: 'Data reading', icon: FileSearch, duration: 1500 },
   { label: 'TAX Calculation', icon: Calculator, duration: 1500 },
-  { label: 'Regime Calculation', icon: Database, duration: 2500 },
-  { label: 'Results Generation', icon: LineChart, duration: 1500 },
+  { label: 'RAG Retrieval', icon: Database, duration: 2500 },
+  { label: 'Comparative Analysis', icon: LineChart, duration: 1500 },
 ]
 
 /**
