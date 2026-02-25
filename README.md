@@ -75,7 +75,7 @@ Tax calculations follow AY 2025-26 (FY 2024-25) rules.
 
 ```
 TaxMantri/
-├── backend2/                  # FastAPI application
+├── backend/                  # FastAPI application
 │   ├── agents/
 │   │   ├── input_agent/       # Validates & normalises user profile
 │   │   ├── matcher_agent/     # RAG retrieval + Mistral generation
@@ -140,7 +140,7 @@ docker-compose up -d
 
 ### 3. Set up the backend
 ```bash
-cd backend2
+cd backend
 
 # Create and activate virtual environment
 python3 -m venv venv
@@ -191,7 +191,7 @@ Make sure the install path (e.g. `C:\Program Files\Tesseract-OCR`) is added to y
 
 ### 4. Set up the backend
 ```cmd
-cd backend2
+cd backend
 
 :: Create and activate virtual environment
 python -m venv venv
