@@ -37,7 +37,7 @@ export default function InputPage() {
     <div className="min-h-screen font-sans text-custom-textDark relative">
       <LoadingOverlay visible={isCalculating} onComplete={handleOverlayComplete} />
 
-      <Navbar />
+      {!isCalculating && <Navbar />}
 
 
 
@@ -61,7 +61,7 @@ export default function InputPage() {
           />
         </div>
 
-        <p className="text-center text-gray-400 text-xs mt-6">
+        <p className="text-center text-black text-sm mt-6">
           Your data stays in your browser session only. No account required.
         </p>
       </main>

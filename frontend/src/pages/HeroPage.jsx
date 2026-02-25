@@ -99,7 +99,7 @@ export default function HeroPage() {
 
                 <div className="bg-[#2a2935] border border-gray-700/50 rounded-2xl p-5 shadow-lg">
                   <p className="text-gray-400 text-sm mb-2 flex justify-between items-center">
-                    Real time tax
+                    Total Tax Payable
                     <span className="text-green-400">↑ 16%</span>
                   </p>
                   <p className="text-white text-3xl font-bold">₹43,500.67</p>

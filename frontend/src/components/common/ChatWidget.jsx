@@ -35,7 +35,7 @@ function TypingDots() {
             {[0, 1, 2].map(i => (
                 <span
                     key={i}
-                    className="w-2 h-2 rounded-full bg-white/50 animate-bounce"
+                    className="w-2 h-2 rounded-full bg-purple-400 animate-bounce"
                     style={{ animationDelay: `${i * 0.15}s` }}
                 />
             ))}
@@ -53,7 +53,7 @@ function MessageBubble({ msg }) {
                 {/* Avatar */}
                 <div className={`
           w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 text-white text-xs
-          ${isUser ? 'bg-white/20' : 'bg-[#5ce1ca] text-black'}
+          ${isUser ? 'bg-[#7C3AED]' : 'bg-[#7C3AED]'}
         `}>
                     {isUser ? <User className="w-3.5 h-3.5" /> : <Bot className="w-3.5 h-3.5" />}
                 </div>
@@ -62,8 +62,8 @@ function MessageBubble({ msg }) {
                 <div className={`
           max-w-[75%] px-3.5 py-2.5 rounded-2xl text-sm leading-relaxed
           ${isUser
-                        ? 'bg-white/20 text-white rounded-br-sm border border-white/10'
-                        : 'bg-[#1a1a1a]/60 border border-white/10 text-gray-300 rounded-bl-sm'
+                        ? 'bg-[#7C3AED] text-white rounded-br-sm shadow-sm'
+                        : 'bg-purple-50 border border-purple-100 text-gray-800 rounded-bl-sm'
                     }
         `}>
                     {msg.loading ? <TypingDots /> : msg.text}
@@ -81,7 +81,7 @@ function MessageBubble({ msg }) {
                             <span
                                 key={i}
                                 title={tip}
-                                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-white/10 text-gray-300 text-xs font-bold border border-white/20"
+                                className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-purple-100 text-purple-700 text-xs font-bold border border-purple-200"
                             >
                                 <BookOpen className="w-2.5 h-2.5" />
                                 {label}
@@ -94,8 +94,8 @@ function MessageBubble({ msg }) {
     )
 }
 
-// ── Welcome message ───────────────────────────────────────────────────────────
-const WELCOME = {
+// ── Welcome messages ─────────────────────────────────────────────────────────
+const WELCOME_GENERIC = {
     id: '__welcome__',
     role: 'bot',
     text: "Hi! I'm your AI tax assistant powered by Mistral and India's Income Tax Act. Ask me anything — deductions, HRA, 80C limits, ITR-1 filing, or which regime suits you.",
@@ -103,12 +103,27 @@ const WELCOME = {
     confidence: null,
 }
 
-// Sample questions shown when chat is empty
-const SAMPLE_QUESTIONS = [
+const WELCOME_PERSONALISED = {
+    id: '__welcome__',
+    role: 'bot',
+    text: "Hi! I can see your tax analysis — I have your income details, deduction breakdown, and regime recommendation ready. Ask me anything about your results, how to save more tax, or any IT Act section.",
+    citations: [],
+    confidence: null,
+}
+
+// Sample questions — generic (no profile) vs personalised (with profile)
+const SAMPLE_QUESTIONS_GENERIC = [
     'What is the 80C investment limit?',
     'How is HRA exemption calculated?',
     'What is the new income tax slab for AY 2025-26?',
     'Is NPS eligible for deduction?',
+]
+
+const SAMPLE_QUESTIONS_PERSONALISED = [
+    'Why is my recommended regime better for me?',
+    'How much tax can I save with more 80C investments?',
+    'What deductions am I missing out on?',
+    'Explain my taxable income calculation.',
 ]
 
 // ── Main Widget ───────────────────────────────────────────────────────────────
@@ -119,7 +134,13 @@ const SAMPLE_QUESTIONS = [
  */
 export default function ChatWidget({ profileId: propProfileId = null }) {
     const [open, setOpen] = useState(false)
-    const [messages, setMessages] = useState([WELCOME])
+    // Lazy initializer: pick the correct welcome message at mount time based on
+    // whether a profile is already stored. Avoids referencing the local `WELCOME`
+    // variable before profileId has been computed.
+    const [messages, setMessages] = useState(() => {
+        const hasProfile = propProfileId || !!localStorage.getItem('taxmantri_profile_id')
+        return [hasProfile ? WELCOME_PERSONALISED : WELCOME_GENERIC]
+    })
     const [input, setInput] = useState('')
     const [loading, setLoading] = useState(false)
     const sessionId = useRef(getSessionId())
@@ -129,6 +150,9 @@ export default function ChatWidget({ profileId: propProfileId = null }) {
     // Use prop if given, otherwise read the profileId the ResultsPage saved to localStorage.
     // This lets the backend personalise answers with the user's own salary/deductions/regime.
     const profileId = propProfileId || localStorage.getItem('taxmantri_profile_id')
+
+    // Pick welcome message and sample questions based on whether we have a profile
+    const SAMPLE_QUESTIONS = profileId ? SAMPLE_QUESTIONS_PERSONALISED : SAMPLE_QUESTIONS_GENERIC
 
     // Auto-scroll to bottom on new message
     useEffect(() => {
@@ -199,28 +223,27 @@ export default function ChatWidget({ profileId: propProfileId = null }) {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.22, ease: 'easeOut' }}
-                        className="fixed bottom-24 right-5 z-50 w-[360px] max-h-[560px] flex flex-col rounded-3xl shadow-2xl border border-white/20 bg-black/80 backdrop-blur-2xl overflow-hidden"
-                        style={{ boxShadow: '0 24px 60px rgba(0,0,0,0.5)' }}
+                        className="fixed bottom-24 right-5 z-50 w-[360px] max-h-[560px] flex flex-col rounded-3xl shadow-2xl border border-purple-100 bg-white overflow-hidden"
+                        style={{ boxShadow: '0 24px 60px rgba(124,58,237,0.18)' }}
                     >
                         {/* Header */}
-                        <div className="flex items-center gap-3 px-4 py-3.5 bg-transparent border-b border-white/10 text-white flex-shrink-0">
-                            <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center">
+                        <div className="flex items-center gap-3 px-4 py-3.5 bg-white border-b border-purple-100 text-gray-900 flex-shrink-0">
+                            <div className="w-9 h-9 rounded-xl bg-[#7C3AED] flex items-center justify-center text-white">
                                 <Sparkles className="w-4.5 h-4.5" />
                             </div>
                             <div className="flex-1 min-w-0">
-                                <p className="font-extrabold text-sm leading-tight">TaxMantri Assistant</p>
-                                <p className="text-xs text-gray-400 font-medium">Powered by Mistral · Income Tax Act 1961</p>
+                                <p className="font-extrabold text-sm leading-tight text-gray-900">TaxMantri Assistant</p>
                             </div>
                             <button
                                 onClick={() => setOpen(false)}
-                                className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/30 transition-colors"
+                                className="w-7 h-7 rounded-full bg-purple-50 flex items-center justify-center hover:bg-purple-100 transition-colors"
                             >
-                                <X className="w-4 h-4" />
+                                <X className="w-4 h-4 text-purple-600" />
                             </button>
                         </div>
 
                         {/* Messages */}
-                        <div className="flex-1 overflow-y-auto px-4 py-4 bg-transparent space-y-0">
+                        <div className="flex-1 overflow-y-auto px-4 py-4 bg-purple-50/50 space-y-0">
                             {messages.map(msg => (
                                 <MessageBubble key={msg.id} msg={msg} />
                             ))}
@@ -234,7 +257,7 @@ export default function ChatWidget({ profileId: propProfileId = null }) {
                                     <button
                                         key={i}
                                         onClick={() => sendMessage(q)}
-                                        className="text-left text-xs px-3 py-2 rounded-xl bg-black/60 backdrop-blur-md border border-white/20 text-white font-semibold hover:bg-black/80 transition-colors"
+                                        className="text-left text-xs px-3 py-2 rounded-xl bg-white border border-purple-200 text-purple-700 font-semibold hover:bg-purple-50 transition-colors shadow-sm"
                                     >
                                         {q}
                                     </button>
@@ -245,7 +268,7 @@ export default function ChatWidget({ profileId: propProfileId = null }) {
                         {/* Input bar */}
                         <form
                             onSubmit={handleSubmit}
-                            className="flex items-center gap-2 px-3 py-3 bg-transparent border-t border-white/10 flex-shrink-0"
+                            className="flex items-center gap-2 px-3 py-3 bg-white border-t border-purple-100 flex-shrink-0"
                         >
                             <input
                                 ref={inputRef}
@@ -254,12 +277,12 @@ export default function ChatWidget({ profileId: propProfileId = null }) {
                                 onChange={e => setInput(e.target.value)}
                                 placeholder="Ask a tax question…"
                                 disabled={loading}
-                                className="flex-1 text-sm px-3.5 py-2.5 rounded-2xl border border-white/20 bg-white/10 text-white placeholder-gray-400 outline-none focus:border-white/40 focus:ring-2 focus:ring-white/20 transition-all disabled:opacity-50"
+                                className="flex-1 text-sm px-3.5 py-2.5 rounded-2xl border border-purple-200 bg-purple-50 text-gray-800 placeholder-purple-300 outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-200 transition-all disabled:opacity-50"
                             />
                             <button
                                 type="submit"
                                 disabled={!input.trim() || loading}
-                                className="w-10 h-10 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white hover:bg-black/80 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0"
+                                className="w-10 h-10 rounded-2xl bg-[#7C3AED] flex items-center justify-center text-white hover:bg-purple-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed flex-shrink-0 shadow-md"
                             >
                                 {loading
                                     ? <Loader2 className="w-4 h-4 animate-spin" />
@@ -276,7 +299,7 @@ export default function ChatWidget({ profileId: propProfileId = null }) {
                 onClick={() => setOpen(v => !v)}
                 whileHover={{ scale: 1.08 }}
                 whileTap={{ scale: 0.95 }}
-                className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-black/60 backdrop-blur-md border border-white/20 text-white shadow-[0_4px_16px_rgba(0,0,0,0.3)] flex items-center justify-center hover:bg-black/80 hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)] transition-all duration-300"
+                className="fixed bottom-5 right-5 z-50 w-14 h-14 rounded-full bg-[#7C3AED] text-white shadow-[0_4px_20px_rgba(124,58,237,0.45)] flex items-center justify-center hover:bg-purple-700 hover:shadow-[0_8px_28px_rgba(124,58,237,0.55)] transition-all duration-300"
                 aria-label="Open tax chatbot"
             >
                 <AnimatePresence mode="wait">

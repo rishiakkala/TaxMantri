@@ -25,12 +25,12 @@ export default function RegimeCard({ regime, data, isRecommended, isExpanded, on
       animate={{ scale: isExpanded ? 0.98 : 1 }}
       transition={{ duration: 0.3 }}
       className={[
-        'rounded-3xl border cursor-pointer transition-all duration-300 relative overflow-hidden',
-        'hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] active:scale-[0.98] group',
+        'rounded-3xl border-2 cursor-pointer transition-all duration-300 relative overflow-hidden',
+        'hover:shadow-[0_20px_40px_rgb(0,0,0,0.10)] active:scale-[0.98] group',
         isRecommended
-          ? 'border-custom-green bg-custom-green/5 shadow-[0_8px_30px_rgb(46,172,133,0.15)] ring-2 ring-custom-green/20'
-          : 'border-gray-100 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.04)]',
-        isExpanded ? 'ring-2 ring-custom-purple border-custom-purple bg-gray-50' : '',
+          ? 'border-custom-green bg-white shadow-[0_0_30px_4px_rgba(46,172,133,0.35),0_8px_30px_rgb(46,172,133,0.2)]'
+          : 'border-gray-200 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.06)]',
+        isExpanded && !isRecommended ? 'ring-2 ring-custom-purple border-custom-purple' : '',
       ].join(' ')}
     >
       {/* Recommended Badge Gradient */}
