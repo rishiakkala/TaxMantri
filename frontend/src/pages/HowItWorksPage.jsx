@@ -11,15 +11,15 @@ const steps = [
         title: "Choose How You Want to Start",
         description: "TaxMantri supports two easy paths, ensuring flexibility for every user.",
         options: [
-            { title: "Upload Form 16", desc: "The system uses OCR to extract salary details automatically. Low-confidence fields are highlighted for review." },
-            { title: "Enter Details Manually", desc: "A guided 5-step wizard helps you enter personal details, salary, HRA, investments, and more." }
+            { title: "Upload Form 16", desc: "The system uses OCR to extract salary details automatically." },
+            { title: "Enter Details Manually", desc: "A guided 5-step wizard helps you enter salary, HRA, investments, and more." }
         ],
         color: "bg-custom-purple/10 border-custom-purple/20"
     },
     {
         icon: <FileText className="w-8 h-8 text-amber-500" />,
         title: "Smart Data Extraction & Validation",
-        description: "If you upload Form 16, our OCR reads your document, extracting key fields like salary, HRA, and TDS. Confidence scores flag uncertain values, allowing you to edit any field before proceeding. This ensures accuracy and user control.",
+        description: "If you upload Form 16, our OCR reads your document, extracting key fields like salary, HRA, and TDS making it easier for the user.",
         color: "bg-amber-500/10 border-amber-500/20"
     },
     {
@@ -43,7 +43,7 @@ const steps = [
     {
         icon: <ShieldCheck className="w-8 h-8 text-indigo-500" />,
         title: "Privacy & Security First",
-        description: "Built with strong security. Files are encrypted and auto-deleted, PAN is anonymized, no raw data is sent to external APIs, and all transmissions are secure (TLS). Your data stays safe.",
+        description: "Built with strong security. Files are stored in cache memory and destroyed after 15 minutes or after session termination. No raw data is sent to external APIs, and all transmissions are secure (TLS). Your data stays safe.",
         color: "bg-indigo-500/10 border-indigo-500/20"
     }
 ]

@@ -17,7 +17,11 @@ from fastapi import APIRouter, Depends, HTTPException, Query, Request
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from backend.agents.matcher_agent.llm_service import build_profile_summary, generate_answer
+from backend.agents.matcher_agent.llm_service import (
+    build_profile_summary,
+    build_tax_result_summary,
+    generate_answer,
+)
 from backend.agents.matcher_agent.retriever import TaxRetriever
 from backend.agents.matcher_agent.schemas import QueryRequest, RAGResponse, SessionEventRequest
 from backend.cache import get_faq_cache, set_faq_cache
@@ -25,6 +29,7 @@ from backend.database import get_db
 from backend.store import (
     get_chat_history,
     get_profile,
+    get_result,
     get_session_events,
     get_session_summary,
     save_chat_message,
@@ -47,13 +52,14 @@ async def query_endpoint(
     grounded in the Phase 4 knowledge base with [Section X, IT Act 1961] citations.
 
     Flow:
-      1. Check Redis FAQ cache (TTL 1h) — return immediately on hit
+      1. Check Redis FAQ cache (TTL 1h) — skip if profile_id present (personalised query)
       2. Retrieve top-10 chunks via TaxRetriever.hybrid_search() (FAISS + BM25 + RRF)
       3. Build optional PII-stripped profile_summary if profile_id provided
-      4. Call Mistral API via generate_answer() with asyncio.Semaphore(2) rate limiting
-      5. Store result in Redis FAQ cache
+      4. Build optional tax_result_summary if tax result exists for profile_id
+      5. Call Mistral API via generate_answer() with asyncio.Semaphore(2) rate limiting
       6. Store Q&A in PostgreSQL chat_history (every response, including cache hits)
-      7. Return RAGResponse (or JSONResponse with retrieved_chunks if debug=True)
+      7. Store result in Redis FAQ cache (skipped for personalised queries)
+      8. Return RAGResponse (or JSONResponse with retrieved_chunks if debug=True)
 
     Returns 503 if Phase 4 indexes have not been built (TaxRetriever not loaded).
 
@@ -63,20 +69,26 @@ async def query_endpoint(
     """
     redis = request.app.state.redis
 
-    # ── 1. FAQ cache check ──────────────────────────────────────────────────
-    cached_data = await get_faq_cache(redis, body.question)
-    if cached_data is not None:
-        logger.info("FAQ cache hit for session_id=%s", body.session_id)
-        cached_data["cached"] = True
-        # Store in chat_history even on cache hit — history is complete (CONTEXT.md)
-        await save_chat_message(
-            db,
-            body.session_id,
-            body.question,
-            cached_data.get("answer", ""),
-            cached_data.get("confidence", "low"),
+    # ── 1. FAQ cache check — skip for personalised queries (profile_id provided) ──
+    if not body.profile_id:
+        cached_data = await get_faq_cache(redis, body.question)
+        if cached_data is not None:
+            logger.info("FAQ cache hit for session_id=%s", body.session_id)
+            cached_data["cached"] = True
+            # Store in chat_history even on cache hit — history is complete (CONTEXT.md)
+            await save_chat_message(
+                db,
+                body.session_id,
+                body.question,
+                cached_data.get("answer", ""),
+                cached_data.get("confidence", "low"),
+            )
+            return RAGResponse(**cached_data)
+    else:
+        logger.info(
+            "Skipping FAQ cache for personalised query session_id=%s profile_id=%s",
+            body.session_id, body.profile_id,
         )
-        return RAGResponse(**cached_data)
 
     # ── 2. Retrieval ────────────────────────────────────────────────────────
     retriever: Optional[TaxRetriever] = request.app.state.retriever
@@ -91,40 +103,27 @@ async def query_endpoint(
     chunks = retriever.hybrid_search(body.question, top_k=10)
     logger.info("Retrieval complete session_id=%s chunks=%d", body.session_id, len(chunks))
 
-    # ── 3. Profile summary (PII-stripped numeric summary only) ────────────
+    # ── 3. Profile summary + tax result summary (PII-stripped) ──────────────
     profile_summary: Optional[str] = None
+    tax_result_summary: Optional[str] = None
     if body.profile_id:
         profile = await get_profile(db, body.profile_id)
         if profile is not None:
             profile_summary = build_profile_summary(profile)
-
-    # ── 3b. Session context (derived from events + chat — no PII) ─────────
-    session_context: Optional[str] = None
-    try:
-        events = await get_session_events(db, body.session_id)
-        prior_chat = await get_chat_history(db, body.session_id)
-        prior_count = len(prior_chat)
-        if prior_count > 0 or events:
-            tabs = list({
-                e["payload"].get("tab")
-                for e in events
-                if e["event_type"] == "tab_click" and e["payload"].get("tab")
-            })
-            pdf_dl = any(e["event_type"] == "pdf_download" for e in events)
-            parts = [f"Prior questions: {prior_count}"]
-            if tabs:
-                parts.append(f"Tabs viewed: {', '.join(tabs)}")
-            if pdf_dl:
-                parts.append("PDF downloaded: yes")
-            session_context = " | ".join(parts)
-    except Exception:
-        pass  # session context is optional — never block the answer on it
+        tax_result = await get_result(db, body.profile_id)
+        if tax_result is not None:
+            tax_result_summary = build_tax_result_summary(tax_result)
+            logger.info(
+                "Tax result context injected for session_id=%s profile_id=%s",
+                body.session_id, body.profile_id,
+            )
 
     # ── 4. LLM generation + citation validation ─────────────────────────
     mistral = request.app.state.mistral
     semaphore: asyncio.Semaphore = request.app.state.rag_semaphore
     result = await generate_answer(
-        mistral, body.question, chunks, profile_summary, semaphore, session_context
+        mistral, body.question, chunks, profile_summary, semaphore,
+        tax_result_summary=tax_result_summary,
     )
     result["cached"] = False
 
@@ -137,9 +136,10 @@ async def query_endpoint(
         result["confidence"],
     )
 
-    # ── 6. Cache the result (exclude retrieved_chunks — not relevant to cache) ──
-    cacheable = {k: v for k, v in result.items() if k != "retrieved_chunks"}
-    await set_faq_cache(redis, body.question, cacheable)
+    # ── 6. Cache the result — skip personalised queries (profile-specific answers) ──
+    if not body.profile_id:
+        cacheable = {k: v for k, v in result.items() if k != "retrieved_chunks"}
+        await set_faq_cache(redis, body.question, cacheable)
 
     # ── 7. Return — two explicit paths based on debug flag ───────────────
     #

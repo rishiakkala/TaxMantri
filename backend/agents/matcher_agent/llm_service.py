@@ -2,9 +2,10 @@
 llm_service.py — Mistral async generation layer for TaxMantri RAG.
 
 Components:
-  SYSTEM_PROMPT       — all 6 locked tone/behavior constraints from CONTEXT.md
-  build_user_prompt() — context blocks + optional profile_summary + question
+  SYSTEM_PROMPT       — unified tone/behavior constraint (handles both KB and user data)
+  build_user_prompt() — context blocks + optional profile_summary + tax_result_summary
   build_profile_summary() — PII-stripped numeric-only summary for Mistral context
+  build_tax_result_summary() — computed tax result summary for personalized answers
   validate_citations() — regex extraction + cross-check against retrieved chunks
   generate_answer()   — async Mistral call wrapped in asyncio.Semaphore(2)
 
@@ -31,43 +32,46 @@ logger = logging.getLogger(__name__)
 
 MISTRAL_MODEL = "mistral-small-latest"
 MISTRAL_TEMPERATURE = 0.1   # Low temperature for citation compliance
-MISTRAL_MAX_TOKENS = 512
+MISTRAL_MAX_TOKENS = 800    # Increased for fuller, more complete answers
 
 
 # ---------------------------------------------------------------------------
-# System prompts — grounded (KB chunks available) and open (no relevant chunks)
+# System prompt — unified prompt handling both KB context and user data
 # ---------------------------------------------------------------------------
 
-# Used when FAISS + BM25 retrieval returned relevant IT Act chunks.
-SYSTEM_PROMPT_GROUNDED = """You are TaxMantri, an Indian income tax expert for ITR-1 filers (AY 2025-26).
+SYSTEM_PROMPT = """You are TaxMantri, an Indian income tax expert assistant for ITR-1 filers (AY 2025-26), powered by Mistral.
+
+You have two types of information available:
+  A. **IT Act Knowledge Base** — retrieved chunks of the Income Tax Act 1961, labelled [Context N — section_ref]. Use these for legal/factual questions.
+  B. **User's personal tax data** — their profile (salary, deductions) and calculated tax result (regime recommendation, savings, breakdown), labelled under 'User profile' and 'User's calculated tax result'. Use this for personalised questions about their specific situation.
 
 Rules you MUST follow:
-1. Answer ONLY from the context provided. Do not use outside knowledge.
-2. If the answer is not in the context, respond with exactly this phrase: "I could not find a verified source for this in my knowledge base." Then add: "Note: This answer is not from my verified knowledge base — please verify independently with a CA or official source."
-3. For yes/no questions, begin your answer with "Yes" or "No" before explaining.
-4. Cite every factual claim using the format: [Section X, IT Act 1961] or [Rule X, IT Rules 1962]. Example: [Section 10(13A), IT Act 1961]. You MUST cite every factual claim — if you cannot cite it, do not state it.
-5. Keep your answer concise — 2 to 4 sentences maximum.
-6. Show formulas when they help. For HRA questions, include the Rule 2A min-of-3 formula.
-7. Write as a CA explaining to a client — accurate, warm, professional, no legal jargon."""
-
-# Used when retrieval found no relevant chunks — open general-knowledge fallback.
-SYSTEM_PROMPT_OPEN = """You are TaxMantri, an Indian income tax expert for ITR-1 filers (AY 2025-26).
-
-Rules you MUST follow:
-1. Answer using your general knowledge of Indian income tax law and ITR-1 filing.
-2. Keep your answer concise — 2 to 4 sentences maximum.
-3. For yes/no questions, begin your answer with "Yes" or "No" before explaining.
-4. Show formulas when they help.
-5. Always end your answer with this disclaimer on a new line: "Note: This answer is based on general knowledge — please verify with a CA or the Income Tax Department before filing."
-6. Write as a CA explaining to a client — accurate, warm, professional, no legal jargon."""
+1. Use BOTH types of information above. Do not refuse to answer if the information is present in either A or B.
+2. For legal or factual claims from the IT Act (type A), you MUST cite every single claim using EXACTLY this format: [Section X, IT Act 1961] or [Rule X, IT Rules 1962]. Do not write citations any other way. Always include the brackets, the word Section or Rule, and the year. Examples: [Section 80C, IT Act 1961], [Section 10(13A), IT Act 1961], [Rule 2A, IT Rules 1962].
+3. For personalised answers using the user's own data (type B), clearly prefix with "Based on your tax data:" and state the specific figures. You do NOT need IT Act citations for the user's own numbers, but DO cite the law when explaining how a deduction or slab is calculated.
+4. If the answer is truly not available in either type A or B, respond: "I could not find a verified source for this — please consult a CA or the Income Tax portal."
+5. For yes/no questions, begin with "Yes" or "No" before explaining.
+6. Keep answers concise — 3 to 5 sentences. Show calculation formulas when relevant.
+7. Write as a CA explaining to a client: accurate, warm, professional, no legal jargon."""
 
 
 # ---------------------------------------------------------------------------
 # Citation extraction regex
 # ---------------------------------------------------------------------------
 
+# Matches citation formats Mistral actually produces, e.g.:
+#   [Section 80C, IT Act 1961]
+#   [Section 10(13A), Income Tax Act, 1961]
+#   [Rule 2A, IT Rules 1962]
+#   [Sec. 80D, Income Tax Act 1961]
 CITATION_REGEX = re.compile(
-    r'\[(?:Section|Rule)\s+([\w().,\s-]+),\s*(?:IT Act 1961|Income Tax Act|IT Rules 1962)\]',
+    r'\['
+    r'(?:Section|Sec\.?|Rule|Regulation)\s+'
+    r'([\w().,\d\s/-]+?)'
+    r'(?:,\s*|\s+of\s+the\s+)'
+    r'(?:IT Act|Income Tax Act|I\.T\. Act|IT Rules|Income Tax Rules)'
+    r'[,\s\d]*'
+    r'\]',
     re.IGNORECASE,
 )
 
@@ -80,13 +84,13 @@ def build_user_prompt(
     question: str,
     chunks: list[dict],
     profile_summary: Optional[str],
-    session_context: Optional[str] = None,
+    tax_result_summary: Optional[str] = None,
 ) -> str:
     """
-    Build the user-turn prompt for Mistral (KB-grounded path).
+    Build the user-turn prompt for Mistral.
     Chunks are numbered [Context N — section_ref] blocks.
     profile_summary is appended only if provided (PII-stripped numeric values only).
-    session_context is appended only if provided (derived session metrics, no PII).
+    tax_result_summary is appended if provided (regime recommendation, savings, breakdown).
     """
     context_blocks = []
     for i, chunk in enumerate(chunks, 1):
@@ -100,31 +104,12 @@ def build_user_prompt(
         if profile_summary else ""
     )
 
-    session_section = (
-        f"\n\nSession context:\n{session_context}"
-        if session_context else ""
+    tax_result_section = (
+        f"\n\nUser's calculated tax result (use this for personalised answers):\n{tax_result_summary}"
+        if tax_result_summary else ""
     )
 
-    return f"Context:\n{context_text}{profile_section}{session_section}\n\nQuestion: {question}"
-
-
-def build_open_prompt(
-    question: str,
-    profile_summary: Optional[str],
-    session_context: Optional[str] = None,
-) -> str:
-    """
-    Build the user-turn prompt for the open/general fallback path (no KB chunks).
-    """
-    profile_section = (
-        f"\n\nUser profile (numeric summary — no PII):\n{profile_summary}"
-        if profile_summary else ""
-    )
-    session_section = (
-        f"\n\nSession context:\n{session_context}"
-        if session_context else ""
-    )
-    return f"{profile_section}{session_section}\n\nQuestion: {question}".lstrip()
+    return f"Context:\n{context_text}{profile_section}{tax_result_section}\n\nQuestion: {question}"
 
 
 def build_profile_summary(profile: "UserFinancialProfile") -> str:
@@ -143,6 +128,47 @@ def build_profile_summary(profile: "UserFinancialProfile") -> str:
         f"Home loan interest: {int(profile.home_loan_interest or 0):,}",
         f"NPS employee (80CCD1B): {int(profile.employee_nps_80ccd1b or 0):,}",
     ]
+    return " | ".join(parts)
+
+
+def build_tax_result_summary(tax_result) -> str:
+    """
+    Build a concise summary of the calculated tax result for Mistral context.
+    Includes recommended regime, savings amount, and key breakdown figures
+    for both old and new regimes so the chatbot can answer personalised questions.
+    """
+    if tax_result is None:
+        return ""
+
+    rec = tax_result.recommended_regime or "unknown"
+    savings = int(tax_result.savings_amount or 0)
+
+    old = tax_result.old_regime
+    new = tax_result.new_regime
+
+    parts = [
+        f"Recommended regime: {rec} regime",
+        f"Tax savings by choosing {rec} regime: ₹{savings:,}",
+    ]
+
+    if old:
+        parts.append(
+            f"Old Regime — Gross income: ₹{int(old.gross_income or 0):,}, "
+            f"Total deductions: ₹{int(old.total_deductions or 0):,}, "
+            f"Taxable income: ₹{int(old.taxable_income or 0):,}, "
+            f"Total tax: ₹{int(old.total_tax or 0):,}"
+        )
+    if new:
+        parts.append(
+            f"New Regime — Gross income: ₹{int(new.gross_income or 0):,}, "
+            f"Total deductions: ₹{int(new.total_deductions or 0):,}, "
+            f"Taxable income: ₹{int(new.taxable_income or 0):,}, "
+            f"Total tax: ₹{int(new.total_tax or 0):,}"
+        )
+
+    if tax_result.rationale:
+        parts.append(f"AI rationale: {tax_result.rationale[:300]}")
+
     return " | ".join(parts)
 
 
@@ -219,15 +245,12 @@ async def generate_answer(
     chunks: list[dict],
     profile_summary: Optional[str],
     semaphore: asyncio.Semaphore,
-    session_context: Optional[str] = None,
+    tax_result_summary: Optional[str] = None,
 ) -> dict:
     """
-    Generate a grounded or open answer from Mistral API.
+    Generate a grounded answer from Mistral API using the unified system prompt.
 
-    Routing:
-      - chunks present → KB-grounded path: SYSTEM_PROMPT_GROUNDED + IT Act context blocks
-      - no chunks      → open fallback path: SYSTEM_PROMPT_OPEN + general knowledge
-
+    The single SYSTEM_PROMPT handles both KB-grounded and personalised answers.
     Applies asyncio.Semaphore(2) for rate-limit protection.
     Validates citations after generation via validate_citations().
 
@@ -235,15 +258,9 @@ async def generate_answer(
     (does NOT include 'cached' — caller sets that field)
     """
     use_kb = len(chunks) > 0 and any(c.get("text") for c in chunks)
+    answer_mode = "kb_grounded" if use_kb else "general"
 
-    if use_kb:
-        system_prompt = SYSTEM_PROMPT_GROUNDED
-        prompt = build_user_prompt(question, chunks, profile_summary, session_context)
-        answer_mode = "kb_grounded"
-    else:
-        system_prompt = SYSTEM_PROMPT_OPEN
-        prompt = build_open_prompt(question, profile_summary, session_context)
-        answer_mode = "general"
+    prompt = build_user_prompt(question, chunks, profile_summary, tax_result_summary)
 
     logger.info(
         "Calling Mistral API model=%s chunks=%d answer_mode=%s",
@@ -254,7 +271,7 @@ async def generate_answer(
         response = await client.chat.complete_async(
             model=MISTRAL_MODEL,
             messages=[
-                {"role": "system", "content": system_prompt},
+                {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": prompt},
             ],
             temperature=MISTRAL_TEMPERATURE,

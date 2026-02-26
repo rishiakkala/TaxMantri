@@ -41,7 +41,7 @@ Tax calculations follow AY 2025-26 (FY 2024-25) rules.
 | 📄 Form 16 OCR | Auto-extract salary, HRA, 80C, and other fields from uploaded Form 16 |
 | ⚖️ Regime Comparison | Side-by-side Old vs New regime tax calculation with full breakdowns |
 | 🤖 AI Insights | Mistral-powered regime recommendation with Income Tax Act citations |
-| 💬 Tax Chatbot | RAG-powered chatbot — answers personalised or generic tax queries |
+| 💬 Tax Chatbot | RAG-powered chatbot — answers personalised queries using your own tax data |
 | 🗂️ ITR-1 Mapping | Maps your financial data to exact Schedule/Field positions on ITR-1 |
 | 📥 PDF Export | Download a full tax summary report as a PDF |
 | 🔒 Privacy First | All session data stored temporarily — no login required |
@@ -52,14 +52,14 @@ Tax calculations follow AY 2025-26 (FY 2024-25) rules.
 
 ### Frontend
 - **React 18** + Vite
-- **Tailwind CSS** — utility-first styling
+- **Vanilla CSS** — custom styling with glassmorphism & dark theme
 - **Framer Motion** — animations
 - **React Router v6** — routing
 - **Lucide React** — icons
 
 ### Backend
 - **FastAPI** — async Python web framework
-- **LangGraph** — agent pipeline orchestration
+- **LangGraph** — agent pipeline orchestration (InputAgent → MatcherAgent → EvaluatorAgent)
 - **Mistral AI** — LLM for insights & chatbot
 - **FAISS + BM25** — hybrid RAG retrieval
 - **Sentence Transformers** (`BAAI/bge-m3`) — embeddings
@@ -75,21 +75,23 @@ Tax calculations follow AY 2025-26 (FY 2024-25) rules.
 
 ```
 TaxMantri/
-├── backend2/                  # FastAPI application
+├── backend/                   # FastAPI application
 │   ├── agents/
-│   │   ├── input_agent/       # Validates & normalises user profile
-│   │   ├── matcher_agent/     # RAG retrieval + Mistral generation
-│   │   └── evaluator_agent/   # Tax calculation + ITR-1 mapping
-│   ├── graph/                 # LangGraph pipeline
-│   ├── models/                # SQLAlchemy models
-│   ├── alembic/               # DB migrations
-│   ├── main.py                # App entrypoint
+│   │   ├── input_agent/       # Validates & normalises user profile + OCR
+│   │   ├── matcher_agent/     # RAG retrieval + Mistral chatbot generation
+│   │   └── evaluator_agent/   # Tax calculation, ITR-1 mapping, PDF export
+│   ├── graph/                 # LangGraph pipeline definition
+│   ├── models/                # SQLAlchemy ORM models
+│   ├── alembic/               # Database migrations
+│   ├── main.py                # App entrypoint & lifespan
+│   ├── store.py               # Data access layer
+│   ├── cache.py               # Redis helpers
 │   ├── config.py              # Settings (reads .env)
 │   └── requirements.txt
 ├── frontend/                  # React + Vite app
 │   ├── src/
-│   │   ├── pages/             # HeroPage, InputPage, ResultsPage, AboutPage
-│   │   ├── components/        # Navbar, ChatWidget, RegimeCard, etc.
+│   │   ├── pages/             # HeroPage, InputPage, ResultsPage, AboutPage, HowItWorksPage
+│   │   ├── components/        # Navbar, ChatWidget, RegimeCard, AIInsightsCard, etc.
 │   │   ├── api/               # Axios endpoint helpers
 │   │   └── images/            # Static assets
 │   ├── index.html
@@ -131,7 +133,7 @@ cd TaxMantri
 ```bash
 docker-compose up -d
 ```
-> Or install PostgreSQL and Redis natively via Homebrew:
+> Or install natively via Homebrew:
 > ```bash
 > brew install postgresql@14 redis tesseract
 > brew services start postgresql@14
@@ -140,7 +142,7 @@ docker-compose up -d
 
 ### 3. Set up the backend
 ```bash
-cd backend2
+cd backend
 
 # Create and activate virtual environment
 python3 -m venv venv
@@ -191,7 +193,7 @@ Make sure the install path (e.g. `C:\Program Files\Tesseract-OCR`) is added to y
 
 ### 4. Set up the backend
 ```cmd
-cd backend2
+cd backend
 
 :: Create and activate virtual environment
 python -m venv venv
@@ -222,7 +224,7 @@ knowledge_base\raw\
 
 ## Environment Variables
 
-Create a `.env` file inside `backend2/` (copy from `.env.example`):
+Create a `.env` file inside `backend/` (copy from `.env.example`):
 
 | Variable | Description | Example |
 |---|---|---|
@@ -242,15 +244,16 @@ Create a `.env` file inside `backend2/` (copy from `.env.example`):
 **macOS / Linux:**
 ```bash
 cd TaxMantri
-source backend2/venv/bin/activate
-uvicorn backend2.main:app --reload --port 8000
+source backend/venv/bin/activate
+PYTHONPATH=. uvicorn backend.main:app --reload --port 8000
 ```
 
 **Windows:**
 ```cmd
 cd TaxMantri
-backend2\venv\Scripts\activate
-uvicorn backend2.main:app --reload --port 8000
+backend\venv\Scripts\activate
+set PYTHONPATH=.
+uvicorn backend.main:app --reload --port 8000
 ```
 
 The API will be available at `http://localhost:8000`  
@@ -275,11 +278,16 @@ The frontend will be available at `http://localhost:5173`
 | Method | Endpoint | Description |
 |---|---|---|
 | `GET` | `/api/health` | Health check |
-| `POST` | `/api/upload-form16` | Upload Form 16 and extract fields via OCR |
-| `POST` | `/api/confirm-profile` | Confirm extracted profile with any edits |
-| `POST` | `/api/run` | Run the full LangGraph tax pipeline |
+| `POST` | `/api/upload` | Upload Form 16 and extract fields via OCR |
+| `POST` | `/api/profile` | Create a profile from manual wizard entry |
+| `PUT` | `/api/profile/confirm` | Confirm OCR-extracted profile with edits |
+| `POST` | `/api/calculate` | Run full LangGraph tax pipeline |
 | `GET` | `/api/itr1-mapping/{profile_id}` | Get ITR-1 field mapping for a profile |
-| `POST` | `/api/query` | RAG chatbot query |
+| `GET` | `/api/export/{profile_id}` | Download PDF tax report |
+| `POST` | `/api/query` | RAG chatbot query (personalised if profile_id provided) |
+| `GET` | `/api/chat/history` | Fetch session chat history |
+| `POST` | `/api/session/event` | Track UI interaction events |
+| `GET` | `/api/session/summary` | Get session analytics summary |
 | `GET` | `/api/docs` | Swagger UI (interactive API docs) |
 
 ---

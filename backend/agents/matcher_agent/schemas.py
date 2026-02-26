@@ -2,14 +2,15 @@
 schemas.py — MatcherAgent Pydantic v2 data contracts.
 
 Defines:
-  - CitationObject    (single legal citation with supporting excerpt)
-  - ConfidenceLevel   enum (high / low — two levels only per CONTEXT.md)
-  - ChatMessage       (single turn in conversation history)
-  - QueryRequest      (incoming RAG query from client)
-  - RAGResponse       (LLM answer with structured citations)
+  - CitationObject       (single legal citation with supporting excerpt)
+  - ConfidenceLevel      enum (high / low — two levels only per CONTEXT.md)
+  - ChatMessage          (single turn in conversation history)
+  - QueryRequest         (incoming RAG query from client)
+  - SessionEventRequest  (incoming UI interaction event from frontend)
+  - RAGResponse          (LLM answer with structured citations and answer_mode)
 
 Citation format enforced downstream by llm_service.py:
-  r'\[(?:Section|Rule)\s+[\w().,\s-]+,\s*(?:IT Act 1961|Income Tax Act|IT Rules 1962)\]'
+  [Section X, IT Act 1961] or [Rule X, IT Rules 1962]
 """
 from enum import Enum
 from typing import List, Literal, Optional
@@ -88,7 +89,7 @@ class QueryRequest(BaseModel):
 
 
 # ---------------------------------------------------------------------------
-# RAGResponse — LLM answer with structured citations
+# SessionEventRequest — incoming UI interaction event
 # ---------------------------------------------------------------------------
 
 class SessionEventRequest(BaseModel):
@@ -102,6 +103,10 @@ class SessionEventRequest(BaseModel):
     )
     payload: dict = Field(default_factory=dict, description="Structured event context — no PII")
 
+
+# ---------------------------------------------------------------------------
+# RAGResponse — LLM answer with structured citations
+# ---------------------------------------------------------------------------
 
 class RAGResponse(BaseModel):
     """
@@ -149,6 +154,6 @@ __all__ = [
     "ConfidenceLevel",
     "ChatMessage",
     "QueryRequest",
-    "RAGResponse",
     "SessionEventRequest",
+    "RAGResponse",
 ]
