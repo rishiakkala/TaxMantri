@@ -579,9 +579,8 @@ def _extract_text_tesseract(file_path: str) -> str:
     from pdf2image import convert_from_path
     from PIL import Image
 
-    pytesseract.pytesseract.tesseract_cmd = (
-        r"C:\Program Files\Tesseract-OCR\tesseract.exe"
-    )
+    # Rely on system PATH for pytesseract (assumes it's installed via brew/apt)
+    # pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
     path = Path(file_path)
 
@@ -589,7 +588,7 @@ def _extract_text_tesseract(file_path: str) -> str:
         try:
             images = convert_from_path(
                 file_path,
-                poppler_path=r"C:\Program Files\poppler-25.12.0\Library\bin",
+                # poppler_path=r"C:\Program Files\poppler-25.12.0\Library\bin",
                 dpi=300,          # Tesseract recommended minimum for high accuracy
                 first_page=1,
                 last_page=4,
